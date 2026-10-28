@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>玩家体验升级验收-2026-10-27 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>玩家体验升级验收-2026-10-27</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/玩家体验升级验收-2026-10-27.md</code>　·　5.1 KB</p>
+<hr><h1>玩家体验升级 · 2026-10-27</h1>
+<p>本轮围绕首次试玩的可读性、发令节奏、动作容错和重复返程实施升级。此前工作区已有的输入、纸窗进度与后期关卡修复予以保留。玩家体验需要真人验证，本文不把自动化通过等同于玩家满分。</p>
+<h2>已实施</h2>
+<table><thead><tr><th>玩家遇到的问题</th><th>当前行为</th></tr></thead><tbody><tr><td>开场九段对话与三次单选确认较长</td><td>主流程改为两段出航简报，标称演出八秒，可直接跳过。完整互动序章留在档案，旧存档中的序章可继续恢复。</td></tr><tr><td>未收集就显示交付资料</td><td>按真实库存、已交付物与机制回执选择下一步；满三格提示回艇，终章逐步提示收集、集结、装载、确认撤离。</td></tr><tr><td>看不清目标所在房间与路线</td><td>目标标记和可展开的梯路参考。换房目标指向实际可通行出口；事件锁与挑战关闭的出口不进入导航。路线只作走法参考，不承诺无危险。</td></tr><tr><td>发令时反复选取，面板遮挡场景</td><td>默认选未处理目标；按 1／2／3 后确认按钮获得焦点，Enter 可执行。主体面板精简，复杂编排按需展开。</td></tr><tr><td>三种角色使用相同开路用词</td><td>Grok 为连续／定点破障；Claude 为引开多人／只引一人；GLM 为广域／精准扫描。默认 AI Token ×1，精确 AI Token ×2，限定词或训练额度明确展示。</td></tr><tr><td>扫描风险需要展开才能看到</td><td>真实预览几何包含警戒器时，确认前直接显示警报提醒。无效操作、取消和重复确认继续不重复扣费。</td></tr><tr><td>两次冲刺等待偏长、梯子对齐较紧</td><td>当前扩展主线冲刺恢复 2.8→1.65 秒，起跳缓冲 0.14→0.18 秒，离地容错 0.11→0.14 秒，爬梯接入半径 25→30。旧基础地图保持原参数。</td></tr><tr><td>探索后多次原路跑图</td><td>第二至四章远端资料触发实际返航维护舱，落点在鲸艇附近。捷径不代取资料、不交付、不结算；事件可存档，关闭捷径契约确实封闭。第五章仍须走完整限时路线。</td></tr><tr><td>主角与背景、队友混在一起</td><td>降低背景亮度与饱和度，按章节调整色调；主角脚下水纹与“你”标记突出位置。</td></tr><tr><td>危险提示排在普通消息后、换章残留旧提示</td><td>自由行动中的危险消息优先显示；换章清理旧提示与对白计时器。</td></tr></tbody></table>
+<h2>源码入口</h2>
+<ul><li><code>src/game/player-guidance.mjs</code>：只读行动建议，不推进任务、不扣资源。</li><li><code>src/game/world.mjs</code>、<code>rooms.mjs</code>、<code>contracts.mjs</code>：动作容错、默认目标、返航维护舱与挑战规则。</li><li><code>src/game/story.mjs</code>、<code>story-art.mjs</code>、<code>src/main.mjs</code>：短开场、档案入口、消息调度。</li><li><code>src/ui/ui-v3.mjs</code>、<code>ui.mjs</code>、<code>player-polish.css</code>：动态任务、紧凑指令、费用、风险和键盘焦点。</li><li><code>src/render/scene-renderer.mjs</code>：目标、路线和主角位置反馈，继续使用现有图集。</li><li><code>scripts/verify-player-upgrade.mjs</code>：真实状态驱动、捷径事件、存档、挑战和终章前置条件回归。</li></ul>
+<h2>验证与证据</h2>
+<p>最终结果：32／32 项脚本检查、13／13 项生产浏览器检查通过，未发现浏览器异常或资源加载失败。常规／初始零限定词及各自跳过可选教学的四组五章输入流程全部完成。浏览器覆盖 1280×720 桌面及 844×390、740×360、640×360 触屏横屏模拟，并检查暂停、旋转、刷新恢复和保存。</p>
+<p>这四组流程使用脚本生成真实方向输入与持续互动，不代表首次真人通关时长；十三房间渲染截图是画面检查，未作为真人逐房间通关的证据。</p>
+<p>最终机器回归与浏览器记录在 <code>output/player-upgrade-20261027/</code>。浏览器验收使用独立存储与本地 HTTP 服务，测试操作不写入玩家现有存档。</p>
+<ul><li><a href="../output/player-upgrade-20261027/summary.json" target="_blank" rel="noopener">汇总与最终包校验</a></li><li><a href="../output/player-upgrade-20261027/regression-summary.json" target="_blank" rel="noopener">脚本回归结果</a></li><li><a href="../output/player-upgrade-20261027/browser/browser-report.json" target="_blank" rel="noopener">生产浏览器验收</a></li><li><a href="../output/player-upgrade-20261027/campaigns.json" target="_blank" rel="noopener">四组完整五章输入流程</a></li><li><a href="../output/player-upgrade-20261027/browser/upgraded-guidance.png" target="_blank" rel="noopener">下一步与背包进度截图</a></li><li><a href="../output/player-upgrade-20261027/browser/upgraded-scan-command.png" target="_blank" rel="noopener">扫描指令与风险截图</a></li><li><a href="../output/player-upgrade-20261027/browser/mobile-844-command.png" target="_blank" rel="noopener">844×390 手机指令截图</a></li></ul>
+<p>原图来源检查发现 49 份机器临时生成缓存已不存在。项目保留的原始 PNG 与原先记录的生成 SHA256 逐项一致，因此校验改为允许使用这份原始 PNG；仍严格核对来源、提示词、尺寸、透明信息、图集坐标和交付 WebP，不跳过校验、不修改历史来源记录。</p>
+<p>本轮不新增手绘逐帧动画或配音资产。首次玩家通关时长、长期复玩动力和主观评分仍须由未参与开发的玩家实测。</p>
+<h2>试玩与交付</h2>
+<p>工作区运行原有 <code>启动游戏.ps1</code> 即可体验。<code>dist/</code> 已重建为当前版本。新增的 <code>deliverables/鲸鱼魔盗团-体验升级-20261027.zip</code> 包含完整静态游戏、本地 HTTP 服务器、启动器和试玩说明，逐文件校验与当前构建一致，并附 SHA256；原有交付包保留。</p></div></div></body></html>

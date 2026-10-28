@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>游戏音频制作方案-2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>游戏音频制作方案-2026-10-25</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/游戏音频制作方案-2026-10-25.md</code>　·　11.3 KB</p>
+<hr><h1>《鲸鱼魔盗团》游戏音频制作方案</h1>
+<blockquote>1024 超能 Coding 周末 · 游戏赛道 · 音频补全计划（方案稿）<br>日期：2026-10-25 | 状态：待确认后执行</blockquote>
+<h2>一、范围与现状盘点</h2>
+<h3>1.1 目标游戏</h3>
+<p>项目文件夹 <code>1024切磋大会</code> 下有两个游戏目录，结论如下：</p>
+<table><thead><tr><th>目录</th><th>状态</th><th>是否本次音频目标</th></tr></thead><tbody><tr><td><code>游戏-鲸鱼魔盗团</code></td><td>完整可玩网页游戏：五章主线、四角色、双端、完整美术资产、已有程序化音频模块</td><td><strong>是（唯一目标）</strong></td></tr><tr><td><code>游戏-大肥鱼指令不清</code></td><td>仅策划案 V1.0（<code>docs/大肥鱼指令不清最终策划案.md</code>），<code>src/</code> 为空，无游戏本体</td><td>否。无本体可做，若日后做出本体再补</td></tr></tbody></table>
+<h3>1.2 现有音频能力（<code>src/game/audio.mjs</code>）</h3>
+<table><thead><tr><th>项目</th><th>现状</th></tr></thead><tbody><tr><td>引擎</td><td>纯 Web Audio API 程序化合成，无任何音频资源文件</td></tr><tr><td>背景音乐</td><td>每 4 秒循环的三音正弦和弦（<code>harbor</code> / <code>evacuation</code> 两套），默认音量 0.25</td></tr><tr><td>音效</td><td>16 个预置，均为单振荡器扫频（dash / impact / pickup / delivery / command-confirm / alarm / results / jump / ui / door / story / story-page / story-scan / story-impact / story-alert / story-beacon）</td></tr><tr><td>已接入能力</td><td>首次操作解锁、三档音量（总/音乐/音效）、静音、暂停、失焦处理、按章节切场景（第 5 章切 <code>evacuation</code>）、事件队列触发 <code>audio.play(name)</code></td></tr></tbody></table>
+<h3>1.3 缺口（本次要解决的）</h3>
+<ol><li><strong>没有旋律性音乐</strong>——BGM 是正弦和弦垫，无情绪、无主题动机、四秒一循环过于机械；</li><li><strong>没有环境音</strong>——水港、机房、警戒氛围缺失；</li><li><strong>音色单薄</strong>——所有音效是单波形扫频，无层次、无材质感，与已有高完成度美术不匹配；</li><li><strong>无语音</strong>——策划案允许"语音改字幕"降级，语音列为可选；</li><li><strong>资产零登记</strong>——策划案要求"登记图像、声音和第三方资源"，音频目前无来源记录。</li></ol>
+<h2>二、音频设计定位</h2>
+<p>整体跟随美术与剧情的"诙谐海港 × 机房电子 × 喜剧夸张"基调：</p>
+<table><thead><tr><th>维度</th><th>定位</th></tr></thead><tbody><tr><td>风格</td><td>轻爵士/手风琴海港小调（主角感）＋ 电子脉冲（机房/警戒感）＋ 卡通夸张音效（Q 版反馈）</td></tr><tr><td>BGM 情绪曲线</td><td>标题(诙谐轻松) → 1–3 章(轻快带悬念) → 4 章(反转紧张) → 5 章(撤离紧迫) → 结算(滑稽加冕)</td></tr><tr><td>SFX 原则</td><td>短促、夸张、有材质（水花/金属/纸张/电子），单次 0.1–0.5 秒</td></tr><tr><td>响度基准</td><td>BGM −20 dB 左右垫底，环境 −28 dB，SFX 峰值 −8 dB，语音 −12 dB（相对主音量）</td></tr><tr><td>循环要求</td><td>所有 BGM/环境音必须无缝循环（AI 生成后用编辑对齐，或叠加淡入淡出拼接）</td></tr></tbody></table>
+<h2>三、音频资产体系</h2>
+<h3>3.1 音乐层（BGM）</h3>
+<table><thead><tr><th>ID</th><th>场景/状态</th><th>情绪</th><th>制作要点</th><th>目标时长</th></tr></thead><tbody><tr><td><code>bgm_title</code></td><td>标题 / 主菜单</td><td>诙谐欢快，海港阳光</td><td>手风琴＋轻鼓点＋水花点缀，循环尾接首</td><td>30s 循环</td></tr><tr><td><code>bgm_harbor</code></td><td>第 1–3 章行动</td><td>轻快带悬念</td><td>轻爵士节奏＋滴水音色，留空间给音效</td><td>45s 循环</td></tr><tr><td><code>bgm_investigation</code></td><td>第 4 章战报公开</td><td>悬疑紧迫</td><td>低频弦乐脉冲＋滴答声，逐渐加密度</td><td>45s 循环</td></tr><tr><td><code>bgm_evacuation</code></td><td>第 5 章 60 秒撤离</td><td>高速紧迫</td><td>电子脉冲加速，BPM 明显高于港口曲</td><td>60s 循环</td></tr><tr><td><code>bgm_results</code></td><td>章末结算 / 总评</td><td>滑稽加冕号角</td><td>小型铜管上行号角，收尾干净</td><td>12–20s 非循环</td></tr><tr><td><code>bgm_failure</code></td><td>失败结算</td><td>诙谐懊恼</td><td>低音拨弦"哇哇"＋短弱奏</td><td>8–12s 非循环</td></tr><tr><td><code>bgm_story</code></td><td>剧情演出</td><td>叙事轻垫</td><td>弦乐/钢琴长音垫，可循环</td><td>30s 循环</td></tr></tbody></table>
+<h3>3.2 环境音层（Ambience）</h3>
+<table><thead><tr><th>ID</th><th>用途</th><th>内容</th><th>目标时长</th></tr></thead><tbody><tr><td><code>amb_harbor</code></td><td>港口常驻氛围（1–4 章）</td><td>轻浪、水滴、远处气笛</td><td>30s 循环</td></tr><tr><td><code>amb_ops</code></td><td>机房运转氛围（叠加）</td><td>服务器嗡鸣、键盘/散热底噪</td><td>30s 循环</td></tr><tr><td><code>amb_alarm</code></td><td>警戒 ≥70 时叠层</td><td>低频嗡鸣＋雷达脉冲</td><td>15s 循环</td></tr></tbody></table>
+<h3>3.3 动作音效层（SFX，与现有 <code>play()</code> 名称一一对应）</h3>
+<p>保留现有 16 个触发名不变（代码改动最小），逐条给出目标音色：</p>
+<table><thead><tr><th>触发名</th><th>场景</th><th>目标音色</th></tr></thead><tbody><tr><td><code>dash</code></td><td>鲸形冲刺</td><td>水花滑行"唰"＋气泡，清亮</td></tr><tr><td><code>impact</code></td><td>撞开数据节点/破障</td><td>玻璃罐碎裂＋低频砰，有金属尾音</td></tr><tr><td><code>pickup</code></td><td>数据吸附入包</td><td>吸附"啵"＋轻微电子收束</td></tr><tr><td><code>delivery</code></td><td>交付数据</td><td>确认"叮"＋小号上行两音</td></tr><tr><td><code>command-confirm</code></td><td>指令确认</td><td>战术确认电子音，区别于交付</td></tr><tr><td><code>alarm</code></td><td>警戒器报警</td><td>高频双音脉冲（可循环 2–3 次）</td></tr><tr><td><code>results</code></td><td>结算播报</td><td>加冕号角（与 bgm_results 呼应）</td></tr><tr><td><code>jump</code></td><td>跳跃/爬梯</td><td>轻弹跳音</td></tr><tr><td><code>ui</code></td><td>通用 UI 点击</td><td>柔和纸感"咔哒"</td></tr><tr><td><code>door</code></td><td>房间切换/登艇</td><td>舱门气动"嘶—砰"</td></tr><tr><td><code>story</code></td><td>剧情翻页/推进</td><td>纸页翻动＋提示音</td></tr><tr><td><code>story-page</code></td><td>剧情对话框</td><td>短促打字/翻页</td></tr><tr><td><code>story-scan</code></td><td>GLM 扫描</td><td>电子网格扫描扫频</td></tr><tr><td><code>story-impact</code></td><td>剧情中破障</td><td>低沉撞击</td></tr><tr><td><code>story-alert</code></td><td>剧情中警报</td><td>略柔和的警报变体</td></tr><tr><td><code>story-beacon</code></td><td>返航信标</td><td>灯塔脉冲"叮—嘟"</td></tr></tbody></table>
+<h3>3.4 语音层（可选，P2）</h3>
+<p>策划案允许"语音改字幕"，语音不做交付硬性要求。若做：四角色各 5–8 条中文短句（指令确认、加入、撤离提示、结算吐槽），每条 1–3 秒，AI 合成人声。</p>
+<h2>四、场景-事件-音频映射</h2>
+<table><thead><tr><th>界面/事件</th><th>音乐</th><th>环境</th><th>音效</th></tr></thead><tbody><tr><td>标题/主菜单</td><td><code>bgm_title</code></td><td>—</td><td>ui</td></tr><tr><td>第 1–3 章行动</td><td><code>bgm_harbor</code></td><td><code>amb_harbor</code>（室内叠加 <code>amb_ops</code>）</td><td>动作类全部</td></tr><tr><td>第 4 章战报公开</td><td><code>bgm_investigation</code></td><td><code>amb_harbor</code>＋<code>amb_ops</code></td><td>同上＋story-alert</td></tr><tr><td>第 5 章撤离 60s</td><td><code>bgm_evacuation</code></td><td><code>amb_alarm</code> 叠层</td><td>alarm 高频化</td></tr><tr><td>剧情演出</td><td><code>bgm_story</code>（暂停行动音乐）</td><td>视章节保留氛围</td><td>story 系列</td></tr><tr><td>章末结算</td><td><code>bgm_results</code></td><td>停止环境</td><td>results</td></tr><tr><td>失败</td><td><code>bgm_failure</code></td><td>停止环境</td><td>impact</td></tr><tr><td>警戒 ≥70</td><td>现音乐不动</td><td>叠加 <code>amb_alarm</code></td><td>预告扫描音</td></tr><tr><td>暂停/失焦</td><td>音乐衰减暂停</td><td>暂停</td><td>—</td></tr></tbody></table>
+<h2>五、制作管线</h2>
+<ol><li><strong>生成</strong>：用 AI 音频工具按资产卡逐条生成 WAV（音乐、音效、环境声；语音另用合成人声）。每条资产卡记录目标、情绪、风格参考与时长。</li><li><strong>转码压缩</strong>：ffmpeg 统一转码 —— BGM/环境 96kbps 立体声、SFX 128kbps 单声道、语音 96kbps 单声道，全部 MP3；长文件按循环点裁剪对齐，验证无缝。</li><li><strong>落盘</strong>：<code>assets/audio/{music,ambience,sfx,voice}/</code>，命名与资产 ID 一致。</li><li><strong>登记</strong>：<code>assets/provenance/audio-manifest.json</code>，逐条记录工具、日期、生成 prompt、时长、用途、游戏内引用点（满足策划案"登记声音来源"要求）。</li><li><strong>打包</strong>：<code>scripts/build-game.mjs</code> 纳入 <code>assets/audio</code> 复制到 <code>dist/</code>；更新 <code>assets/runtime-catalog.json</code> 登记音频资源。</li><li><strong>接入</strong>：升级 <code>src/game/audio.mjs</code>（见下节），构建后跑回归验证。</li></ol>
+<h3>体积预算（受"初始包 ≤8MB"目标约束）</h3>
+<table><thead><tr><th>类</th><th>数量</th><th>单条约</th><th>小计</th></tr></thead><tbody><tr><td>BGM（P0 三首＋P1 四首）</td><td>7</td><td>0.3–0.6MB</td><td>≤3.2MB</td></tr><tr><td>环境音</td><td>3</td><td>0.2–0.3MB</td><td>≤0.9MB</td></tr><tr><td>SFX</td><td>16</td><td>5–20KB</td><td>≤0.3MB</td></tr><tr><td>语音（可选）</td><td>20</td><td>10–30KB</td><td>≤0.6MB</td></tr><tr><td><strong>合计</strong></td><td>—</td><td>—</td><td><strong>≤4.5MB（首批 P0 控制在 2MB 内）</strong></td></tr></tbody></table>
+<h2>六、代码接入设计（<code>src/game/audio.mjs</code> 升级）</h2>
+<p><strong>目标：不破坏现有调用方，向下兼容。</strong></p>
+<ol><li><strong>保留现有接口</strong>：<code>unlock() / configure() / setMuted() / setScene() / setPaused() / play(name) / dispose()</code>，<code>main.mjs</code>、<code>ui-v3.mjs</code> 零改动即可继续工作。</li><li><strong>新增资源加载器</strong>：启动时按需 <code>fetch + decodeAudioData</code> 加载音频到缓存池；短音效使用 <code>AudioBufferSourceNode</code> 即时触发（延迟可忽略），BGM/环境使用 buffer 循环节点实现无缝循环。</li><li><strong><code>play(name)</code> 升级</strong>：内部维护 <code>name → 资产文件（若有）</code>映射，有文件播文件；文件缺失/未加载完时<strong>自动回退现有程序化合成</strong>，保证不静默失败。</li><li><strong>新增 API</strong>：<code>playMusic(id)</code>、<code>playAmbience(id)</code>、<code>stopMusic(fadeMs)</code>；场景音乐切换用 1.5 秒交叉淡变（<code>setScene()</code> 内部自动切 BGM）。</li><li><strong>混音总线</strong>：master → music / ambience / sfx / voice 四个独立子总线，各自可独立调音量；设置页新增"环境音""语音"两档（保留现有三档字段兼容旧存档）。</li><li><strong>警戒联动</strong>：暴露/警戒 ≥70 时由 <code>main.mjs</code> 触发 <code>audio.playAmbience('amb_alarm')</code>（或直接在 <code>setScene</code> 逻辑中按警戒值叠层）。</li><li><strong>静音/暂停/失焦</strong>：沿用现有 gain 衰减逻辑，暂停时 BGM/环境同步静音，恢复时同步复原。</li></ol>
+<h2>七、优先级与工作量</h2>
+<table><thead><tr><th>档</th><th>内容</th><th>资产数</th><th>说明</th></tr></thead><tbody><tr><td><strong>P0 必须</strong></td><td><code>bgm_harbor</code>、<code>bgm_evacuation</code>、<code>bgm_results</code>＋核心 7 类 SFX（dash/impact/pickup/delivery/command-confirm/alarm/results）＋<code>amb_harbor</code>＋代码接入</td><td>≈11 条</td><td>先立起"有层次、有情绪"的声音骨架；对应策划案"七类声音必须覆盖"</td></tr><tr><td><strong>P1 推荐</strong></td><td><code>bgm_title</code>、<code>bgm_investigation</code>、<code>bgm_story</code>、<code>bgm_failure</code>＋<code>amb_ops</code>、<code>amb_alarm</code>＋其余 9 类 SFX 补齐＋警戒联动</td><td>≈15 条</td><td>补全情绪曲线与氛围</td></tr><tr><td><strong>P2 可选</strong></td><td>四角色语音短句、结算语音播报</td><td>≤20 条</td><td>策划允许语音改字幕，不阻塞交付</td></tr></tbody></table>
+<p>预计总工作量：资产生成约 2 批（每批 10–15 条调用）、转码登记 1 批、代码接入与平衡 1 轮、回归验证 1 轮。P0 可在一个执行轮次内完成。</p>
+<h2>八、验证与验收</h2>
+<ol><li><strong>资产层</strong>：逐条试听；确认循环无缝（交叉点无爆音/断音）、时长与 ID 匹配、音量基准符合（BGM −20dB / SFX −8dB）。</li><li><strong>集成层</strong>：浏览器实测——首次点击解锁、静音开关、三档音量独立生效、暂停/失焦暂停、第 4/5 章 BGM 自动切换（交叉淡变）、警戒报警叠层。</li><li><strong>回退层</strong>：临时移除某条资产文件，确认该事件仍出程序化合成音（不静默）。</li><li><strong>性能与体积</strong>：记录 dist 音频总字节；弱网下首包加载时间目标 &lt;5s；内存中 buffer 数量不随章节累积（复用循环节点）。</li><li><strong>双端</strong>：桌面键鼠与手机触屏各跑一遍首章教学，确认音效触发正常。</li><li><strong>来源登记</strong>：<code>audio-manifest.json</code> 字段完整，可追溯到生成工具与 prompt。</li></ol>
+<h2>九、范围说明</h2>
+<ul><li>只做《鲸鱼魔盗团》；《大肥鱼指令不清》无游戏本体，不做。</li><li>短剧《鲸天魔盗团》音频已完成，不重复制作、不直接复用其配音进游戏（策划案要求核对来源与授权后再复用）。</li><li>语音层默认不进 P0；若做，仅使用 AI 合成、无真人声纹。</li></ul>
+<h2>十、待确认项</h2>
+<ol><li>执行范围：先只做 P0，还是 P0＋P1 一次做完？</li><li>音频风格：以上"诙谐海港轻爵士＋电子脉冲"基调是否认可？若有参考音乐可直接替换风格描述。</li><li>语音层：是否要（P2），还是维持"语音改字幕"？</li><li>交付载体：音频接入游戏后，同步交付一份音频资产包（含 manifest）供提交留档，是否 OK？</li></ol></div></div></body></html>

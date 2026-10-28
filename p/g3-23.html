@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>美术资产交付说明 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>美术资产交付说明</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/美术资产交付说明.md</code>　·　7.6 KB</p>
+<hr><h1>《鲸鱼魔盗团》美术资产交付说明</h1>
+<p>版本：Art Build 01；日期：2026 年 10 月 24 日。以批准的横版侧视视觉稿为方向，采用深蓝海底机房、象牙白平台、黄铜金边、青色水光和暖色灯光。角色统一使用 DeepSeek、Grok、Claude、GLM。</p>
+<h2>实际交付</h2>
+<p>当前 <code>assets/runtime-catalog.json</code> 登记 <strong>28 张原生 PNG，96 个运行采样区</strong>；另有 1 张独立 HUD 图标带供 HTML/CSS 状态徽章使用。<code>assets/asset-manifest.json</code> 记录制作状态、参考与来源。文件数与可调用区域数不同：角色和部件共用图集，头像源图也直接用于运行缩放，没有重复生成或另存裁切版。</p>
+<table><thead><tr><th>可调用内容</th><th>数量</th><th>交付方式</th></tr></thead><tbody><tr><td>四角色左右朝向 × 五种状态</td><td>40</td><td>四张动作图集；待机、行走关键姿态、跳跃、下落、技能</td></tr><tr><td>正面头像</td><td>4</td><td>四张独立生成的胸像 PNG</td></tr><tr><td>敌方</td><td>2</td><td>普通守卫与调查员</td></tr><tr><td>道具</td><td>6</td><td>一张图集</td></tr><tr><td>场景部件</td><td>18</td><td>平台／障碍、机关、港湾三张图集</td></tr><tr><td>特效帧</td><td>16</td><td>四组 × 四帧，四张图集</td></tr><tr><td>背景</td><td>3</td><td>游戏舞台、标题与结算</td></tr><tr><td>UI 图形</td><td>7</td><td>鲸鱼徽标＋六类装饰框，两个 PNG 文件</td></tr><tr><td>HUD 图标带</td><td>6 个图标</td><td>1 张无文字透明 PNG，CSS sprite，供实时状态徽章使用</td></tr><tr><td><strong>总计</strong></td><td><strong>96</strong></td><td><strong>28 个生产 PNG 文件</strong></td></tr></tbody></table>
+<p>另外新增 5 张剧情关键帧 PNG，位于 <code>assets/story/</code>，由剧情电影、实景和分镜模式共同读取；它们不占用 96 个运行时取样区。<code>assets/prompts/</code> 与 <code>assets/provenance/</code> 记录每张关键帧的生成提示词和来源。</p>
+<p>配套程序界面由 <code>assets/ui/game-ui.css</code> 与 <code>assets/ui/hud-icon-badges.png</code> 提供，覆盖菜单、任务 HUD、指令预览、小队面板、触屏操作、对话、章节结算和主线结算；原矢量操作图标已由 <code>operation-icons-v1.png</code> 的 16 枚手绘图标替换，<code>button-states-v1.png</code> 提供默认、聚焦、按压和禁用四态。CSS 负责排版与状态，固定视觉取自 PNG。HUD 的固定语义优先使用生成图标，实时数字、计时、任务进度、按钮状态和无障碍文本仍由游戏代码更新，避免把动态信息做成无法更新的静态图片。</p>
+<h2>原图与坐标约定</h2>
+<p>本轮使用内置 <code>image_gen</code>，全部交付 PNG 为原生生成输出的完整复制，保留原始尺寸与 Alpha，未后期裁切、缩放或拼接。实际尺寸以目录中的 <code>images</code> 为准，例如角色动作图集为 793×1983，头像与敌方为 1254×1254，场景图集为 1536×1024，三张背景为 1672×941；这些不是旧制作清单中的目标导出尺寸。</p>
+<p>20 张透明 PNG 均检查到真实 Alpha 通道及完全透明像素；三张背景为 RGB 不透明图。部分资源 Alpha 最大值为 252 或 254，这是输出的实际数据，不应误记为 255。各图的尺寸、模式、字节数、透明像素数及 SHA256 保存在 <code>runtime-catalog.json</code>。</p>
+<p>所有矩形采用原图绝对像素坐标 <code>[x, y, width, height]</code>：</p>
+<table><thead><tr><th>字段</th><th>含义与用途</th></tr></thead><tbody><tr><td><code>source_rect</code></td><td>资源在原图里的完整分配区域，包含透明留白；用于图集取样与特效共同画布</td></tr><tr><td><code>content_rect</code></td><td>在分配区域内以 Alpha &gt; 8 检测得到的内容包围盒；普通精灵以此裁取显示，不会改写原图</td></tr><tr><td><code>solid_rect</code></td><td>Alpha &gt; 160 的实色包围盒；供边缘检查和主体识别，不能直接充当玩法碰撞盒</td></tr><tr><td><code>logical_size</code>、<code>anchor</code></td><td>运行时目标显示范围与归一化锚点；适配器默认保持长宽比</td></tr></tbody></table>
+<p><strong>按每条记录取样，不统一等分。</strong> 角色原生图集宽度为奇数，左右列会有一像素差；平台图集六个部件采用不等宽区域，UI 装饰框也按实际区域登记。不要用固定格宽重新切图，否则会截断武器、平台或装饰框。</p>
+<h2>接入方式</h2>
+<p><a href="../src/render/assets.mjs" target="_blank" rel="noopener">资源适配器</a> 提供 <code>AssetLibrary.load</code>、<code>draw</code>、<code>drawActor</code> 和 <code>drawEffect</code>。下面示例适用于位于项目根目录的游戏入口模块：</p>
+<pre><code>import { AssetLibrary } from './src/render/assets.mjs';
+
+const art = await AssetLibrary.load(
+  new URL('./assets/runtime-catalog.json', import.meta.url)
+);
+art.drawActor(ctx, 'deepseek', 'idle', 'right', 320, 520);
+art.drawEffect(ctx, 'water-dash', elapsedSeconds, 360, 480);</code></pre>
+<p>适配器用 <code>fetch</code> 载入 JSON，游戏入口应通过开发服务器访问。角色默认以 <code>content_rect</code> 为显示区域、以底部中心锚点放置；传入的 <code>feetY</code> 是美术脚底位置，仍需由角色物理状态决定。</p>
+<p>四组特效默认 8 FPS、500ms、播放一次；可以传入 <code>loop</code> 反复展示。特效取样要保留完整 <code>source_rect</code> 和共同中心，不能每帧按内容包围盒重新居中，否则水流和斧光会跳动。<code>solid_rect</code> 不参与特效取样。</p>
+<p>平台的装饰支架、管线和下方石柱不能决定碰撞盒。关卡分别定义水平站立顶面、穿越规则和触发器，使角色脚底落在真正的平台边缘。水段、墙板未保证无缝平铺，正式摆关卡时检查接缝。背景可按比例 cover 适配 16:9；角色保持等比缩放。</p>
+<h2>预览与目录</h2>
+<p>双击或在浏览器打开 <a href="../assets/preview/index.html" target="_blank" rel="noopener">assets/preview/index.html</a>，可直接从 <code>file://</code> 运行，无外部脚本、字体、CDN 或网络依赖。图库展示全部采样区、角色筛选、四组特效与代码界面示例。场景拼装展示的是素材组合，不是可玩的关卡，也不是实机截图。</p>
+<table><thead><tr><th>位置</th><th>用途</th></tr></thead><tbody><tr><td><code>assets/atlases/</code>、<code>portraits/</code>、<code>enemies/</code></td><td>动作、头像、敌方、道具与场景图集</td></tr><tr><td><code>assets/fx/</code>、<code>backgrounds/</code>、<code>ui/</code></td><td>特效、背景、界面美术及代码</td></tr><tr><td><code>assets/runtime-catalog.json</code></td><td>程序取样的当前事实来源</td></tr><tr><td><code>assets/asset-manifest.json</code></td><td>制作状态与原计划的对应登记</td></tr><tr><td><code>assets/prompts/</code>、<code>provenance/</code></td><td>提示词、工具、日期、参考与原始输出位置</td></tr><tr><td><code>assets/references/</code>、<code>concepts/</code></td><td>用户参考、批准稿与已替代旧稿</td></tr><tr><td><code>assets/preview/</code></td><td>离线素材库</td></tr><tr><td><code>scripts/build_art_catalog.py</code></td><td>只读分析 PNG 并生成目录元数据，不输出裁缩图片</td></tr></tbody></table>
+<p>保留每项提示词及来源 JSON，不用“最新生成图片”推测来源。来源记录中的原始工具路径和工作区路径共同用于追溯；替换图像后应同步更新坐标、尺寸、SHA256 与相关来源记录。用户参考和概念稿不计入本轮生产 PNG，也不能标记为真实游戏截图。当前记录不表示已经核验参考图的参赛或使用授权。</p>
+<h2>待游戏开发继续完成</h2>
+<p>本包提供单张行走关键姿态，尚无完整逐帧步态；声音已在 src/game/audio.mjs 中以 Web Audio 合成。比赛主角卡状态为 <code>waiting_for_gameplay_capture</code>，必须在游戏接入后使用真实运行截图制作。五章关卡、约 20 分钟完整流程、存档、碰撞与操作体验仍需开发和实测，本轮美术交付不等于整款游戏完成。</p>
+<p><a href="美术资产制作清单.md" target="_blank" rel="noopener">原制作清单</a> 保留了制作前的范围和目标尺寸。当前数量、文件路径与实际尺寸以本说明及两份机器清单为准。</p>
+<h2>2026-10-24 游戏接入更新</h2>
+<p>五章侧视可玩流程、键鼠与触屏输入、章间存档、重试、结算和程序音效已实现。比赛主角卡已用真实运行画面制作于 <code>assets/submission/deepseek-hero-card.png</code>，1600×900 PNG。前文“待开发”“待截图”等为此前阶段记录；当前实施与验收见<a href="开发与验收记录.md" target="_blank" rel="noopener">开发与验收记录</a>。首次体验二十分钟待真人校准；在线发布等待源码上传和部署授权。</p></div></div></body></html>

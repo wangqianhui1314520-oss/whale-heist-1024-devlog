@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>美术资产制作清单 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>美术资产制作清单</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/美术资产制作清单.md</code>　·　15.8 KB</p>
+<hr><h1>《鲸鱼魔盗团》横版侧视美术资产制作清单</h1>
+<p>依据：最终策划案 V2.0 的角色、五章主线、约20分钟流程，以及用户最新确认的横版侧视方向。登记日期：2026 年 10 月 24 日。</p>
+<p><strong>视角变更取代V2.0俯视设定。</strong> 当前游戏采用类似《森林冰火人》的固定镜头、多层平台与机关；每章完整场景同时呈现。DeepSeek、Grok、Claude、GLM 的身份、五章推进、指挥和数据搬运保留。本清单不代表旧版策划 Word 已同步修订。</p>
+<p>本文件保留制作前的范围与验收基线，以下“待生成”、目标路径和尺寸不再表示当前交付状态。2026 年 10 月 24 日已交付 <strong>28 张原生 PNG、96 个可调用采样区</strong>及程序 UI 资源，实际内容、差异与接入方式见<a href="美术资产交付说明.md" target="_blank" rel="noopener">美术资产交付说明</a>，运行坐标以 <code>../assets/runtime-catalog.json</code> 为准。两张用户参考和实际1672×941的侧视视觉方向稿保留；旧俯视稿单独归档为 <code>superseded</code>，不计入当前生产资产。</p>
+<p>机器清单位于 <code>../assets/asset-manifest.json</code>，所有生产条目包括稳定 ID、ASCII 文件名、路径、尺寸、透明要求、锚点、优先级、制作方式、来源和状态。<code>dimensions</code> 是目标导出尺寸；只有 <code>dimensions_verified: true</code> 才表示已检查实际文件尺寸。</p>
+<h2>1. 当前范围与数量</h2>
+<table><thead><tr><th>类别</th><th>数量</th><th>制作方式</th><th>当前状态</th></tr></thead><tbody><tr><td>四角色：左右朝向×待机／行走／跳跃／下落／技能</td><td>40</td><td>AI 生成</td><td>待生成</td></tr><tr><td>四角色正面头像源图</td><td>4</td><td>单独 AI 生成正面胸像</td><td>待生成</td></tr><tr><td>运行头像</td><td>4</td><td>从正面头像源图裁切</td><td>待派生</td></tr><tr><td>调查员、普通守卫</td><td>2</td><td>AI 生成侧视静态图</td><td>待生成</td></tr><tr><td>六类道具</td><td>6</td><td>AI 生成侧视图</td><td>待生成</td></tr><tr><td>共用侧视平台与机关</td><td>17</td><td>AI 生成</td><td>待生成</td></tr><tr><td>四组短特效，每组四帧</td><td>16</td><td>AI 生成侧视效果</td><td>待生成</td></tr><tr><td>特效运行图集</td><td>4</td><td>由四帧拼接</td><td>待派生</td></tr><tr><td>标题背景、结算背景</td><td>2</td><td>AI 生成横版背景</td><td>待生成</td></tr><tr><td>比赛主角卡</td><td>1</td><td>参考＋角色＋真实运行截图排版</td><td>待派生</td></tr><tr><td>当前横版侧视视觉方向稿</td><td>1</td><td>AI 概念图</td><td>已生成概念图，实际1672×941</td></tr><tr><td>程序 UI 组件</td><td>8</td><td>HTML／CSS／Canvas</td><td>待实现</td></tr><tr><td>七类音效</td><td>7</td><td>Web Audio 程序合成</td><td>待实现</td></tr><tr><td>用户参考图</td><td>2</td><td>用户提供</td><td>已有参考，非新生成素材</td></tr><tr><td><strong>当前清单合计</strong></td><td><strong>114</strong></td><td><strong>生产 AI 图87张、派生图9张，其余见上</strong></td><td><strong>生产素材未完成</strong></td></tr></tbody></table>
+<p>另外登记旧俯视概念稿一张，位于 <code>superseded_assets</code>，<strong>不计入114条当前记录</strong>。角色首发仍只有四名，不加入对照图中的其他模型、额外Boss、装备树或独立五套场景。</p>
+<h2>2. 相机、尺寸与锚点</h2>
+<ul><li>画面为 <strong>16:9横版、1280×720逻辑视口</strong>；视觉图目标为1920×1080。每关固定镜头展示多层平台与机关联系，手机横屏缩放完整场景，关键机关不依赖滚屏才可看见。</li><li>角色和道具采用<strong>正交侧视立面</strong>；人物明确朝左或朝右，不使用原来的正／背／左／右俯视四方向。平台的水平顶边必须清楚。</li><li>角色约2至2.5头身、深蓝干净描边、柔和分层上色；统一光源、比例、轮廓和脚底高度。用户参考中的鲸尾、服饰与发色保持一致。</li><li>角色透明PNG源图 <strong>512×512</strong>，运行图 <strong>256×256</strong>。共同脚底基准分别为 <strong>(256,448)</strong> 与 <strong>(128,224)</strong>，四边至少12%安全留白，不裁尾巴、武器或头饰。跳跃和下落由游戏物理改变位置，精灵保持同一画布基准。</li><li>角色脚底贴水平平台顶面。接触阴影、呼吸、受击闪白、负重起伏由程序表现，不烘焙俯视地面投影。</li><li>图像统一sRGB。透明图检查真实Alpha，不得使用白底、假透明棋盘、截图黑边或残余文字。</li><li>图片生成实际输出与目标尺寸不同的，先保存原始输出，再派生导出；不能把目标尺寸冒充已经检查的实际尺寸。</li><li>源图保存在 <code>assets/source/</code>，运行图分目录保存，源图不进入首屏包。文件名只用小写ASCII、数字和连字符。</li></ul>
+<h2>3. 四角色侧视动作（P0）</h2>
+<p>每人10张：<code>left</code>、<code>right</code> 两个朝向，各有 <code>idle</code>、<code>walk</code>、<code>jump</code>、<code>fall</code>、<code>skill</code> 五种状态。源图目录为 <code>assets/source/characters/</code>，运行目录为 <code>assets/sprites/characters/</code>，同名PNG。</p>
+<table><thead><tr><th>角色</th><th>前缀与识别元素</th><th>技能姿态</th></tr></thead><tbody><tr><td>DeepSeek</td><td><code>deepseek</code>；蓝发蓝眼、蕾丝头饰、蓝白女仆裙、鲸鱼围裙、鲸尾、鲸鱼背包</td><td>横向鲸形水流冲刺前倾</td></tr><tr><td>Grok</td><td><code>grok</code>；金发、黑红服装、大战斧</td><td>持斧横向冲锋</td></tr><tr><td>Claude</td><td><code>claude</code>；橙色长发、米白棕色服装、书本</td><td>翻书放出纸页诱饵</td></tr><tr><td>GLM</td><td><code>glm</code>；黑发、黑白学院风、终端或书卷</td><td>举终端进行侧视扫描</td></tr></tbody></table>
+<p>以DeepSeek为例，固定文件名如下；其余三人的命名仅替换前缀：</p>
+<table><thead><tr><th>朝向</th><th>5张运行图</th></tr></thead><tbody><tr><td>左</td><td><code>deepseek-left-idle.png</code>、<code>deepseek-left-walk.png</code>、<code>deepseek-left-jump.png</code>、<code>deepseek-left-fall.png</code>、<code>deepseek-left-skill.png</code></td></tr><tr><td>右</td><td><code>deepseek-right-idle.png</code>、<code>deepseek-right-walk.png</code>、<code>deepseek-right-jump.png</code>、<code>deepseek-right-fall.png</code>、<code>deepseek-right-skill.png</code></td></tr></tbody></table>
+<p>朝左、朝右相对屏幕定义。左右图需要核对非对称头饰、持书手、斧头和鲸尾位置，不能未经检查直接镜像。五种状态在相同显示尺寸下保持头部大小、服装比例与道具一致。</p>
+<p><code>walk</code>为单张行走关键姿态，配合程序起伏形成移动反馈；当前范围不声称已有完整逐帧步态。跳跃与下落各有独立状态，落地挤压和冲刺尾迹由程序／短特效辅助。后续若增加步态帧，应另登记新增资产。</p>
+<h2>4. 正面头像和敌方（P0）</h2>
+<p>四张正面头像源图<strong>单独生成</strong>，不能从侧身精灵虚称“正面裁切”。源图路径：</p>
+<ul><li><code>assets/source/portraits/deepseek-front-portrait-source.png</code></li><li><code>assets/source/portraits/grok-front-portrait-source.png</code></li><li><code>assets/source/portraits/claude-front-portrait-source.png</code></li><li><code>assets/source/portraits/glm-front-portrait-source.png</code></li></ul>
+<p>每张512×512透明正面胸像、中心锚点(256,256)，同一角色造型需与侧视图一致。由验收后的胸像裁成 <code>assets/portraits/{角色名}-portrait.png</code>，192×192透明PNG、中心锚点(96,96)。头像框与冷却遮罩由程序实现。四张运行头像属于派生资产，不重复计作AI生成图。</p>
+<p>敌方最低两张为 <code>assets/sprites/enemies/investigator-right-idle.png</code> 与 <code>guard-right-idle.png</code>。源图512×512、运行图256×256，沿用角色脚底基准。调查员用制服、记录板辨识，守卫用青灰制服与手电辨识；只做侧视静态图，转向使用经核对后的程序镜像，不追加两套完整角色动作。</p>
+<h2>5. 六类侧视道具（P0）</h2>
+<p>源图256×256透明PNG、运行图128×128，底部接触点源图(128,224)、运行图(64,112)。全部按侧视平台相机绘制，运行时可拾取或放在平台上；不使用俯视顶面。</p>
+<table><thead><tr><th>文件，目录 <code>assets/props/</code></th><th>用途</th></tr></thead><tbody><tr><td><code>data-cube.png</code></td><td>蓝青数据块，用于拾取、三格背包与交付</td></tr><tr><td><code>data-node.png</code></td><td>可撞开的服务器节点；受损闪光和裂纹由程序叠加</td></tr><tr><td><code>qualifier-token.png</code></td><td>金色空白气泡词条徽章，无烘焙中文</td></tr><tr><td><code>resume-decoy.png</code></td><td>米白简历纸页、橙色封签，不含个人信息</td></tr><tr><td><code>broadcast-console.png</code></td><td>母舰旁广播控制台，灯色与开关提示由程序绘制</td></tr><tr><td><code>return-beacon.png</code></td><td>鲸尾形返航信标，激活效果由程序控制</td></tr></tbody></table>
+<h2>6. 侧视平台与机关（P0）</h2>
+<p><strong>原俯视地砖、俯视墙角和俯视水道不沿用。</strong> 五章共用一套侧视场景块；平台层数、梯子、升降路线、压力板联动与闸门配置改变关卡。</p>
+<p>场景源图宽高为下表逻辑参考尺寸的4倍，运行图为2倍，按各块真实长宽比导出；例如平台中段源图512×128、运行图256×64，梯子源图128×512、运行图64×256。不得把正方形图强行拉伸成长平台。平台按水平顶边对齐，装饰不越过实际站立边界。以下逻辑尺寸是首次摆放目标，可在关卡试跑时调整，不假称已经完成碰撞调优。</p>
+<table><thead><tr><th>文件，目录 <code>assets/environment/</code></th><th>Alpha</th><th>逻辑参考尺寸</th><th>锚点／要求</th></tr></thead><tbody><tr><td><code>room-back-wall.png</code></td><td>否</td><td>128×128</td><td>左上；低对比后墙立面，可平铺</td></tr><tr><td><code>platform-middle.png</code></td><td>是</td><td>128×32</td><td>平台左上顶边；横向拼接</td></tr><tr><td><code>platform-left-cap.png</code></td><td>是</td><td>64×32</td><td>同高左端封边</td></tr><tr><td><code>platform-right-cap.png</code></td><td>是</td><td>64×32</td><td>同高右端封边</td></tr><tr><td><code>platform-thin.png</code></td><td>是</td><td>96×20</td><td>清楚的窄悬空踏板</td></tr><tr><td><code>ladder.png</code></td><td>是</td><td>32×128</td><td>左上；竖向拼接</td></tr><tr><td><code>lift-platform.png</code></td><td>是</td><td>112×32</td><td>平台左上顶边；运行时升降</td></tr><tr><td><code>pressure-plate.png</code></td><td>是</td><td>48×16</td><td>平台顶面；受压灯色与压缩由程序表现</td></tr><tr><td><code>gate-closed.png</code></td><td>是</td><td>64×128</td><td>底部中心；普通机关闸门关闭</td></tr><tr><td><code>gate-open.png</code></td><td>是</td><td>64×128</td><td>同一外框、闸板收起，明确可通行</td></tr><tr><td><code>paper-barrier-intact.png</code></td><td>是</td><td>64×96</td><td>底部中心；可冲刺破障</td></tr><tr><td><code>paper-barrier-broken.png</code></td><td>是</td><td>64×96</td><td>对应破损状态，保留支架与开口</td></tr><tr><td><code>mfa-door-fixed.png</code></td><td>是</td><td>64×128</td><td>底部中心；始终关闭的多重认证钢门</td></tr><tr><td><code>water-channel.png</code></td><td>否</td><td>128×64</td><td>左上；水面与水下立面，横向拼接</td></tr><tr><td><code>mothership.png</code></td><td>是</td><td>176×128</td><td>底部中心；关卡出口平台的交付与登艇点</td></tr><tr><td><code>alarm-sensor.png</code></td><td>是</td><td>32×32</td><td>底部中心；警戒器本体，预警区由程序绘制</td></tr><tr><td><code>hidden-trap.png</code></td><td>是</td><td>48×24</td><td>底部中心；平台陷阱，显隐由程序控制</td></tr></tbody></table>
+<p>独立物件底部中心为归一化(0.5,0.875)，图块左上为(0,0)。平台顶面锚点为导出画布上边缘；验收时核对画面中的站立线确实与此对齐。</p>
+<p>普通机关闸门有开闭状态，与始终不可开启的多重认证钢门必须造型区分。压力板、梯子和升降台在固定全景缩放后仍应易读；机关关系用程序连线或灯色提示，不生成带逻辑箭头的固定贴图。</p>
+<h2>7. 16帧侧视特效与4张图集（P0）</h2>
+<p>每组4帧，共16帧；透明源图512×512、运行帧256×256，中心锚点(256,256)／(128,128)。水流和斧刃沿横向展开，扫描以侧视网格和扫描扇区表现，禁止复用俯视地面圆盘。</p>
+<table><thead><tr><th>组名</th><th>独立帧命名</th><th>效果</th></tr></thead><tbody><tr><td>鲸形水流</td><td><code>assets/fx/frames/water-dash-01.png</code> 至 <code>-04.png</code></td><td>横向尾迹、鲸形水花、展开、消散</td></tr><tr><td>斧刃撞击</td><td><code>assets/fx/frames/axe-impact-01.png</code> 至 <code>-04.png</code></td><td>黑红斧弧、金白命中、消散</td></tr><tr><td>书页诱饵</td><td><code>assets/fx/frames/paper-decoy-01.png</code> 至 <code>-04.png</code></td><td>米白纸页和橙色弧线</td></tr><tr><td>网格扫描</td><td><code>assets/fx/frames/scan-grid-01.png</code> 至 <code>-04.png</code></td><td>侧视青紫网格、扫描波与消散</td></tr></tbody></table>
+<p>每组派生一张 <code>assets/fx/{组名}-atlas.png</code>，1024×256、横向四格、每格256×256无间隙。四张图集不计为新增AI生成图。左右翻转、帧率和震屏由程序控制；只有四张帧实际完成并验收后，才能记录为已制作短动画。</p>
+<h2>8. 横版背景、视觉稿和主角卡</h2>
+<table><thead><tr><th>交付物</th><th>规格与路径</th><th>优先级</th><th>当前状态</th></tr></thead><tbody><tr><td>标题背景</td><td>源图1920×1080，运行1280×720，不透明；<code>assets/backgrounds/menu-background.png</code></td><td>P1</td><td>待生成</td></tr><tr><td>结算背景</td><td>同上；<code>assets/backgrounds/results-background.png</code>；章末与总评共用</td><td>P1</td><td>待生成</td></tr><tr><td>当前横版视觉稿</td><td>目标1920×1080，实际1672×941；<code>assets/concepts/gameplay-sideview-visual-target.png</code></td><td>P0</td><td>已生成概念图并核对尺寸</td></tr><tr><td>比赛主角卡</td><td>1600×900、不透明PNG、10MB内；<code>assets/submission/deepseek-hero-card.png</code></td><td>P0</td><td>待真实游戏截图后派生</td></tr></tbody></table>
+<p>新视觉稿提示词登记为 <code>assets/concepts/gameplay-sideview-visual-target.prompt.txt</code>。视觉稿只能用于方向确认，不能冒称实机截图或已经拆分的运行资产。</p>
+<p>旧俯视稿已归档为 <code>assets/concepts/archived/gameplay-topdown-visual-target-superseded.png</code>，实际941×1672；配套提示词同名 <code>.prompt.txt</code>。清单将其标记为 <code>superseded</code>，归档复制状态为已复制，不能再称当前方向。</p>
+<p>主角卡使用用户原参考、已验收的侧视DeepSeek、单独生成的正面胸像、真实横版运行截图与实际工具信息排版。用户参考、本次生成与实机图分开标注；无论新旧概念图都不能冒充实机。</p>
+<h2>9. 程序绘制 UI（P0）</h2>
+<p>八类UI都由HTML／CSS／Canvas生成，1280×720逻辑画布，手机横屏缩放。文字、按钮、计时、任务、成绩和路径预览不能烘焙进AI背景。本清单仅登记代码目标，未创建界面代码。</p>
+<table><thead><tr><th>ID</th><th>内容</th></tr></thead><tbody><tr><td><code>ui-title-menu</code></td><td>开始、继续、选章、设置与存档提示</td></tr><tr><td><code>ui-mission-hud</code></td><td>章节任务、用时、体力、警戒、三格背包与限定词</td></tr><tr><td><code>ui-command-preview</code></td><td>侧视路径、平台落点、机关关联线、扫描范围与目标</td></tr><tr><td><code>ui-command-panel</code></td><td>队友头像、冷却、默认／精确指令、确认与取消</td></tr><tr><td><code>ui-touch-controls</code></td><td><strong>左／右、跳跃、冲刺、互动、暂停和队友发令</strong>；触控区至少44 CSS像素</td></tr><tr><td><code>ui-dialogue</code></td><td>最多两条短群聊、侧视移动跳跃引导、入队提示</td></tr><tr><td><code>ui-chapter-results</code></td><td>单章成绩、任务明细、调查笔录、继续与重试</td></tr><tr><td><code>ui-campaign-results</code></td><td>五章总分、用时、历史暴露和章节挑战</td></tr></tbody></table>
+<p>触屏需要同时按方向与跳跃／冲刺；不沿用俯视虚拟自由方向摇杆。固定镜头的关卡信息应完整显示，不能用跟随滚动镜头隐藏关键机关。最终键位和触屏布局以游戏实现及试玩结果为准。</p>
+<h2>10. 声音、参考和制作顺序</h2>
+<p>七类声音保留：<code>dash</code>、<code>impact</code>、<code>pickup</code>、<code>delivery</code>、<code>command-confirm</code>、<code>alarm</code>、<code>results</code>。建议Web Audio合成，当前未实现，不计为AI图像；首个点击后开启，可静音。声音事件同时具有视觉反馈，音乐为可选项。</p>
+<table><thead><tr><th>已有参考</th><th>已核对尺寸</th><th>说明</th></tr></thead><tbody><tr><td><code>assets/references/deepseek-chibi-reference.jpg</code></td><td>1252×1294</td><td>用户提供，主角身份造型主要依据；当前仍有效</td></tr><tr><td><code>assets/references/ai-personas-reference.jpg</code></td><td>1258×864</td><td>用户提供，只取三名队友的发色、服饰和道具</td></tr></tbody></table>
+<p>参考只确认文件与尺寸，不视为本次生成素材，不标注为模型官方形象。相机变更不改变这些人物身份参考。</p>
+<p>按以下依赖顺序制作：</p>
+<ol><li>先检查新的横版侧视固定镜头视觉图；旧稿只作归档。</li><li>完成四名角色右朝待机、独立正面胸像，以及平台、梯子、压力板、闸门等关键块，检查小尺寸可读性和站立线。</li><li>补齐角色左朝、行走、跳跃、下落和技能，保持脚底与身体尺度；补齐两敌方和六道具。</li><li>完成升降台、破障、水道、母舰等场景物件，接入固定镜头多层平台测试。</li><li>完成16帧侧视特效，派生四张图集和四张头像；生成横版标题和结算背景。</li><li>真实游戏接入后再制作主角卡，登记实际提示词、参考、生成工具、日期、原始输出、派生步骤与游戏使用位置。</li></ol>
+<p>P0代表完整游戏或参赛必需；P1代表正式视觉完善项。只有实际完成并核对画面、透明、尺寸、侧视方向、脚底和机关可读性后才能更新状态。</p>
+<h2>2026-10-24 游戏接入更新</h2>
+<p>五章侧视可玩流程、键鼠与触屏输入、章间存档、重试、结算和程序音效已实现。比赛主角卡已用真实运行画面制作于 <code>assets/submission/deepseek-hero-card.png</code>，1600×900 PNG。前文“待开发”“待截图”等为此前阶段记录；当前实施与验收见<a href="开发与验收记录.md" target="_blank" rel="noopener">开发与验收记录</a>。首次体验二十分钟待真人校准；在线发布等待源码上传和部署授权。</p></div></div></body></html>

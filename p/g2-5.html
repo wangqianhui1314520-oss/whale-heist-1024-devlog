@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>问题修复方案 · 2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>问题修复方案 · 2026-10-25</h1>
+<p class="meta">来源：<code>_归档-20261026/游戏-output__playthrough/问题修复方案-2026-10-25.md</code>　·　14.3 KB</p>
+<hr><h1>《鲸鱼魔盗团》问题修复方案</h1>
+<blockquote>配套文档：<code>游玩问题总表-2026-10-25.md</code>（12 条待修 + 1 条已修）<br>本方案按「先止崩、再修手感、最后补文案」三批推进，每条都给出<strong>文件:行 → 改法 → 风险 → 验证</strong></blockquote>
+<hr>
+<h2>零、总体判断</h2>
+<table><thead><tr><th>批次</th><th>内容</th><th>条数</th><th>建议时长</th><th>是否阻断发布</th></tr></thead><tbody><tr><td>A 阻断</td><td>QA-01 冻结、QA-02 信标台取件区、QA-08 长按互动偶发失效</td><td>3</td><td>1.5h</td><td><strong>是</strong>（评审第一眼就是"卡住"）</td></tr><tr><td>B 手感</td><td>QA-03 检查点丢资料、QA-04 冲刺刹车、QA-05 跳跃判定、QA-06 陷阱预警</td><td>4</td><td>2h</td><td>否，但直接影响重玩意愿</td></tr><tr><td>C 打磨</td><td>QA-07 动线、QA-09 破障提示、QA-10 暴露释义、QA-11 总结入口、QA-12 阈值</td><td>5</td><td>1.5h</td><td>否</td></tr></tbody></table>
+<blockquote>修改点在 <code>src/</code>，改完必须跑 <code>node src/core/verify-core.mjs</code> + <code>node scripts/verify-world.mjs</code> + <code>node scripts/build-game.mjs</code>，否则 <code>dist/</code> 与实际不一致（发布包用的是 <code>dist/</code>）。</blockquote>
+<hr>
+<h2>A 批：阻断级</h2>
+<h3>QA-01 偶发「角色不响应移动」→ 三处一起改</h3>
+<p><strong>已排除</strong>：焦点在按钮（<code>activeElement=CANVAS</code>）、碰撞体（<code>barriers=[]</code>）、平台边缘（<code>grounded=true</code>、y=490）。 <strong>新发现</strong>：当前 <code>frame()</code> 的世界更新被加了一道 <code>!document.hidden</code> 硬闸；一旦浏览器把页面判为隐藏（后台标签/最小化/部分无头环境），世界会<strong>静默停更</strong>——画面保持最后一帧、<code>screen</code> 仍是 <code>none</code>、没有任何暂停提示。这与"卡住但看起来一切正常"的现象完全吻合。</p>
+<p><strong>改法 1（<code>src/main.mjs</code>，删掉静默闸）</strong></p>
+<pre><code>- if(world&amp;&amp;renderer&amp;&amp;['none','command'].includes(ui.screen)&amp;&amp;!document.hidden){
++ if(world&amp;&amp;renderer&amp;&amp;['none','command'].includes(ui.screen)){</code></pre>
+<blockquote>安全性：<code>input.mjs</code> 的 <code>visibilitychange → lost-focus</code> 已经会在隐藏时暂停并弹出「暂停」面板，所以这道闸是重复的，且它的失败模式是"静默"。</blockquote>
+<p><strong>改法 2（<code>src/main.mjs</code> frame 加看门狗，兜住未知根因）</strong></p>
+<pre><code>// 放在 frame() 顶部，模块级声明 let wdTime=0, wdAt=0;
+if(world&amp;&amp;ui.screen==='none'&amp;&amp;core.view().phase==='playing'&amp;&amp;!mustStayPaused()&amp;&amp;now-wdAt&gt;600){
+  const t=world.time||0;
+  if(t&lt;=wdTime+0.05){                        // 0.6s 内世界时间没走
+    console.warn('[watchdog] world stalled',{t,screen:ui.screen,phase:core.view().phase,dash:world.player.dashCooldown});
+    core.setPaused(false);input.clear();      // 强制回到可操作态
+  }
+  wdTime=t;wdAt=now;
+}</code></pre>
+<p><strong>改法 3（<code>src/game/input.mjs:18</code>，移动键不受按钮焦点影响）</strong></p>
+<pre><code>- const action=this.actionFor(event.code);
+- if(action&amp;&amp;!event.target?.closest?.('button')){
++ const action=this.actionFor(event.code);
++ const movement=['left','right','up','down','jump','dash','interact'].includes(action);
++ if(action&amp;&amp;(movement||!event.target?.closest?.('button'))){</code></pre>
+<p><strong>风险</strong>：移动键在菜单里也能触发 → 但菜单打开时 <code>getScreen()!=='none'</code>，<code>sample()</code> 的下游（<code>frame</code> 的世界块）本来就不吃输入，安全；且这样还顺带修掉「点完剧情按钮后用键盘走不动」。 <strong>验证</strong>：<code>QA_MODE=import5 node output/playthrough/play.cjs</code>，看日志里不再出现 <code>walkTo 卡死 ... phase=playing screen=none barriers=[]</code>。</p>
+<hr>
+<h3>QA-02 第5章信标台三块数据全在守卫巡逻区间内</h3>
+<p><code>src/game/rooms.mjs</code> 第5章副房间：</p>
+<pre><code>- items:at(c.items,[['final-data-1',1040,270],['final-data-2',1120,270],['final-data-3',1180,270]])
++ items:at(c.items,[['final-data-1',1000,270],['final-data-2',1060,270],['final-data-3',1120,270]])
+- guards:[{id:'evacuation-upper-guard',x:1160,y:270,minX:1030,maxX:1200,speed:48}]
++ guards:[{id:'evacuation-upper-guard',x:1175,y:270,minX:1140,maxX:1210,speed:48}]</code></pre>
+<p>效果：三块数据全部落到巡逻带之外（1140 起点），东侧警报（x=1205）仍然惩罚贪走位；玩家有"贴着信标取件"的稳妥解法。 <strong>风险</strong>：章节难度下降（原本是压力设计）；如果这是刻意设计的"必挨打"，可改为只挪 <code>final-data-3</code> → 1130。 <strong>验证</strong>：<code>QA_MODE=demo5</code>，日志里应出现 <code>背包:[3 块] health=100</code>（不再掉血）。</p>
+<hr>
+<h3>QA-08 长按互动偶发不生效</h3>
+<p>根因是 <code>mustReleaseInteract</code> 只能靠"下次读到的 <code>input.interact===false</code>"来清，而 <code>input.clear()</code>／暂停恢复的时序会把它一直卡住。</p>
+<p><strong>改法（<code>src/game/input.mjs</code> keyup + <code>src/main.mjs</code> 接线）</strong></p>
+<pre><code>// input.mjs：keyup 里补一条
+window.addEventListener('keyup',event=&gt;{
+  this.keys.delete(event.code);
+  if(this.actionFor(event.code)==='interact')this.onAction('interact-released',{});
+});</code></pre>
+<pre><code>// main.mjs 的 act() 里加一个分支（放在 switch 里任意位置）
+case 'interact-released':if(world)world.mustReleaseInteract=false;break;</code></pre>
+<p><strong>风险</strong>：极低（只是让"松手"这个事实立刻生效）。 <strong>验证</strong>：<code>QA_MODE=import5</code>，日志里不应再出现 <code>[重试] 换房未生效</code> / <code>广播未能关闭</code>。</p>
+<hr>
+<h2>B 批：手感</h2>
+<h3>QA-03 死亡回档丢"已收集未交付"资料</h3>
+<p><strong>改法（<code>src/main.mjs</code> worldEvent，拾取后立即落检查点）</strong></p>
+<pre><code>+ if(type==='pickup')makeCheckpoint((world.currentRoom?.name||'房间')+' · 拾取后');</code></pre>
+<blockquote><code>makeCheckpoint</code> 内部已有 <code>if(!active()||evacuationStarted)return</code> 保护；每章最多 6 次写盘，可接受。</blockquote>
+<p><strong>验证</strong>：第5章取 1 块后故意踩陷阱死亡 → 检查点重试 → 背包里那块应还在。</p>
+<hr>
+<h3>QA-04 冲刺惯性 117px 无刹车</h3>
+<p><strong>改法（<code>src/game/world.mjs</code>，给冲刺后 0.18s 强摩擦）</strong></p>
+<pre><code>  this.player={...dashCooldown:0,dashTime:0,hurtUntil:0,climbing:false};
++ // 新增字段
++ this.player.slideUntil=0;</code></pre>
+<pre><code>- if(input.dashPressed&amp;&amp;p.dashCooldown===0){p.dashTime=.22;p.dashCooldown=2.8;...}
++ if(input.dashPressed&amp;&amp;p.dashCooldown===0){p.dashTime=.22;p.dashCooldown=2.8;p.slideUntil=this.time+.18;...}
+- const wanted=axis*speed,maxChange=(axis?2500:3000)*dt;
++ const wanted=axis*speed,maxChange=((this.time&lt;(p.slideUntil||0))?9000:(axis?2500:3000))*dt;</code></pre>
+<p>效果：滑行从 117px 降到约 35px，<code>review-data-4</code> 那种"冲下平台"不再发生。 <strong>风险</strong>：冲刺手感变"顿"；若想保留惯性感，把 9000 调成 6000（滑行约 60px）。 <strong>验证</strong>：第3章机房连续两次冲刺后应停在 (≈500,490) 而不是 (654,600)。</p>
+<hr>
+<h3>QA-05 教程跳跃判定窗过窄</h3>
+<p><strong>改法（<code>src/game/lesson-bridge.mjs:223</code>）</strong></p>
+<pre><code>- const crossedRight = rightGap &gt;= 20 &amp;&amp; this.jump.startX &lt;= from.x + from.w + 3 &amp;&amp; current.x &gt;= to.x + 2;
++ const crossedRight = rightGap &gt;= 20 &amp;&amp; current.x &gt;= to.x + 2;
+- const crossedLeft = leftGap &gt;= 20 &amp;&amp; this.jump.startX &gt;= from.x - 3 &amp;&amp; current.x &lt;= to.x + to.w - 2;
++ const crossedLeft = leftGap &gt;= 20 &amp;&amp; current.x &lt;= to.x + to.w - 2;</code></pre>
+<p>判定改成"从 A 平台起跳、落到 B 平台"即可，不再限制起跳像素。 <strong>风险</strong>：无（仍然要求 <code>to.id!==from.id</code> 且 <code>minY</code> 有真实腾空高度）。</p>
+<hr>
+<h3>QA-06 地面陷阱无预警</h3>
+<p><strong>改法（<code>src/game/world.mjs</code> 陷阱循环）</strong></p>
+<pre><code>- trap.active=!this.expanded||(this.time+(trap.x%5))%4&lt;2.5;
+- if(trap.active&amp;&amp;Math.abs(this.player.y-trap.y)&lt;12&amp;&amp;this.player.x&gt;trap.x&amp;&amp;this.player.x&lt;trap.x+trap.w){this.hurt(20);this.triggerAlarm(trap.id);}
++ const cycle=(this.time+(trap.x%5))%4;
++ trap.active=!this.expanded||cycle&lt;2.5;
++ // 下次通电前 0.45s 预警：裂纹 + 提示音
++ trap.warning=this.expanded&amp;&amp;cycle&gt;=3.55&amp;&amp;cycle&lt;4;
++ if(trap.warning&amp;&amp;!trap.warned){trap.warned=true;this.cue('alert',trap.x+trap.w/2,trap.y-6);this.emit('sound',{name:'guard-warning'});}
++ if(cycle&lt;3.55)trap.warned=false;
++ if(trap.active&amp;&amp;Math.abs(this.player.y-trap.y)&lt;12&amp;&amp;this.player.x&gt;trap.x&amp;&amp;this.player.x&lt;trap.x+trap.w){this.hurt(14);this.triggerAlarm(trap.id);}</code></pre>
+<p>渲染层（<code>scene-renderer.mjs</code>）若有绘制 trap 的分支，按 <code>trap.warning</code> 加一层描边/闪烁即可；没有也不影响逻辑。 <strong>风险</strong>：伤害 20→14 会改变评分压力（<code>alarms</code> 不变），如不想动数值就只加预警。</p>
+<hr>
+<h2>C 批：打磨</h2>
+<table><thead><tr><th>编号</th><th>改法</th><th>文件</th></tr></thead><tbody><tr><td>QA-07</td><td>副房间到达点从 <code>{x:85,y:600}</code> 改到资料侧（第2/3章建议 <code>{x:1040,y:600}</code>，出口同步挪到 <code>x=1170</code>），或两个机房各加一条中部梯路</td><td><code>src/game/rooms.mjs</code> <code>pair()</code></td></tr><tr><td>QA-09</td><td>路线为 null 时区分文案：<code>if(!route)return {ok:false,reason:</code>${actor.name} 还在障碍另一侧，正在绕行（约 ${Math.ceil(distance(actor,target)/195)}s）<code>}</code></td><td><code>src/game/world.mjs</code> <code>actionGeometry</code></td></tr><tr><td>QA-10</td><td>结算面板「暴露」加说明：<code>&lt;span title="公开指令/公开交付/警报 各计 2 点，上限 20"&gt;暴露&lt;/span&gt;</code> + 底部一行 <code>tiny-note</code></td><td><code>src/ui/ui-v3.mjs</code> <code>renderChapterResult</code></td></tr><tr><td>QA-11</td><td>通关后标题加「查看航程总结」：<code>renderTitle</code> 里 <code>completed</code> 时追加 <code>btn('campaign-summary','查看航程总结','text-button')</code>；<code>main.mjs</code> 的 <code>act()</code> 加 <code>case 'campaign-summary':updateUI();ui.show('campaign-result',{core:core.view()});break;</code></td><td><code>ui-v3.mjs</code> + <code>main.mjs</code></td></tr><tr><td>QA-12</td><td><code>campaignGrade</code>：<code>score&gt;=360?'A'</code>（当前 375，实测正常通关 369–371 卡在 B）</td><td><code>src/core/chapters.mjs:121</code></td></tr></tbody></table>
+<hr>
+<h2>回归验证清单（改完照跑）</h2>
+<pre><code># 1) 逻辑层
+node src/core/verify-core.mjs
+node scripts/verify-world.mjs &amp;&amp; node scripts/verify-maps.mjs &amp;&amp; node scripts/verify-art.mjs
+
+# 2) 构建 + 部署包一致性
+node scripts/build-game.mjs &amp;&amp; node scripts/verify-build.mjs
+
+# 3) 真机回归（本套驱动）
+node output/playthrough/play.cjs                 # 整局 5 章
+QA_MODE=demo5 node output/playthrough/play.cjs   # 第5章（验 QA-02/QA-08）
+QA_MODE=import5 node output/playthrough/play.cjs # 第5章 + 战役总结</code></pre>
+<p><strong>必须复现确认的三条</strong>（改完应消失）：</p>
+<ol><li><code>walkTo 卡死(…) screen=none barriers=[]</code>（QA-01）</li><li><code>[重试] 换房未生效</code> / <code>广播未能关闭</code>（QA-08）</li><li><code>第5章数据未拿齐</code> + <code>health</code> 掉到 35 以下（QA-02）</li></ol>
+<hr>
+<h2>需要你拍板的三处</h2>
+<ol><li><strong>QA-02</strong>：是"必须挨打"的紧张设计，还是失误？——决定挪数据还是缩巡逻。</li><li><strong>QA-12</strong>：A 线是否下调到 360（正常通关给 A，做可选内容给 S）？</li><li><strong>QA-07</strong>：副房间动线要不要动（会改地图美术的"门"位置，需要同步素材）？</li></ol>
+<hr>
+<h2>落地方式建议</h2>
+<p>仓库现在有 <strong>262 行未提交改动</strong>（<code>main.mjs</code> / <code>world.mjs</code> / <code>ui-v3.mjs</code> / <code>rooms.mjs</code> 都在别人手上动着）。建议：</p>
+<ol><li>先 <code>git stash</code> 或提交当前进度，锁定基线；</li><li>我按 A→B→C 顺序分三个 commit 落代码，每个 commit 附对应验证命令的输出；</li><li>每批改完跑一次上面的回归清单，再进下一批。</li></ol>
+<p><strong>要我现在就动手吗？</strong> 告诉我「按 A 批开始」即可，我改完直接把 <code>git diff</code> 和验证日志贴给你。</p>
+<hr>
+<h1>落地记录（2026-10-25 21:0x）</h1>
+<p>按拍板结果执行：<strong>QA-02 保留紧张设计不改、QA-12 A 线降到 360、QA-07 动线不动</strong>。</p>
+<h2>已改动</h2>
+<table><thead><tr><th>编号</th><th>文件:行</th><th>改动</th></tr></thead><tbody><tr><td>QA-01</td><td><code>main.mjs</code> frame()</td><td>新增看门狗：<code>screen=none &amp;&amp; phase=playing</code> 且世界时钟停滞 &gt;1.2s → 打警告并 <code>setPaused(false)+input.clear()</code>；隐藏页面持续 0.8s 补一次「暂停」面板（保留"隐藏不重绘"的既有契约，未删 <code>!document.hidden</code>）</td></tr><tr><td>QA-01</td><td><code>input.mjs</code> keydown</td><td>方向/爬梯/冲刺/互动键不再被"焦点在 button"吞掉（Space 仍交给按钮，避免破坏菜单键盘激活）</td></tr><tr><td>QA-08</td><td><code>input.mjs</code> keyup + <code>main.mjs</code></td><td>新增 <code>interact-released</code> 动作：一松 E 立刻清 <code>mustReleaseInteract</code></td></tr><tr><td>QA-03</td><td><code>main.mjs</code> worldEvent</td><td><code>type==='pickup'</code> 立即 <code>makeCheckpoint(房间+' · 拾取后')</code>，死亡回档不再丢已捡资料</td></tr><tr><td>QA-04</td><td><code>world.mjs</code> 玩家/冲刺</td><td>新增 <code>slideUntil</code>：冲刺后 0.18s 减速度 3000→9000，滑行 117px → ~35px</td></tr><tr><td>QA-05</td><td><code>lesson-bridge.mjs</code></td><td>跳跃通过条件去掉 <code>startX</code> 限制，只判"从 A 台跳到 B 台"</td></tr><tr><td>QA-06</td><td><code>world.mjs</code> 陷阱</td><td>通电前 0.45s <code>trap.warning</code>：<code>scan-grid</code> 波纹 + <code>guard-warning</code> 提示音（伤害与判定未改）</td></tr><tr><td>QA-09</td><td><code>world.mjs</code> actionGeometry</td><td>路线不可达文案改为「X 还在障碍的另一侧，正在绕行（约 N 秒）」</td></tr><tr><td>QA-10</td><td><code>ui-v3.mjs</code> 结算</td><td>「暴露」加 tooltip + 一行释义</td></tr><tr><td>QA-11</td><td><code>ui-v3.mjs</code> + <code>main.mjs</code></td><td>通关后标题新增「查看航程总结」→ 新动作 <code>campaign-summary</code></td></tr><tr><td>QA-12</td><td><code>chapters.mjs:121</code></td><td><code>campaignGrade</code> A 线 375 → <strong>360</strong></td></tr></tbody></table>
+<p><strong>未改</strong>：QA-02（信标台取件压力是设计）、QA-07（副房间动线不动）。</p>
+<h2>验证证据</h2>
+<table><thead><tr><th>检查</th><th>结果</th></tr></thead><tbody><tr><td><code>src/core/verify-core.mjs</code></td><td>PASS（事务/重试/资源/500 分制/存档恢复）</td></tr><tr><td><code>scripts/verify-input.mjs</code></td><td>5 项 PASS（含"菜单 Space 保持原生按钮行为"、"1000 次焦点/可见性中断"）</td></tr><tr><td><code>scripts/verify-world.mjs</code></td><td>PASS，五章物理输入模拟通关</td></tr><tr><td><code>scripts/verify-main-flow.mjs</code></td><td><strong>8/8 PASS</strong>（含"隐藏页面不重绘"契约）</td></tr><tr><td><code>scripts/verify-runtime-save.mjs</code> / <code>verify-experience.mjs</code> / <code>verify-story-flow.mjs</code> / <code>verify-lesson-bridge.mjs</code></td><td>13 / 18 / 18 / 12 全 PASS</td></tr><tr><td><code>scripts/verify-maps.mjs</code> / <code>verify-mission-completeness.mjs</code> / <code>verify-rendering.mjs</code></td><td>PASS</td></tr><tr><td><code>scripts/build-game.mjs</code> + <code>verify-build.mjs</code></td><td>built 148 files, missing 0</td></tr><tr><td>真机（<code>QA_MODE=demo5</code>）</td><td><strong>页面异常 0 次</strong>（改前 351 次），第5章跑到撤离 60s 倒数并成功登艇</td></tr></tbody></table>
+<h2>过程中自己踩的坑（已修，写进约定）</h2>
+<ul><li>陷阱预警第一版用了 <code>this.cue('alert', …)</code>，但 <code>assets/runtime-catalog.json</code> 的 <code>animations</code> 只有 <code>water-dash / axe-impact / paper-decoy / scan-grid</code> 四组 —— 渲染层直接抛 <code>Unknown effect: alert</code>，每帧一条 P0 异常（真机跑了 351 条）。已改为 <code>scan-grid</code>。</li><li><strong>约定</strong>：新增任何 <code>cue(&lt;group&gt;)</code>，group 必须已存在于 catalog 的 animations 里；这类错误 <code>verify-*.mjs</code> 抓不到，只有真机跑才会暴露。</li></ul>
+<h2>仍未闭环</h2>
+<ol><li><strong>QA-01 根因</strong>：看门狗是"兜底自愈"，不是根治。需要真机复现一次抓 <code>core.view().phase</code>；若确认为"无遮罩暂停态"，应在 <code>setPaused(true)</code> 处统一收口。</li><li><strong>第5章整链跑</strong>：脚本玩家仍会在信标台被守卫打死→检查点回档打断流程（游戏本身可通关，<code>demo5</code> 已证 75/A）。这是脚本走位问题，不是新缺陷。</li><li>仓库仍有并发未提交改动，本次改动未提交（不替你 commit）。建议 <code>git diff</code> 过一遍再封板。</li></ol></div></div></body></html>

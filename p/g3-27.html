@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>音频接入核查报告-2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>音频接入核查报告-2026-10-25</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/音频接入核查报告-2026-10-25.md</code>　·　7.3 KB</p>
+<hr><h1>《鲸鱼魔盗团》音频接入核查与全量接线报告</h1>
+<blockquote>日期：2026-10-25 | 范围：<code>游戏-鲸鱼魔盗团</code>（源码 + dist + 游戏发布快照）| 方法：静态引用追踪（清单 ↔ 播放入口 ↔ 打包产物三方对账）+ 运行时守护脚本 + mutation test</blockquote>
+<h2>一、结论先行</h2>
+<table><thead><tr><th>问题</th><th>结论</th></tr></thead><tbody><tr><td>46 个音频文件是否登记进游戏清单</td><td>✅ 已全部登记（<code>src/game/audio.mjs</code> 四张表 + <code>assets/runtime-catalog.json</code> 46 条 + <code>assets/provenance/audio-manifest.json</code>）</td></tr><tr><td>接线前运行时实际播放</td><td>⚠️ 仅 30/46；16 个登记但无触发点（14 语音 + <code>amb_ops</code> + <code>ui</code>），约 554 KB</td></tr><tr><td>接线后运行时实际播放</td><td>✅ <strong>46/46 全部有触发点</strong>（守护脚本静态证明）</td></tr><tr><td>主项目 dist</td><td>✅ 已重建（148 文件 / 46 mp3 / verify-build 0 缺失），音频全部在包内</td></tr><tr><td>游戏发布快照 dist（原 P0）</td><td>✅ 已刷新：原为接线前旧构建（0 mp3），现 46 mp3 全部入包，8 项接线检查全绿</td></tr><tr><td>回归守护</td><td>✅ 新增 <code>scripts/verify-audio-usage.mjs</code>：任何资产被摘除触发点即 FAIL；7/7 mutation 全杀</td></tr><tr><td>遗留（非本次引入）</td><td>⚠️ <code>verify-world.mjs</code> 五章模拟通关 FAIL——并行会话 17:06 改写 <code>world.mjs</code> 诱饵逻辑所致，与音频接线零耦合（该脚本不引用 main.mjs/audio），基线 16:54 曾 PASS</td></tr></tbody></table>
+<h2>二、接线明细（16 个闲置资产 → 触发点）</h2>
+<h3>2.1 语音 14 条</h3>
+<table><thead><tr><th>语音</th><th>台词</th><th>接入位置</th><th>触发时机</th></tr></thead><tbody><tr><td>voice_hero_confirm</td><td>收到，出发！</td><td>main.mjs worldEvent <code>command-receipt</code></td><td>每章首次指令成功执行（<code>chapterOrderPlayed</code> 章节级一次性）</td></tr><tr><td>voice_hero_charge</td><td>冲锋！</td><td>main.mjs storyMotionSound voices 表</td><td>剧情 fx <code>water</code>（鲸形冲刺）</td></tr><tr><td>voice_hero_scan</td><td>扫描完成！</td><td>main.mjs storyMotionSound 说话人判别</td><td>剧情 fx <code>scan</code> 且说话人为 DeepSeek（序章观察）</td></tr><tr><td>voice_grok_charge</td><td>就是现在，冲！</td><td>storyMotionSound voices 表</td><td>剧情 fx <code>impact</code>（破障）</td></tr><tr><td>voice_grok_pickup</td><td>数据到手啦！</td><td>worldEvent <code>sound</code> 分支</td><td><code>delivery</code> 数据交付</td></tr><tr><td>voice_grok_cheer</td><td>嘿嘿，小菜一碟！</td><td>worldEvent <code>chapter-result</code></td><td>章末结算</td></tr><tr><td>voice_grok_evacuate</td><td>走走走，别磨蹭！</td><td>worldEvent <code>evacuation-status</code></td><td>与 hero_evacuate 按里程碑轮换（奇数次播 Grok）</td></tr><tr><td>voice_claude_analyze</td><td>正在分析……</td><td>worldEvent <code>analysis-open</code></td><td>打开分析面板</td></tr><tr><td>voice_claude_careful</td><td>小心些，慢慢来。</td><td>worldEvent <code>sound</code> 分支</td><td><code>guard-warning</code> 守卫逼近（第 5 章）</td></tr><tr><td>voice_claude_record</td><td>记录已归档。</td><td>storyMotionSound voices 表</td><td>剧情 fx <code>record</code>（×9 次出现）</td></tr><tr><td>voice_claude_alert</td><td>发现异常，请留意。</td><td>worldEvent <code>sound</code> 分支</td><td><code>alarm</code> 警戒器报警</td></tr><tr><td>voice_glm_scan</td><td>扫描完成，一切正常。</td><td>storyMotionSound voices 表</td><td>剧情 fx <code>scan</code> 非 DeepSeek 说话人（GLM 扫描，×3）</td></tr><tr><td>voice_glm_warn</td><td>警戒值上升，请注意。</td><td>① frame() 警戒 false→true 转换；② storyMotionSound fx <code>alert</code></td><td>警戒值跨 70 阈值 / 剧情警报节拍</td></tr><tr><td>voice_glm_route</td><td>撤离路线已计算完毕。</td><td>storyMotionSound voices 表</td><td>剧情 fx <code>beacon</code>（返航信标，×14 次出现）</td></tr></tbody></table>
+<p>设计约束：每条剧情节拍最多播 1 条语音（取首个命中 fx），语音 8 秒/条冷却（hero_encourage 6 秒），不与现有 6 条已接线语音冲突。</p>
+<h3>2.2 环境音与 UI 音效</h3>
+<table><thead><tr><th>资产</th><th>接入位置</th><th>说明</th></tr></thead><tbody><tr><td>amb_ops.mp3</td><td>audio.mjs <code>setScene</code></td><td>第 1–4 章（harbor/investigation）与 amb_harbor 叠加；撤离/菜单场景停止；结算/失败屏显式停止</td></tr><tr><td>ui.mp3</td><td>main.mjs <code>act()</code> + UI_CLICK_ACTIONS 白名单</td><td>37 个菜单/导航类动作播放；指令面板、剧情翻页等有专属音频的动作不播</td></tr></tbody></table>
+<h3>2.3 行为变更说明（音频 flavor，非游戏逻辑）</h3>
+<ul><li><code>evacuation-status</code> 语音由"每次 hero_evacuate"改为 hero/grok 轮换——让两条撤离语音都有播出机会，首次通知仍为 hero。</li><li><code>chapter-result</code> / 失败屏新增 <code>stopAmbience('ops')</code>，防止机房氛围音漏进结算屏。</li></ul>
+<h2>三、回归守护与变异测试</h2>
+<p><strong><code>scripts/verify-audio-usage.mjs</code></strong>（已被 verify-all.ps1 自动收录）：</p>
+<ol><li>解析 audio.mjs 四张清单，对每个 key 断言存在≥1 个触发证据（play/playMusic/playAmbience 调用、world.mjs <code>emit('sound')</code> 事件源、playVoice 角色+类型组合含动态角色展开、setScene 音乐映射值、main.mjs 裸字面量——裸字面量检查前会剥掉 stop* 调用，防止"停止引用"冒充触发）</li><li>清单 ↔ 磁盘完整性：46 个登记文件全部在盘、盘中 mp3 全部登记</li><li>反向检查（信息级）：<code>guard-warning</code> 事件无对应文件，走合成器兜底（既有设计，未改）</li></ol>
+<p><strong>mutation test（<code>scripts/mutation-audio-usage.mjs</code>，7/7 全杀）</strong>：</p>
+<table><thead><tr><th>#</th><th>变异</th><th>守护反应</th></tr></thead><tbody><tr><td>M1</td><td>删 delivery→grok_pickup 分支</td><td>KILLED（grok_pickup 成孤儿）</td></tr><tr><td>M2</td><td>删 setScene 的 playAmbience('ops')</td><td>KILLED（ops 成孤儿；首轮曾存活——裸字面量被 stopAmbience('ops') 冒充证据，已修守护）</td></tr><tr><td>M3</td><td>删剧情 beacon→glm_route 映射</td><td>KILLED</td></tr><tr><td>M4</td><td>删 grok_evacuate 轮换调用</td><td>KILLED</td></tr><tr><td>M5</td><td>摘除清单中 glm_warn 条目</td><td>KILLED（磁盘完整性：文件在盘未登记）</td></tr><tr><td>M6</td><td>删 hero_scan 说话人判别</td><td>KILLED</td></tr><tr><td>M7</td><td>删 alarm→claude_alert 分支</td><td>KILLED</td></tr></tbody></table>
+<p>基线 PASS → 每条变异 FAIL → 还原后字节级一致且 PASS。</p>
+<h2>四、验证结果（终态，证据在 output/qa-audio-wiring/）</h2>
+<table><thead><tr><th>脚本</th><th>结果</th></tr></thead><tbody><tr><td>verify-audio-usage（新）</td><td>✅ PASS 46/46 全触发</td></tr><tr><td>mutation-audio-usage（新）</td><td>✅ 7/7 killed</td></tr><tr><td>build-game + verify-build</td><td>✅ 148 文件 / 46 音频 / 0 缺失引用</td></tr><tr><td>verify-core / verify-main-flow / verify-story-ui / verify-input / verify-experience / verify-runtime-save</td><td>✅ PASS</td></tr><tr><td>verify-story-flow</td><td>✅ 18/18 PASS（修复 harness：补 storyArtFor/Image/FakeAudio 完整音频面——该缺口源于 16:09 音频接线与 17:03 剧情美术预埋改动未同步测试桩，非本次引入）</td></tr><tr><td>verify-stress-main</td><td>✅ 5/5 PASS（2050 次转换）</td></tr><tr><td>verify-world</td><td>❌ FAIL（五章模拟通关 health-depleted @close-hatch）——并行会话 17:06 改写 world.mjs 诱饵逻辑所致；该脚本纯世界模拟、不引用 main.mjs/audio，与音频接线零耦合；16:54 基线曾 PASS。<strong>待并行会话修复后复跑</strong></td></tr></tbody></table>
+<h2>五、打包层面对账（终态）</h2>
+<table><thead><tr><th>产物</th><th>状态</th></tr></thead><tbody><tr><td>游戏-鲸鱼魔盗团/dist</td><td>✅ 46 mp3 + 完整清单 + 全部接线的 main.js/audio.js</td></tr><tr><td>游戏发布快照/dist</td><td>✅ 已刷新（src/assets/dist/index.html/story-theater.html 同步自主项目），46 mp3 入包，8 项检查全绿</td></tr><tr><td>线上发布站点</td><td>未重新部署（按约定需用户当次明确要求）</td></tr></tbody></table>
+<h2>六、文件清单</h2>
+<ul><li>修改：<code>src/game/audio.mjs</code>（setScene 叠 amb_ops）、<code>src/main.mjs</code>（14 语音 + ui 音效接线，纯增量）</li><li>新增：<code>scripts/verify-audio-usage.mjs</code>（守护）、<code>scripts/mutation-audio-usage.mjs</code>（变异测试）、<code>scripts/refresh-snapshot.mjs</code>（快照刷新）</li><li>修复：<code>scripts/verify-story-flow.mjs</code>（VM 测试桩补 storyArtFor / Image / FakeAudio 音频面）</li><li>证据：<code>output/qa-audio-wiring/*.txt</code></li></ul></div></div></body></html>

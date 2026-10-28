@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>游玩问题总表 · 2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>游玩问题总表 · 2026-10-25</h1>
+<p class="meta">来源：<code>_归档-20261026/游戏-output__playthrough/游玩问题总表-2026-10-25.md</code>　·　9.8 KB</p>
+<hr><h1>《鲸鱼魔盗团》游玩问题总表</h1>
+<blockquote>来源：2026-10-25 真实浏览器通关测试（Edge + Playwright 真键鼠，第1–4章走完整战役，第5章走「章节展示」，共 20+ 轮复跑）<br>覆盖：序章 + 五章 + 章节结算 ×5 + 失败/检查点 + 存档导入导出<br>统计：<strong>待修 12 条</strong>（P1×2 / P2×7 / P3×3）＋ <strong>已修复 1 条</strong>；全部条目均在当前源码 <code>grep</code> 复核过</blockquote>
+<hr>
+<h2>一、总表</h2>
+<table><thead><tr><th>编号</th><th>级别</th><th>问题</th><th>位置</th><th>复现</th><th>状态</th></tr></thead><tbody><tr><td>QA-01</td><td>P1</td><td>偶发「画面完全正常但角色不响应移动」</td><td>任意关卡，剧情/结算后概率出现</td><td>20 轮中 5+ 次</td><td>待修·未定因</td></tr><tr><td>QA-02</td><td>P1</td><td>第5章信标台三块数据全在守卫巡逻区间内</td><td>第5章 远端装载接应站</td><td>必然</td><td>待修</td></tr><tr><td>QA-03</td><td>P2</td><td>死亡回档静默清空「已收集未交付」资料</td><td>全部房间</td><td>必定</td><td>待修</td></tr><tr><td>QA-04</td><td>P2</td><td>冲刺惯性 117px 无刹车，窄平台掉层</td><td>第1/3章窄平台</td><td>高概率</td><td>待修</td></tr><tr><td>QA-05</td><td>P2</td><td>教程「跳跃」判定窗过窄</td><td>第1章教学</td><td>必定（从东侧起跳）</td><td>待修</td></tr><tr><td>QA-06</td><td>P2</td><td>地面周期陷阱无预警、惩罚偏重</td><td>第2/3/4/5章地面</td><td>必定</td><td>待修</td></tr><tr><td>QA-07</td><td>P2</td><td>副房间入口/出口与资料位置背离，动线冗长</td><td>第2–5章副房间</td><td>必定</td><td>待修</td></tr><tr><td>QA-08</td><td>P2</td><td>长按互动偶发不生效（需二次按住）</td><td>换房/关广播</td><td>中概率</td><td>待修</td></tr><tr><td>QA-09</td><td>P2</td><td>破障指令可用性依赖队友站位，提示误导</td><td>第3章隔板、第5章隔板</td><td>中概率</td><td>待修</td></tr><tr><td>QA-10</td><td>P3</td><td>结算「暴露」数值无解释</td><td>章节结算</td><td>必定</td><td>待修</td></tr><tr><td>QA-11</td><td>P3</td><td>通关后无法回看战役总结</td><td>标题界面</td><td>必定</td><td>待修</td></tr><tr><td>QA-12</td><td>P3</td><td>评分阈值偏严：正常通关 371/500 正好落到 B</td><td>战役评级</td><td>—</td><td>观察项</td></tr><tr><td>—</td><td>已修</td><td>被诱饵引开的守卫贴身仍扣血</td><td>第2章</td><td>—</td><td>18:45 修复</td></tr></tbody></table>
+<hr>
+<h2>二、P1 阻断级</h2>
+<h3>QA-01 偶发「画面完全正常但角色不响应移动」</h3>
+<p><strong>现象</strong>：角色站在平台中央，画面、HUD、时钟全部正常，按 A/D 完全不动；持续 &gt;4.5 秒不恢复。换一个时间点重开同一段又完全正常。</p>
+<p><strong>实测取证</strong>（驱动卡死诊断，20 轮中出现 5 次以上）：</p>
+<pre><code>walkTo 卡死(拾取 harbor-data-2) activeElement=CANVAS
+目标x=500 当前x=406.7 y=490.0
+房间=paper-window:room-1 screen=none grounded=true dash=0.00
+barriers=[] gates=[] nearby=无</code></pre>
+<p><strong>已排除</strong>：</p>
+<ul><li>焦点在按钮上（<code>activeElement</code> 明确是 <code>CANVAS</code>）</li><li>纸窗未破挡住去路（<code>barriers=[]</code>，同轮日志里纸窗已碎、桥已展开）</li><li>平台边缘/坠落（y=490 正好在落地平台上，<code>grounded=true</code>）</li><li>有遮罩（<code>screen=none</code>）</li></ul>
+<p><strong>两个候选根因</strong>（需人工定性）：</p>
+<ol><li><strong>无遮罩的暂停态</strong>：<code>core.setPaused(true)</code> 后没有对应 <code>ui.show()</code>，<code>frame()</code> 里 <code>phase!=='playing'</code> 就不再 <code>world.update()</code>，画面却保持最后一帧。</li><li><strong>失焦抖动</strong>：<code>window.blur</code> → <code>input.clear()</code> + 暂停 → 自动恢复的循环里，移动键刚按下就被 <code>clear()</code> 清掉，采集到的 x 每帧只前进零点几像素。</li></ol>
+<p><strong>建议</strong>：</p>
+<ul><li>在 <code>frame()</code> 里加一条自检：<code>phase==='playing'</code> 但 <code>ui.screen==='none'</code> 且连续 N 帧没有 <code>world.update()</code> 时，记录诊断并强制恢复。</li><li>或把 <code>resumePlay()</code> 里的 <code>input.clear()</code> 改为只清边缘键、保留方向键。</li></ul>
+<p><strong>QA 侧临时规避</strong>：驱动已在 <code>ensurePlayable()</code> 里加钩子——检测到 <code>phase!=='playing'</code> 就按 Esc 再点「继续行动」。</p>
+<hr>
+<h3>QA-02 第5章信标台：三块数据全在守卫巡逻区间内</h3>
+<p><strong>现象</strong>：<code>final-data-1/2/3</code> 分别在 x=1040 / 1120 / 1180，而 <code>evacuation-upper-guard</code> 巡逻 <strong>1030–1200</strong> —— 三块数据 100% 落在巡逻路径上，取件必然进入接触区。</p>
+<p><strong>实测</strong>：</p>
+<ul><li>第 5 章接触伤害 15/次（0.55s 预警后结算），一次完整撤离 <strong>100 → 35 血</strong>；</li><li>另一次尝试在信标台被直接打到 0，触发失败界面（<code>ISSUES[P2] 角色生命耗尽 — 远端装载接应站</code>）。</li></ul>
+<p><strong>建议</strong>（任选其一）：</p>
+<ul><li>把 <code>final-data-1</code> 挪到信标西侧的安全带（x ≈ 880–900）；</li><li>巡逻区间收窄到 1100–1200，留出「等巡逻走开」的解法；</li><li>或给信标台一块可遮挡视野的掩体（现有 <code>guardVision</code> 已被实体遮挡）。</li></ul>
+<hr>
+<h2>三、P2 明显影响体验</h2>
+<h3>QA-03 死亡回档静默清空「已收集未交付」资料</h3>
+<p><strong>现象</strong>：房间内捡了 3 份资料但没回艇交付时死亡 → 「从检查点再试」回到房间入口 → <strong>背包清空、资料重新刷出</strong>，全程没有任何提示。</p>
+<p><strong>原因</strong>：<code>makeCheckpoint()</code> 只在三处调用（<code>main.mjs:204</code> 换房、<code>:242</code> 章节开始、<code>:407</code> 交付完成），房间内捡取不入快照。</p>
+<p><strong>建议</strong>：把 <code>inventory</code> 纳入检查点；或重试弹窗写明「未交付的资料会丢失」。</p>
+<hr>
+<h3>QA-04 冲刺惯性 117px 且无法快速刹车，窄平台必掉层</h3>
+<p><strong>数据</strong>：<code>world.mjs:760-761</code> 冲刺 0.22s × 840px/s = 185px；结束后 <code>vx</code> 以 3000/s 衰减，<strong>额外滑行约 117px</strong>（合计约 335px）；反向输入只能把减速度提到 2500/s，压不住。</p>
+<p><strong>实测</strong>：第3章 <code>review-data-4</code>（西画廊 400px 宽）连续两次「冲刺后 (654,600)」——本应停在 490 层，实际冲到地面。</p>
+<p><strong>建议</strong>：冲刺结束加 0.1s 强摩擦；或节点统一放平台中段（距边缘 ≥ 200px）。</p>
+<hr>
+<h3>QA-05 教程「跳跃」判定窗过窄</h3>
+<p><strong>原因</strong>：<code>lesson-bridge.mjs:223</code> <code>crossedRight = rightGap&gt;=20 &amp;&amp; startX &lt;= from.x+from.w+3 &amp;&amp; current.x &gt;= to.x+2</code> —— 起跳点必须距西码头东沿 ≤3px。</p>
+<p><strong>实测</strong>：驱动从 x=302 起跳（越过 45px 缺口、落在对面平台）连续 3 次不通过；改到 x≈292 一次通过。</p>
+<p><strong>建议</strong>：只判「起跳时脚下平台 = 西码头」，不限制精确 x；或在标记处画一条明确的起跳线。</p>
+<hr>
+<h3>QA-06 地面周期陷阱无预警、惩罚偏重</h3>
+<p><strong>数据</strong>：<code>world.mjs:909</code> 直接 <code>hurt(20) + triggerAlarm</code>，无任何预警；配合 700ms 无敌帧，站在陷阱上 3.5s 必死（100 血）。</p>
+<p><strong>对照</strong>：警戒器有 1.3s 预警 + 扫描波动画，陷阱什么都没有——两套危险物的反馈语言不一致。</p>
+<p><strong>建议</strong>：激活前 0.3–0.5s 地面裂纹/闪烁；或把伤害降到 10。</p>
+<hr>
+<h3>QA-07 副房间动线：入口最西、出口更西、资料最东</h3>
+<p><strong>数据</strong>：<code>rooms.mjs:53</code> 进副房间固定刷 <code>x=85</code>；返回出口 <code>x=65</code>；必拿资料在 <code>x≈1000–1180</code>。</p>
+<p><strong>实测</strong>：第2章单章 105s，其中约 25s 是纯跑路；跑路还要横穿地面陷阱（ch2/ch3）和守卫（ch4/ch5），是主要掉血来源。</p>
+<p><strong>建议</strong>：副房间入口/出口挪到资料侧，或机房中部加捷径梯路。</p>
+<hr>
+<h3>QA-08 长按互动偶发不生效</h3>
+<p><strong>现象</strong>：按住 E 达到时长（换房 0.18s / 关广播 0.8s），进度条不走、状态不变；再按一次即成功。</p>
+<p><strong>实测</strong>：日志中 <code>换房未生效(screen=none, nearby=进入 复查服务管廊)，再按一次</code>、<code>广播未能关闭（连续三次按住后 broadcastOn 仍为 true）</code>。</p>
+<p><strong>可能原因</strong>：与 QA-01 同源（暂停态/输入被 clear），也可能是 <code>mustReleaseInteract</code> 未被清除。</p>
+<p><strong>建议</strong>：<code>interact()</code> 里对「按住超过 duration 仍未推进」打点日志，便于定位；或将 <code>mustReleaseInteract</code> 改为按帧超时释放。</p>
+<hr>
+<h3>QA-09 破障指令可用性依赖队友站位，提示误导</h3>
+<p><strong>现象</strong>：第3章回程隔板 / 第5章接应隔板，队友若还在障碍西侧，指令预览直接报「静态梯路尚未连通，请换一个落脚点」；等队友走到东侧后同一指令可用。</p>
+<p><strong>实测</strong>：同一指令在不同轮次时好时坏，差异只是队友位置（<code>crew[].x</code>）。</p>
+<p><strong>建议</strong>：预览文案改为「Grok 正在绕行（预计 3s）」并显示队友当前位置；或让队友自动选可达侧。</p>
+<hr>
+<h2>四、P3 打磨项</h2>
+<h3>QA-10 结算「暴露」无解释</h3>
+<p>第2章暴露直接顶到上限 20，界面没说它由公开指令/公开交付/警报加权（<code>exposureOf</code>）而来，玩家无法复盘是哪一步泄的。</p>
+<h3>QA-11 通关后无法回看战役总结</h3>
+<p>已通关存档的标题主按钮变成「再次出发」（<code>primaryAction = completed ? 'chapter-select'</code>），没有「查看航程总结」入口；玩家只能去「档案」回放剧情，看不到五章总分与评级。</p>
+<h3>QA-12 评分阈值偏严（观察项）</h3>
+<p>五章实测 78+65~67+71+80+75 ≈ <strong>369~371</strong>，<code>campaignGrade</code> 的 A 线是 375 —— 差 4 分。若「正常通关+只做必要目标」就该拿 A，阈值建议下调到 360；若刻意要求做可选内容才给 A，可忽略。</p>
+<hr>
+<h2>五、已修复（回归验证请保留这条用例）</h2>
+<p><strong>被诱饵引开的守卫贴身仍扣血</strong></p>
+<ul><li>旧行为：<code>world.mjs</code> 的接触判定只看距离，<code>luredUntil</code> 只影响视野不影响伤害 → 玩家顺着被腾出的路线走仍被打（第2章实测 100→40→20）。</li><li>当前源码：<code>world.mjs:898</code> <code>if(g.luredUntil&lt;=this.time &amp;&amp; Math.abs(g.x-p.x)&lt;34 &amp;&amp; …)</code>，已被引开的守卫不再结算接触伤害。</li><li>回归要点：Claude 诱饵生效后走过守卫身边，应不掉血、不触发警报。</li></ul>
+<hr>
+<h2>六、附：不是游戏问题（避免误判）</h2>
+<p>测试脚本自身踩的坑，不计入游戏缺陷，仅作说明：</p>
+<table><thead><tr><th>现象</th><th>真实原因</th></tr></thead><tbody><tr><td>「纸窗破开后走不过去」</td><td>脚本按 185px 算冲刺距离，漏了 117px 惯性 → 冲过头掉层，与游戏无关</td></tr><tr><td>「副房间爬不上梯子」</td><td><code>climb()</code> 容差 6px，停在平台下沿松键后坠落；改成顶到梯口即解决</td></tr><tr><td>「登艇没结算」</td><td>结算前角色死亡触发失败界面，脚本当时没处理</td></tr><tr><td>「导入存档后点不到返回」</td><td>导入成功后游戏自动回标题，退场按钮已消失</td></tr><tr><td>剧情点不完</td><td>已选中的关键词按钮仍留在 DOM，脚本重复点击；只点 <code>aria-pressed="false"</code> 即可</td></tr></tbody></table></div></div></body></html>

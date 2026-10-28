@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>主菜单与指令页视觉方案-2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>主菜单与指令页视觉方案-2026-10-25</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/主菜单与指令页视觉方案-2026-10-25.md</code>　·　5.1 KB</p>
+<hr><h1>《鲸鱼魔盗团》主菜单与指令页视觉方案</h1>
+<p>日期：2026-10-25</p>
+<p>截图反映的主要问题是：指令页同时呈现队友身份、方案、约束、行动回声、长提示词输入、模板槽位、回执说明和确认按钮，玩家要读完一张“表单”才能行动。主菜单也存在入口和状态说明并列、视觉焦点不明确的问题。</p>
+<h2>方案 A：鲸艇指挥舱</h2>
+<p><strong>定位</strong>：最稳妥的深海科技控制台，适合先做低风险视觉重构。</p>
+<p><strong>参考方向</strong>：<code>Hades</code> 的单一主行动按钮、<code>Into the Breach</code> 的目标/危险聚焦、<code>Subnautica</code> 的海洋科技仪表感。</p>
+<p><strong>主菜单</strong></p>
+<ul><li>全屏鲸艇与服务器城背景，中央只保留 Logo 和唯一大按钮“继续行动/开始行动”。</li><li>下方三个图标入口：航图（罗盘）、档案（证据片）、设置（齿轮）。</li><li>存档压缩为章节图标加一行“第 2 章·简历风波”。</li><li>移除英文眉题、队伍职责长列表、版本水印与重复保存状态。</li></ul>
+<p><strong>指令页</strong></p>
+<ul><li>顶部为三步图标轨：<code>目标 → 方案 → 执行</code>。</li><li>第一屏只显示目标图、推荐队友头像和一句短回执。</li><li>第二屏只保留两张方案卡：<code>整片开路</code>、<code>只开此处</code>；每张卡只放图标、短标题、Token/限定词费用。</li><li>第三屏只有一个高亮“执行”按钮；结果用破窗、纸片、警报图标和短数字反馈。</li><li>高级提示词、限制词、模板收进 <code>••• 高级编排</code>。</li></ul>
+<p><strong>图标语言</strong></p>
+<ul><li>蓝色六边能量：AI Token。</li><li>金色封条：限定词。</li><li>青色准星：当前目标。</li><li>红色扇形：危险/警戒。</li></ul>
+<p><strong>优点</strong>：与现有深海科技视觉最一致，改动风险低。   <strong>代价</strong>：仍有控制台工具感，需要用角色动作和声音增加情绪。</p>
+<h2>方案 B：证据档案局</h2>
+<p><strong>定位</strong>：把“观察—取证—下令—公开记录”变成主视觉语言。</p>
+<p><strong>参考方向</strong>：<code>Return of the Obra Dinn</code> 的证据查验、<code>The Case of the Golden Idol</code> 的图形线索、<code>Inscryption</code> 的卡片信息层级。</p>
+<p><strong>主菜单</strong></p>
+<ul><li>背景是一张半透明深海服务器地图，鲸艇航线和五章节点组成主视觉。</li><li>中央主按钮改为“继续追踪”。</li><li>航图、档案、设置使用线路节点、照片/芯片、扳手三个图标。</li><li>章节状态只使用图章：完成 <code>✓</code>、当前 <code>◎</code>、锁定 <code>🔒</code>；聚焦后再显示章节名。</li></ul>
+<p><strong>指令页</strong></p>
+<ul><li>采用“证据卡 + 行动轨”结构，取消大面积玻璃表单。</li><li>左侧证据卡只显示目标图、危险轮廓和可影响范围。</li><li>右侧显示推荐队友和两枚行动卡。</li><li>底部用三枚图标表达影响范围、警戒变化、费用。</li><li>提示词默认是一个“贴标签”按钮；点击“自定义”才展开一行输入。</li><li>详细解释进入点击后的详情抽屉，不常驻占屏。</li></ul>
+<p><strong>图标语言</strong></p>
+<ul><li>目标：照片/芯片。</li><li>影响范围：虚线圆。</li><li>守卫：眼睛。</li><li>执行回执：勋章/勾。</li><li>警报：红色三角。</li></ul>
+<p><strong>优点</strong>：最能强化游戏的调查叙事与 AI 取证感。   <strong>代价</strong>：地图和证据纹理容易变复杂，必须严格控制背景对比度。</p>
+<h2>方案 C：魔盗团剧场</h2>
+<p><strong>定位</strong>：以队友角色和技能动作替代解释文字，追求最低阅读负担。</p>
+<p><strong>参考方向</strong>：<code>Hades</code> 的角色头像反馈、<code>Overcooked</code> 的大图标协作、<code>Cocoon</code> 的无文字颜色编码。</p>
+<p><strong>主菜单</strong></p>
+<ul><li>四名队友半身像与鲸艇剪影组成横向队形，章节背景投影在后方。</li><li>中央唯一主按钮改为“出发”。</li><li>航图、档案、设置缩成三枚小按钮。</li><li>聚焦队友头像时只显示一个能力词：破障、诱导、扫描、撤离。</li></ul>
+<p><strong>指令页</strong></p>
+<ul><li>采用“角色头像 → 技能图标 → 目标图标”的三节点链路。</li><li>点场景目标后自动放大推荐队友；点头像显示技能图标，再点目标即可预览。</li><li>右下只保留费用图标和“确认”按钮。</li><li>执行成功用 1 秒动作动画、音效和极短反馈替代长段落，例如 <code>+1 记录</code>、<code>警戒↓</code>。</li><li>首次教程只展示三张图：点目标、点队友、确认；高级限制词收进技能图标下的金色标签。</li></ul>
+<p><strong>优点</strong>：文字最少、角色辨识最强，操作记忆清晰。   <strong>代价</strong>：需要补做技能图标、头像动效和动作反馈，制作成本最高。</p>
+<h2>共通规则</h2>
+<ul><li>深海蓝背景、青色互动光、黄铜边线继续保留。</li><li>主菜单和局内均只保留一个主按钮。</li><li>同屏最多一个主目标和一个风险提示。</li><li>Token 与限定词必须同时使用形状和颜色区分，不能只靠颜色。</li><li>固定语义优先使用生成图片、图标、技能动作；数字、章节名、动态目标和无障碍标签保留可更新文本。</li><li>常驻 UI 控制在画面约 15% 以内，关键触控目标不小于 44px。</li><li>截图中的长回执三列、长文本框、保存/载入槽位和重复费用说明从默认指令页移除，改为详情抽屉或高级编排。</li></ul>
+<h2>推荐路线</h2>
+<p>先落地方案 A，直接解决截图中最明显的信息拥挤；吸收方案 B 的证据卡和调查图标，增强故事；最后逐步加入方案 C 的头像技能动效，减少文字并提高角色参与感。</p></div></div></body></html>

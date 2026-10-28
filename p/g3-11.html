@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>剧情动画制作方案 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>剧情动画制作方案</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/剧情动画制作方案.md</code>　·　5.1 KB</p>
+<hr><h1>《鲸鱼魔盗团》剧情动画制作方案</h1>
+<p>设计日期：2026-10-24   当前落地：方案 A、B、C 均已接入，默认使用方案 A</p>
+<h2>现有基础</h2>
+<p>游戏已经有数据驱动的剧情过场：章节会暂停、逐句播放、打字机显示、自动推进、跳过、历史记录和回看都已接通。现有资产包括四名角色立绘、三张 16:9 关卡背景、五张剧情专用 16:9 生成关键帧、角色关键姿态图集，以及水流冲刺、纸页诱饵、扫描和冲击特效图集。</p>
+<p>因此剧情动画采用“生成关键帧 + 角色立绘 + 程序位移 + 分层特效 + 合成音效”，不依赖大体积 MP4，也不把关键状态写进剧情播放层。跳过、回看和存档仍由原有剧情系统处理。</p>
+<h2>方案 A：游戏内电影卡片（推荐，已落地）</h2>
+<p>适合主流程，尤其是序章、队友加入、第四章反转、第五章准备和尾声。</p>
+<ul><li><strong>画面</strong>：剧情专用生成关键帧缓慢推镜；角色立绘从左右或下方入场；徽记、纸页、扫描线、冲击圈和警报框在舞台层叠加。</li><li><strong>节奏</strong>：每句 3—5 秒，文字继续保留点击、空格、自动播放和跳过。</li><li><strong>声音</strong>：沿用现有 Web Audio；纸页、扫描、冲击、警报和信标使用短促提示音。</li><li><strong>优点</strong>：改动小、跨浏览器、移动端已有适配、和现有五章叙事一致。</li><li><strong>限制</strong>：关键帧是静态生成画面，运动由镜头平移、缩放、角色入场和特效叠加实现，不宣传成完整逐帧动画。</li></ul>
+<p>当前实现方式：<code>src/game/story.mjs</code> 的 step 可选携带 <code>motion.camera</code>、<code>motion.enter</code>、<code>motion.fx</code> 和剧情关键帧 backdrop；<code>src/ui/ui-v3.mjs</code> 将它们映射到剧情舞台；<code>src/ui/ui-v3.css</code> 负责动效；<code>src/game/audio.mjs</code> 播放对应提示音。关键帧位于 <code>assets/story/</code>，并有对应的 <code>assets/prompts/</code> 与 <code>assets/provenance/</code> 记录。</p>
+<h3>关键镜头脚本</h3>
+<table><thead><tr><th>节点</th><th>镜头</th><th>动效</th><th>建议时长</th></tr></thead><tbody><tr><td>序章：接单出航</td><td>航图由远推近，DeepSeek 从右侧进入；玩家依次完成观察、发令、撤离三处必选互动</td><td>信标光晕、纸页、鲸尾水流、Grok 冲击圈</td><td>约 30 秒自动演出，另加玩家选择时间</td></tr><tr><td>Claude 加入</td><td>简历从左侧翻入，Claude 抬头</td><td>纸页漂移、诱饵扩散</td><td>5–8 秒</td></tr><tr><td>GLM 加入</td><td>视线移向校验桥</td><td>扫描线扫过舞台，扫描姿态高亮</td><td>5–8 秒</td></tr><tr><td>第四章反转</td><td>广播室切到记录屏</td><td>广播开启时警报红框；关闭时信标蓝光；真实记录逐条出现</td><td>12–18 秒</td></tr><tr><td>最后出航</td><td>远端信标由暗变亮</td><td>集结完成用信标脉冲，已确认撤离用警报边框</td><td>5–8 秒</td></tr><tr><td>尾声：调查笔录</td><td>调查桌推近，记录卡进入</td><td>记录扫描层、结算信标</td><td>12–20 秒</td></tr></tbody></table>
+<h2>方案 B：Canvas 实景小剧场（已接入）</h2>
+<p>把剧情播放切到独立的剧情 Canvas，在生成的剧情关键帧上叠加平台、粒子、角色和扫描姿态，保留对白、跳过、自动推进和对话历史。</p>
+<ul><li><strong>优点</strong>：空间关系最强，动作和玩法衔接自然。</li><li><strong>代价</strong>：需要时间线、角色碰撞暂停、镜头坐标和恢复逻辑，回归范围较大。</li><li><strong>当前实现</strong>：剧情页右上“实景”按钮或设置里的“实景小剧场”。实景模式共享剧情关键帧，并叠加当前角色姿态与轻量粒子；关卡坐标仍由实际游戏层负责。</li></ul>
+<h2>方案 C：分镜卡式动态漫画（已接入）</h2>
+<p>每段剧情配置 2–4 张关键帧卡片，用背景裁切、角色缩放、遮罩和字幕切换表现“发现—执行—结果”。</p>
+<ul><li><strong>优点</strong>：阅读清晰，移动端表现好，制作成本低于 Canvas 实景。</li><li><strong>代价</strong>：动作感弱于实景，需要更多卡面排版。</li><li><strong>当前实现</strong>：剧情页右上“分镜”按钮；每句剧情使用对应生成关键帧作为卡面，再叠加角色头像、场景、线索和选择字幕，适合调查档案、章节回顾、教学复盘和剧情回看。</li></ul>
+<h2>方案 D：竖屏短剧混剪</h2>
+<p>使用 <code>短剧-鲸天魔盗团</code> 中已有竖屏短剧作为宣传片素材，再混入游戏内水流、纸页、扫描和记录屏画面。</p>
+<ul><li><strong>优点</strong>：可以快速做比赛展示、社媒预告和片头片尾。</li><li><strong>代价</strong>：竖屏短剧与游戏横版美术风格不同，不适合直接嵌入主流程；还需要单独剪辑和字幕校对。</li><li><strong>适合</strong>：主流程完成后制作 45–60 秒宣传预告。</li></ul>
+<h2>推荐组合</h2>
+<p>主流程默认使用方案 A；第四章广播反转和尾声调查笔录继续读取真实 records；方案 B、C 可在剧情页右上或设置中切换；方案 D 作为外宣视频。三种游戏内风格共享同一套剧情、存档、记录和跳过逻辑。</p>
+<h2>验收标准</h2>
+<ol><li>首次进入第一章能看到序章动效，播放期间世界和计时保持暂停。</li><li>点击、空格、自动播放、跳过、剧情历史和回看继续可用。</li><li>第四章广播开／关分支只改变色调和台词，不制造虚假行动记录。</li><li>打开“减少动态”后，剧情仍可读，镜头位移和特效不影响字幕。</li><li>桌面与横屏移动端的对白、按钮和特效区域不互相遮挡。</li></ol></div></div></body></html>

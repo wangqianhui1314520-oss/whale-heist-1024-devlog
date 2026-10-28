@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>高清与首分钟升级验收 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>高清与首分钟升级验收</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/高清与首分钟升级验收.md</code>　·　3.4 KB</p>
+<hr><h1>高清与首分钟升级验收</h1>
+<p>2026-10-24。本轮保留五章与现有十三个场景。首次玩家约二十分钟为设计目标，自动输入通关速度不代表真人体验时长。</p>
+<h2>已接入</h2>
+<ul><li>1280×720 逻辑坐标保持不变。桌面标准模式至少 2 倍，随视口与设备密度最高 3 倍；手机标准模式动态 1.5—2 倍。低画质为 1.5 倍。背景独立使用至多 1.5 倍，结构、角色、特效使用清晰的前景分辨率。</li><li>背景、结构、角色、特效分为四张画布，界面与场景文字为 HTML。角色和关键精灵使用整数锚点，节点、门、纸窗、警戒器增加轮廓光。</li><li>待机 4 帧／8 FPS、行走 6 帧／10 FPS、跳跃三阶段、冲刺 4 帧／16 FPS、互动 4 帧／10 FPS、受伤 2 帧／10 FPS、登艇四阶段。此处为现有姿态配合离散变换和局部特效的过渡动画，不等同新增独立绘制的逐帧图集。</li><li>Grok 抬斧蓄力／破障，Claude 纸页，GLM 扫描扇面与锁定框，DeepSeek 指令卡、搬运箱与登艇水花。支持减少动态效果与减少闪光设置。</li><li>房间主题：教学码头、资料分拣、校验管廊、广播档案、远端撤离。机柜指示灯、数据流、气泡、远处鲸影、扫描波纹、广播增长、第五章红蓝撤离与加速水流均已接入。</li><li>约三十秒互动序章，实际点击观察、发令、撤离；开始行动直接进入教学。Grok／Claude／GLM 加入短演出、战报反转、调查笔录可回放，使用游戏内资产演出。</li><li>十步引导只认真实行为；十二秒目标提示，二十五秒工具提示，两次真实受击／失败或主动请求显示完整路线。选队友、选目标、默认方案、确认分别校验；指令失败不会锁死。</li><li>左上一个当前目标，其余目标默认收进任务清单。部分交付后继续引导补齐必需资料，全部目标完成才提示登艇。指令窗口内嵌教学摘要，避免高级面板遮挡引导。</li><li>AI Token 为行动资源，默认方案不耗限定词但仍耗 AI Token；离线沙盒通过虚构日志、配置、权限关系、证据链和修复建议表现分析过程，无外部服务器连接或真实攻击命令。</li></ul>
+<h2>自动验证</h2>
+<p>以下验证均通过：核心状态、运行时存档、物理关卡、扩展房间、五章自动输入通关（含零限定词路径）、提示词与剧情、教学桥、输入、美术、地图、分层渲染、角色循环、主流程编排。</p>
+<p>新增 <code>scripts/verify-rendering.mjs</code> 验证高清策略、四层清理、所有章节房间的整数落点与 HTML 标签；<code>scripts/verify-character-motion.mjs</code> 验证状态优先级、循环节奏和物理状态不变；<code>scripts/verify-main-flow.mjs</code> 验证真实序章到教学入口、失焦恢复、明确选目标、失败重试和 Grok 实际破障演出。</p>
+<p>静态部署目录由 <code>node scripts/build-game.mjs</code> 生成。开发服务使用 <code>node scripts/serve.mjs</code>，地址 <code>http://127.0.0.1:8766/</code>。</p>
+<h2>验收限制</h2>
+<p>本轮浏览器工具拒绝读取本地试玩页，原因是其 URL 安全策略未授予访问权限，因此未取得新版实屏截图，也未完成真人首分钟试玩或手机 GPU 性能测量。本轮渲染验证为本地绘制调用检查，主流程为真实游戏模块配合模拟浏览器外壳，不能代替实屏视觉验收。现有 <code>output/screenshots/</code> 为此前截图，不作为本轮视觉证据。</p></div></div></body></html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>剧情完整性核查-2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>剧情完整性核查-2026-10-25</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/剧情完整性核查-2026-10-25.md</code>　·　5.9 KB</p>
+<hr><h1>剧情完整性核查与展示修复</h1>
+<p>核查日期：2026-10-25。范围包含游戏主流程、全部剧情放映页、三种演出风格，以及广播反转、撤离准备、调查尾声三段动态剧情。</p>
+<h2>结论</h2>
+<p>12 段剧情脚本、7 个美术节点及三种风格的 21 张原画均存在。此前的主要问题发生在展示层：分镜拉伸、同格重复、对白覆盖画面，以及放映页连播遗漏条件版本。本次已修复这些问题并重建 <code>dist/</code>。</p>
+<p>主流程会按本次航程的状态播放相应剧情，不会把互斥分支连续播给玩家。放映页用于审阅全部版本，现可手动选择或连续播放共 20 个预览版本。三种美术风格共享同一份故事，不是三段不同的主线故事。</p>
+<h2>已修复的展示问题</h2>
+<table><thead><tr><th>问题</th><th>核查结果与修复</th></tr></thead><tbody><tr><td>截图中的人物被拉宽</td><td>放映页把三格横向原画设置成 <code>300% 100%</code>，将其中的竖幅一格拉满横屏。现在按完整原画等比适配。</td></tr><tr><td>游戏里的三格没有显示齐</td><td>原逻辑按三句台词分一页，并把每句台词映射到原画的一格。9 句序章会出现同一页重复第一格、下一页重复第二格的情况；2 句场景只用第一、第三格。现在始终显示且只显示观察、行动、结果三格，当前对白单独推进。</td></tr><tr><td>字幕挡住原画下方</td><td>电影和实景背景原本铺满字幕背后。现在测量标题栏和对白框的实际边界，在中间区域展示完整画面；选项和字幕字号变化也会重新计算。</td></tr><tr><td>电影画面推镜裁边</td><td>改为在完整画面范围内轻微缩放，最大为原适配尺寸。减少动态设置继续生效。</td></tr><tr><td>连播没有播完所有版本</td><td>原 <code>next()</code> 在换场时将分支索引重置为 0。现在先播完当前场景的全部版本，再进入下一段；上一句也可跨分支倒退，结束后保留最后一个版本。新增直接分支选择器。</td></tr><tr><td>实景放映比例和出场阵容</td><td>Canvas 随原始画面等比适配，序章只叠加 DeepSeek，与游戏内实景一致。</td></tr><tr><td>从主菜单回看后关闭页面可能覆盖章内存档</td><td><code>beforeunload</code> 原本可能在尚未载入世界时写入空的章内状态。现在只有实际世界已载入才保存，新增回归验证。</td></tr></tbody></table>
+<h2>三段动态剧情在游戏内的实际触发</h2>
+<table><thead><tr><th>剧情</th><th>主流程入口</th><th>实际展示内容与边界</th></tr></thead><tbody><tr><td>战报成为线索 <code>chapter4-reveal</code></td><td>第四章章首剧情与任务简报之后，点击开始行动</td><td>读取广播开关、实际记录及公开标记；展示最近至多 2 条适用记录。提前关闭广播时使用对应台词，已经公开的记录保留。动态场景不会因为以前看过而被自动跳过。放映页提供 5 种条件组合。</td></tr><tr><td>最后出航之前 <code>chapter5-preparation</code></td><td>第五章远端信标完成准备后首次触发</td><td>核心要求三名队友到齐、三份必需资料齐备、返航信标已设好，才可完成装载。因此主流程自动播出的是“准备就绪、尚未启动撤离”版本；“尚在准备”“已经确认撤离”是其他状态的回看/预览，不会在同一次准备事件中依次自动播出。放映页提供 3 种状态。</td></tr><tr><td>调查笔录 <code>epilogue</code></td><td>第五章结果提交、主线完成后，总评之前</td><td>根据实际章数、总分、公开指令/交付/报警次数和广播状态生成；摘录至多 2 条适用行动记录。它是摘要，全部记录应从记录界面阅读。放映页提供 3 个预览版本；未通关时的结局预览明确用实际数值占位，不伪造通关成绩。</td></tr></tbody></table>
+<p>第一章目前采用“序章 → 实操教学”的直接入口，章首简报保留在档案/航图里供查看；这与现有首分钟教学设计一致。Grok 的协作剧情需真实撞开纸窗才触发，Claude 和 GLM 的加入剧情分别在第二、第三章开头播放。</p>
+<h2>故事内容仍与策划存在的差距</h2>
+<p>以下属于叙事内容的压缩，不是播放器隐藏了现有台词。本次没有重写这些故事内容：</p>
+<ul><li>策划写主角“接到轻松委托”后出航，当前序章直接从异常广播和观察、发令、撤离教学开始，委托的来由与动机交代不足。</li><li>Claude、GLM 的加入对白主要介绍技能和代价，人物为何加入、彼此如何相识的戏剧内容很少。</li><li>策划的第四章是调查员播放已经复制的战报；当前脚本主要由 DeepSeek、GLM 和记录屏说明广播后果，没有调查员出场揭露或对峙的完整段落。</li><li>尾声目前以实际记录和统计汇总为主。它有广播状态差异，但没有完整演绎低暴露与高暴露的不同收场。</li></ul>
+<p>因此，“显示是否全面”的问题已经修复；若目标是把策划里的故事完整演出来，下一步应补写上述因果与人物段落，再增加相应镜头，而不只是继续调整图片大小。</p>
+<h2>验证与证据</h2>
+<p>本次通过 <code>verify-story-flow</code>（18 项）、<code>verify-story-ui</code>、<code>verify-story-art</code>、新增 <code>verify-story-theater</code>、<code>verify-main-flow</code>、<code>verify-experience</code>、<code>verify-runtime-save</code>、<code>verify-architecture</code>，以及构建和部署路径检查。</p>
+<p>新增放映测试遍历 12 段、20 个版本，在无存档记录的条件下检查 63 句台词正向/反向遍历无遗漏、分支选择正确、结束保留最后版本，并验证放映不写存档。实际记录存在时，动态摘录句数会变化，63 不代表每次航程的固定台词总数。</p>
+<p>浏览器检查覆盖 1280×720 桌面三种风格、844×390 横屏三种风格及互动选项、640×360 横屏三种风格的互动选项；测量均未发现标题/对白覆盖剧情画面。放映页逐一切换三段动态剧情的 11 个预览条件。该检查不等同于真人连续通关五章或完整动画逐帧验收。</p>
+<p>实屏截图和几何测量位于 <code>output/story-completeness-2026-10-25/</code>，包括 <code>desktop-comic.jpg</code>、<code>mobile-comic-choice.jpg</code>、<code>small-choice-comic.jpg</code>、<code>theater-comic.jpg</code> 和 <code>browser-checks.json</code>。</p></div></div></body></html>

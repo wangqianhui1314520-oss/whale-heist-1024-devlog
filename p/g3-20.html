@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>玩法创新说明 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>玩法创新说明</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/玩法创新说明.md</code>　·　2.8 KB</p>
+<hr><h1>玩法创新：回声预测与行动复盘</h1>
+<h2>设计目标</h2>
+<p>《鲸鱼魔盗团》的核心不是重复点击队友，而是“观察、写提示词、协作、回收后果”。回声预测把每次指令变成一个小型战术决策：玩家在确认前先看到可能的影响、警戒反应和返程提示，再决定使用默认方案还是增加限定词。</p>
+<h2>玩家体验</h2>
+<ol><li>选择 Grok、Claude 或 GLM。</li><li>选择场景目标并切换默认/精确方案。</li><li>点击“回声预测”，免费查看三格预演：会发生什么、可能的反应、返程提醒。</li><li>根据风险决定是否增加限定词，最后确认执行。</li></ol>
+<p>预测使用当前指令预览的几何数据，不模拟真实服务器，也不消耗 AI Token、限定词或冷却。它只解释游戏内虚构沙盒会如何变化。</p>
+<h2>三类队友差异</h2>
+<ul><li>Grok：默认范围较宽，预测提示破障后会打开新路径；精确方案强调停在目标处。</li><li>Claude：预测守卫位置会发生改变，返程前需要重新观察；精确方案只吸引一名守卫。</li><li>GLM：预测陷阱与警戒器覆盖范围；精确方案提示沿安全边缘返航。</li></ul>
+<h2>已接入的第二层玩法</h2>
+<h3>公开记录三选一</h3>
+<p>第四章或任意已有公开记录出现在“指令记录”页时，玩家可以选择：</p>
+<ul><li>公开摘要：保留结论，隐藏细节。</li><li>封存证据：只留在鲸艇调查档案。</li><li>标记待核验：交给调查员复核。</li></ul>
+<p>这是一个轻量的风险判断，不阻塞主线，也不会修改真实数据。选择会写入本地记录，并在后续调查笔录中留下痕迹。</p>
+<h3>证据链拼图</h3>
+<p>地图拾取的虚构日志会进入“演算舱”。线索有前置关系，玩家需要按来源、时间和复核结果逐步拼出证据链；分析会消耗分析 Token，修复建议会补回有限的 AI Token。主线仍然可以直接完成，完整证据链用于提高回放和结算的可读性。</p>
+<h3>双人提示词接力</h3>
+<p>第五章可以把两名不同队友排成先后顺序，例如“Claude 先引开巡逻，再让 Grok 打开障碍”。接力会一次性校验预算，执行顺序由世界状态决定，不能循环或重复刷分。</p>
+<h3>返程记忆与挑战契约</h3>
+<p>打开的桥、移动的守卫、关闭的广播和已触发的事件会保留到回程。挑战契约可以关闭捷径、加密巡逻或限制预算；挑战记录与主线成绩分开保存。</p>
+<h3>Token 行动经济</h3>
+<p>每次 AI 行动都消耗 AI Token。地图补给、证据修复建议和演算舱的应急缓存提供有限补充，玩家必须在“现在行动”和“保留资源应对返程”之间做选择。</p>
+<h2>后续可扩展</h2>
+<p>回声预测可以进一步接入挑战契约，例如限制预测次数、让默认方案出现区间结果，或在第四章将实际回执与预测并列回放，形成“预测—执行—复盘”的可重玩循环。</p></div></div></body></html>

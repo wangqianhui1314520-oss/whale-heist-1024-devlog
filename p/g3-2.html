@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>三种剧情美术补充验收 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>三种剧情美术补充验收</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/三种剧情美术补充验收.md</code>　·　3.0 KB</p>
+<hr><h1>三种剧情美术补充</h1>
+<p>2026 年 10 月 25 日补充范围：电影卡片、实景小剧场、分镜动态漫画各 7 张独立生成剧情图，共 21 张；使用各模式自己的图，不把同一张旧背景作为三个方案的交付数量。</p>
+<table><thead><tr><th>剧情节点</th><th>电影卡片</th><th>实景小剧场</th><th>分镜动态漫画</th></tr></thead><tbody><tr><td>序章启航</td><td><code>story/cinematic/opening.png</code></td><td><code>story/stage/opening.png</code></td><td><code>story/comic/opening.png</code></td></tr><tr><td>Grok 破窗加入</td><td><code>story/cinematic/grok.png</code></td><td><code>story/stage/grok.png</code></td><td><code>story/comic/grok.png</code></td></tr><tr><td>Claude 诱饵加入</td><td><code>story/cinematic/claude.png</code></td><td><code>story/stage/claude.png</code></td><td><code>story/comic/claude.png</code></td></tr><tr><td>GLM 扫描加入</td><td><code>story/cinematic/glm.png</code></td><td><code>story/stage/glm.png</code></td><td><code>story/comic/glm.png</code></td></tr><tr><td>广播反转</td><td><code>story/cinematic/broadcast.png</code></td><td><code>story/stage/broadcast.png</code></td><td><code>story/comic/broadcast.png</code></td></tr><tr><td>撤离集结</td><td><code>story/cinematic/evacuation.png</code></td><td><code>story/stage/evacuation.png</code></td><td><code>story/comic/evacuation.png</code></td></tr><tr><td>调查尾声</td><td><code>story/cinematic/epilogue.png</code></td><td><code>story/stage/epilogue.png</code></td><td><code>story/comic/epilogue.png</code></td></tr></tbody></table>
+<p>表中路径相对 <code>assets/</code>。每张图对应 <code>assets/prompts/story-{模式}-{节点}.txt</code> 与 <code>assets/provenance/story-{模式}-{节点}.json</code>，来源记录保留生成工具、原始输出路径、真实尺寸和 SHA256。图片保持生成输出的原生字节；登记、构建不裁切、不缩放、不重绘 PNG。</p>
+<h2>登记与构建</h2>
+<p>21 张图片、提示词和来源全部落盘后，在项目根目录运行：</p>
+<pre><code>node scripts/register-story-styles.mjs
+node scripts/verify-art.mjs
+node scripts/build-game.mjs</code></pre>
+<p>登记脚本先核对所有 21 张 PNG 的 IHDR、字节长度、SHA256、来源尺寸、原始生成输出字节及提示词文件，再写入运行目录、制作清单与预览数据。重复执行使用相同资产 ID，不会新增重复记录。缺文件或哈希不符时，在修改元数据前退出。</p>
+<p><code>scripts/build_art_catalog.py</code> 的完整重建也会保留这些图，执行只读解码和 Alpha 检查。21 张剧情图须成套存在，部分完成时重建会报错，避免发布半套资源。</p>
+<h2>最新计数口径</h2>
+<ul><li>运行目录 PNG：49 张，包含原 28 张和本次新增 21 张。</li><li>剧情 PNG：26 张，包含旧 5 张及三种风格各 7 张。</li><li>游戏运行采样区：仍为 96 个，剧情图不创建精灵采样区。</li><li>HUD 图标带：另有 1 张补充 PNG，由构建单独复制，不混入 49 张目录图。</li><li><code>assets/asset-manifest.json</code> 的资产 ID 不得重复；它包含图集采样区域、音频计划、参考等多类记录，记录数量不等于物理 PNG 数量。</li></ul>
+<p>此前《美术资产交付说明》《美术资产制作清单》《美术资产复核报告》《生成图片入口》和《开发与验收记录》出现的 28 张数量对应本次补充前的版本；新增美术完成后以本说明及 <code>runtime-catalog.json</code> 实际计数为准。</p>
+<p>本说明记录素材范围与验证方式。动画仍由原生插画结合镜头、角色及特效驱动；图片数量不代表新增了相同数量的逐帧角色动画。</p></div></div></body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>指令面板美术重构方案-2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>指令面板美术重构方案-2026-10-25</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/指令面板美术重构方案-2026-10-25.md</code>　·　6.2 KB</p>
+<hr><h1>《鲸鱼魔盗团》指令面板美术重构方案</h1>
+<p>日期：2026 年 10 月 25 日</p>
+<p>用户提供的两张截图只作为信息层级参考：头像 → 目标 → 行动方案 → 影响预览 → 确认。截图中的角色名、AI 数值、长回执、输入框和录音栏不作为本项目的固定内容，也不烘焙进美术图片。</p>
+<h2>目标</h2>
+<p>把当前“半透明文字弹窗”重构成一张有明确阅读顺序的行动卡。玩家打开指令后，第一眼看到队友是谁、当前目标是什么、两种行动有什么区别，最后只需要做一次确认。目标、资源、范围和警戒状态仍然是实时 HTML 数据。</p>
+<h2>最终结构</h2>
+<h3>1. 行动卡外壳</h3>
+<ul><li>使用 <code>assets/ui/panel-large.png</code> 作为大面板的边框材质。</li><li>用九宫格或 <code>border-image</code> 思路保留四角金属件和青色内框，避免把整张 PNG 拉伸导致角件变形。</li><li>背景叠加深蓝玻璃渐变和 8–12% 的当前场景缩略纹理；打开面板时，游戏画面保留在后面并降低对比度。</li><li>面板进入动画为 180–240ms：透明度、轻微上移、青色边缘光，不使用大幅缩放。</li></ul>
+<h3>2. 顶部身份栏</h3>
+<p>左侧放角色头像和职责，右侧放资源与关闭按钮：</p>
+<ul><li>使用 <code>assets/portraits/deepseek-portrait.png</code>、<code>grok-portrait.png</code>、<code>claude-portrait.png</code>、<code>glm-portrait.png</code>。</li><li>头像外圈表示状态：青色＝可执行，金色＝精确方案，红色＝资源不足，灰色＝冷却中。</li><li>AI Token、限定词、警戒使用 <code>assets/ui/hud-icon-badges.png</code> 的图标带，数值保持 HTML 文本。</li><li><code>assets/ui/ring.png</code> 只用于关闭、返回或次级操作，避免和主确认按钮抢视觉重量。</li></ul>
+<h3>3. 目标卡</h3>
+<p>当前的纯 <code>&lt;select&gt;</code> 保留为无障碍和键盘入口，但视觉上改成“目标卡”：</p>
+<ul><li>卡片外壳使用 <code>assets/ui/panel-card.png</code>。</li><li>左侧显示目标类型小插图：数据节点、守卫、警戒器、纸窗、升降台等优先从 <code>props-kit.png</code>、<code>mechanisms-kit.png</code>、<code>harbor-kit.png</code> 的已登记 sprite 取样。</li><li>右侧显示实时目标名、距离、合法对象数量和范围状态。</li><li>目标未选中时使用青色虚线焦点框；选中后显示金色锁定角标，并同步场景中的高亮目标。</li><li>目标图像不放大成装饰海报，只作为 48–72px 的识别缩略图，避免遮挡文本。</li></ul>
+<h3>4. 两种行动方案卡</h3>
+<p>两张卡固定并列，保留现有游戏规则：</p>
+<ul><li>默认方案：范围较宽，消耗 AI Token，使用青色边框。</li><li>精确方案：范围更窄，消耗限定词，使用金色边框。</li><li>卡片外壳使用 <code>panel-card.png</code>；卡片左侧放行为图标或特效缩略图，右侧放实时费用、范围和一行说明。</li><li>Grok 卡使用 <code>assets/fx/axe-impact-atlas.png</code> 的命中缩略帧；Claude 使用 <code>paper-decoy-atlas.png</code>；GLM 使用 <code>scan-grid-atlas.png</code>；DeepSeek 使用 <code>water-dash-atlas.png</code>。</li><li>这些图集只做视觉预览，真正执行仍走现有 <code>AssetLibrary.drawEffect()</code> 和世界逻辑。</li><li>选中状态用金色内框和轻微呼吸光；禁用状态保留图形轮廓，但降低饱和度和亮度。</li></ul>
+<h3>5. 影响预览条</h3>
+<p>默认显示三列短卡，不再默认展开长段落：</p>
+<ol><li>影响：会打开、引走、扫描或冲刺到哪里。</li><li>风险：可能触及哪些警戒器或改变守卫路线。</li><li>返程：完成后应从哪条路径回到鲸艇。</li></ol>
+<p>每列使用一个图标、一个短标题和一到两行动态文本。图标来自 <code>hud-icon-badges.png</code>，动效使用细线扫过或小范围脉冲。完整描述继续放在“查看影响”展开区。</p>
+<h3>6. 回执与确认区</h3>
+<ul><li>“队友复述”保留，但只显示一行动态回执；长文本和自定义指令移入“高级编排”。</li><li>底部右侧使用 <code>assets/ui/button-rail.png</code> 作为主确认按钮材质，按钮文本仍是 HTML，确保可访问和可本地化。</li><li>确认按钮在无目标、资源不足、冷却中时保持禁用，并显示对应状态文字；状态不能只靠颜色区分。</li><li>Enter / Esc 提示保留在按钮下方的小号辅助文本，不占主视觉区域。</li></ul>
+<h2>动态效果</h2>
+<ul><li>面板打开：180–240ms 上移 + 边缘光。</li><li>目标锁定：青色扫描线从目标缩略图扫到场景标记，持续约 320ms。</li><li>方案切换：卡片边框由青色或金色完成 160ms 过渡，内容不跳动。</li><li>方案预览：当前角色的 FX atlas 播放 4 帧，8–12fps；只在切换方案或目标时播放一次，避免持续闪烁。</li><li>资源不足：对应徽章短促闪一次，随后停留在红色/金色静态状态。</li><li>确认执行：按钮扫光一次，随后由世界事件触发真实冲刺、斧击、诱饵或扫描特效。</li><li>“动态效果：轻量”和 <code>prefers-reduced-motion</code> 下，保留最终姿态、颜色、进度和禁用状态，关闭浮动、扫描线和重复脉冲。</li></ul>
+<h2>代码落点</h2>
+<ul><li><code>src/ui/ui-v3.mjs</code>：重构 <code>renderCommand()</code> 的 DOM 层级，保持 <code>syncCommand()</code> 的现有状态同步接口。</li><li><code>src/ui/ui-v3.css</code>：处理布局、响应式、状态和动画；不把动态文本写入图片。</li><li><code>src/ui/visual-direction.css</code>：复用面板材质、按钮扫光、资源徽章和角色身份色。</li><li><code>src/render/assets.mjs</code>：继续作为 sprite/FX atlas 的唯一取样入口，不复制生成临时 PNG。</li><li><code>src/game/world.mjs</code>：不改行动规则，只接收现有确认事件并触发真实世界特效。</li></ul>
+<h2>响应式</h2>
+<ul><li>桌面：面板宽度 62%，最大 780px；目标卡在左、方案卡在中、影响预览横向排列。</li><li>手机横屏：面板宽度 90%；目标卡全宽，两张方案卡并排，影响预览默认折叠；所有可点击元素至少 44px。</li><li>窄高度：优先保留头像、目标、方案和确认按钮；高级编排与完整预览滚动展开。</li></ul>
+<h2>验收</h2>
+<ul><li>打开指令后 1 秒内能识别队友、目标、费用和主确认入口。</li><li>所有动态数值和文案继续来自 <code>commandModel()</code> / <code>syncCommand()</code>，截图参考中的文字不进入运行时常量。</li><li>四名队友都能看到对应头像和行为图形；四组 FX atlas 能在方案切换时正确播放。</li><li>目标、方案、确认三层都支持鼠标、键盘和触屏，禁用原因可读。</li><li>低动效模式下无持续扫描和脉冲，主流程、存档和世界事件结果不改变。</li></ul></div></div></body></html>

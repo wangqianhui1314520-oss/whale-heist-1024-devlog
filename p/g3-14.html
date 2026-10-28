@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>开发与验收记录 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>开发与验收记录</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/开发与验收记录.md</code>　·　10.7 KB</p>
+<hr><h1>《鲸鱼魔盗团》开发与验收记录</h1>
+<p>日期：2026 年 10 月 24 日。本地可玩首版；1280×720 固定侧视舞台，采用用户批准的蓝金色水下神殿方向。</p>
+<h2>完整流程</h2>
+<table><thead><tr><th>章节</th><th>地图与任务</th></tr></thead><tbody><tr><td>纸窗入港</td><td>平台教学、Grok 破障、节点破坏、三格搬运与交付</td></tr><tr><td>简历风波</td><td>Claude 加入；巡逻诱饵和六份必需数据</td></tr><tr><td>复查勿扰</td><td>GLM 加入；扫描、隐藏陷阱和警戒器</td></tr><tr><td>战报公开</td><td>两份任务物、关闭或验证广播关闭、设置远端返航信标</td></tr><tr><td>闭舱返航</td><td>三名队友真实导航集结、携带三块数据、分别确认装载与撤离、六十秒内交付登艇</td></tr></tbody></table>
+<p>主角实现平台碰撞、跳跃缓冲、离台宽限、冲刺和爬梯。普通节点需两次独立冲刺，Grok 一次撞开；满包时破坏后的数据留场。队友沿平台、梯子移动，技能实际完成后计协作，重复使用不重复刷分。MFA 门为不可破坏实体，诱饵不会解锁它。</p>
+<p>默认指令免费且结果固定；精确指令耗一枚限定词。预览显示范围、冷却、不可执行原因，并有有限慢动作额度。广播影响后续公开记录，现场报警独立计入。三格负重影响速度，交付需持续互动。按章间继续后才提交分数并保存下一章入口，失败与重试回滚本章。</p>
+<p>已提供开始／继续、暂停、重试、操作指南、章节挑战、独立展示模式、单章与主线结算、静音和减少动态效果。切后台、失焦和竖屏暂停；触屏按钮支持多指分别按住。声音为 Web Audio 程序合成，不依赖音频文件。</p>
+<h2>验证证据</h2>
+<ul><li><code>src/core/verify-core.mjs</code>：任务事务、资源、冷却、去重、失败回滚、远端撤离、五百分评分和存档恢复。</li><li><code>scripts/verify-art.mjs</code>：28 张 PNG 的尺寸／SHA256、96 个非空区域、图集边界、锚点、方向、四组四帧特效与加载接口。</li><li><code>scripts/verify-maps.mjs</code>：五章 ID 覆盖、静态平台梯子连通和几何约定，此项本身不代表可通关。</li><li><code>scripts/verify-world.mjs</code>：物理输入、碰撞、梯子、机关、技能、节点两次破坏与攻击去重、满包留场、重试复原、预览刷新，以及五章完整输入路径通关。</li><li>实际浏览器：标题、五章展示、移动／攀梯、指令预览、限定词扣费、暂停、指南、重试和手机横屏模拟布局。</li></ul>
+<p>最终命令输出保存在 <code>output/verification.txt</code>。完整流程测试使用方向输入、冲刺和持续互动，不用直接填背包或跳过任务替代通关。熟练脚本时间不能证明首次真人二十分钟。</p>
+<p>实际浏览器截图在 <code>output/screenshots/</code>。主角卡在 <code>assets/submission/deepseek-hero-card.png</code>，1600×900 PNG，以 HTML 排版参考、生成资源与真实实机图后截图导出。来源与提示词随资产清单提供。</p>
+<h2>实际工具与限制</h2>
+<p>美术工具为 image_gen，代码由 Codex 辅助开发，运行使用原生 JavaScript、Canvas 2D、Web Audio。没有实际使用 OpenDev 或 WorkBuddy 的记录；早期策划的计划不能作为使用证据或对应评奖资格的保证。</p>
+<p>首次通关二十分钟为设计目标，尚待新人计时和难度校准。触屏已做浏览器模拟，仍需真实手机验证多点操作、性能和音频。角色使用每状态关键姿态，尚无完整逐帧步态；音效为程序合成，没有背景音乐。</p>
+<p>在线发布命令被自动审批拒绝，理由是尚无向外部 Sites 私有仓库传输源码和部署的明确授权。源码未上传，未生成对外发布地址。本地可玩版、源码和静态部署包可先审阅，取得授权后再继续发布。</p>
+<h2>2026-10-24 全面优化回归</h2>
+<p>本轮按“从头通关到结尾”的路径复核了五章，并完成以下交付优化：</p>
+<ul><li>HUD 默认只保留当前未完成目标；“任务清单”可展开查看完整主线和支线，当前目标有独立高亮。</li><li>所有关键交互目标增加 <code>E · 动作</code> 标签、边框、光晕和场景标签 active 状态；支持减少动态效果。</li><li>第五章增加准备撤离、全员集结、返航信标就绪、最后撤离四级状态提示。倒计时显示 30 秒、15 秒、10 秒视觉分级，撤离后保留 5 秒安全窗口，并对守卫接触先预警后伤害。</li><li>指令预览增加预计影响对象、警戒风险和返程提醒；预览本身不扣资源。</li><li>移动端任务、提示、倒计时与触控按钮字号和命中区已提升，按钮最小命中区为 44px。</li><li>第五章撤离状态会写入状态事件和提示队列，避免“准备阶段没有反馈、直到倒计时才知道流程已推进”。</li></ul>
+<p>最终构建与回归：</p>
+<ul><li><code>node scripts/build-game.mjs</code>、<code>node scripts/verify-build.mjs</code></li><li><code>node src/core/verify-core.mjs</code></li><li><code>node scripts/verify-world.mjs</code></li><li><code>node scripts/verify-expanded-world.mjs</code></li><li><code>node scripts/verify-expanded-campaign.mjs --all</code></li><li><code>node scripts/verify-experience.mjs</code></li><li><code>node scripts/verify-rendering.mjs</code></li><li><code>node scripts/verify-story-ui.mjs</code></li></ul>
+<p>以上检查全部通过；辅助路线五章通关 344.03 秒，零限定词路线 352.01 秒，构建目录 57 个文件且缺失 0。</p>
+<h2>下一阶段优化方向</h2>
+<ol><li><strong>先做真人可读性与难度校准</strong>：邀请 3–5 名首次玩家，记录每章首次完成时间、首次迷路位置、指令误读率和第五章倒计时剩余；优先修正“看懂目标但不知道下一步站哪里”的卡点。</li><li><strong>玩法内容扩展</strong>：为每章补一条会改变路线的可选事件链（例如关闭广播后出现安全短路、保留广播则换取更快但更危险的通道），让支线影响后续地图，而不只是加分。</li><li><strong>队友协作深度</strong>：加入两名队友的同步窗口、可撤销指令和一次“接力指令”挑战，让 Grok、Claude、GLM 的差异体现在空间解法上，而非只体现在按钮文案上。</li><li><strong>视觉表现升级</strong>：补齐角色连续步态、受击和登艇动作；为第五章增加动态警戒灯、信标脉冲和撤离路线箭头；保持现有蓝金水下神殿风格与低动态模式兼容。</li><li><strong>性能与设备验收</strong>：做真实手机横屏、多点触控、音频解锁和低端设备帧率测试；根据结果提供低画质开关和粒子预算档位。</li></ol>
+<h2>2026-10-25 全局视觉升级第一轮</h2>
+<p>已将“深海运河机房·动画式 Q 版潜入”方向接入运行时渲染：</p>
+<ul><li>五章建立独立视觉 token：航灯档案、分拣诱饵、扫描校验、广播曝光、集结返航；章节编号、任务面板和场景标记同步使用章节强调色。</li><li>背景加入中心可读性压暗、左右边缘暗框、远中近景线缆和稀疏前景粒子，降低背景与角色、平台的竞争。</li><li>平台顶面统一高光与暗侧面，升降台、事件桥和普通平台拥有更明确的材质边界。</li><li>角色增加深色关键线和轻微队伍色辉光，DeepSeek、Grok、Claude、GLM 在亮水背景上保持可辨识。</li><li>警戒器增加方向扇区和红色警戒三角；守卫视野框在搜索状态变为橙色虚线；信标增加双层脉冲。</li><li>第五章增加青色／红色返航路线灯、信标路线标签和撤离阶段颜色变化；不会改变碰撞、任务或通关逻辑。</li><li>底部小队栏压缩高度，顶部章节标题、任务面板和交互提示使用统一章节色变量；移动端保留 44px 触控命中区。</li></ul>
+<p>本轮验证：<code>verify-core</code>、<code>verify-world</code>、<code>verify-expanded-world</code>、<code>verify-expanded-campaign --all</code>、<code>verify-experience</code>、<code>verify-rendering</code>、<code>verify-story-ui</code> 和 <code>verify-build</code> 全部通过。构建产物 <code>dist/</code> 已刷新。</p>
+<h2>2026-10-25 全局视觉升级第二轮补充</h2>
+<ul><li>五章增加低对比度专属场景地标：纸窗航灯、分拣纸流、扫描校验网格、广播天线、返航塔与撤离箭头；地标仅绘制于结构层，不改变碰撞与玩法。</li><li>选中队友目标与当前指令目标增加可读性信标：竖向渐隐光柱、顶部方向箭头和底部脉冲底座；减少动态／减少闪烁模式下改为静态低强度显示。</li><li>第二轮仅改渲染层，移动、任务、资源和通关逻辑保持不变。</li></ul>
+<p>第二轮补充验证：<code>node --check src/render/scene-renderer.mjs</code>、<code>verify-rendering</code>、<code>verify-world</code>、<code>verify-expanded-world</code>、<code>verify-experience</code>、<code>verify-story-ui</code>、<code>build-game</code>、<code>verify-build</code> 全部通过。</p>
+<h2>2026-10-25 全局视觉升级第三轮补充</h2>
+<ul><li>轻量画质模式进一步降低背景导管、气泡、纸页、水波、远景曲线与 LED 的绘制预算，并冻结非必要动态相位，低端设备仍保留平台、角色、目标和危险提示的完整可读性。</li><li>实景小剧场在轻量画质与减少动态效果下固定粒子和角色 bob，避免剧情卡片与主场景出现不同步的动态负担。</li><li>触屏横屏继续保留 44px 命中区、竖屏遮罩、多点触控独立释放与失焦清理；不改碰撞、任务、资源或通关逻辑。</li></ul>
+<p>第三轮补充验证：<code>node --check src/render/scene-renderer.mjs</code>、<code>node --check src/ui/ui-v3.mjs</code>、<code>verify-input</code>、<code>verify-character-motion</code>、<code>verify-rendering</code>、<code>verify-world</code>、<code>verify-expanded-world</code>、<code>verify-expanded-campaign.mjs --all</code>、<code>verify-experience</code>、<code>verify-story-ui</code>、<code>build-game</code>、<code>verify-build</code> 全部通过。构建产物 <code>dist/</code> 共 63 个文件，缺失 0。</p>
+<h2>2026-10-26 忽略新手教程时的游玩阻断修复</h2>
+<ul><li>指令教学改为辅助提示。选择队友、目标、精准方案、自定义短句、模板和确认执行均由实际玩法规则验证，不再被教学点击顺序拦截；限定词、AI Token、队友解锁和任务执行条件继续生效。</li><li>HUD 与指令面板均增加“跳过教程”。点击后立即清除教学标记和路线，保留当前指令，并保存本章的跳过状态。</li><li>玩家提前取到资料、破开纸窗、离开教学房间或使教学节点无法再练习时，自动退出过时教学；读入已有上述进度的旧存档也会恢复到自由游玩。仍可练习时，节点标记改为指向实际未打开的节点。</li><li>自动退出不伪造已完成动作，不重置节点、任务进度或资源。按教学顺序游玩时继续使用真实动作回执推进，第一章交付阶段仍跟随未完成的本章目标。</li></ul>
+<p>验证：新增 <code>node scripts/verify-tutorial-free-play.mjs</code>，7 项回归全部通过；新增 <code>node scripts/qa-tutorial-free-play.cjs</code>，构建后的桌面与触屏浏览器 6 项回归全部通过，无页面异常或 HTTP 资源失败。浏览器报告及截图位于 <code>output/tutorial-free-play-20261026/</code>。</p>
+<p>同时通过 <code>verify-core</code>、<code>verify-lesson-bridge</code>、<code>verify-main-flow</code>、<code>verify-experience</code>、<code>verify-runtime-save</code>、<code>verify-story-ui</code>、<code>verify-world</code>（含五章真实方向输入与持续交互通关）、<code>verify-rendering</code>、<code>verify-architecture</code>、<code>verify-bug-fixes</code> 与 <code>verify-build</code>。<code>dist/</code> 已重新构建，148 个文件，缺失 0。</p></div></div></body></html>

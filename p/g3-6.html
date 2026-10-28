@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>代码架构与目录约定 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>代码架构与目录约定</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/代码架构与目录约定.md</code>　·　8.9 KB</p>
+<hr><h1>《鲸鱼魔盗团》代码架构与目录约定</h1>
+<p>本文是当前代码库的维护入口。它描述已经存在的目录边界、运行时依赖方向、资源来源和构建产物，帮助后续开发在不破坏现有流程的情况下继续扩展。</p>
+<h2>1. 当前目录分层</h2>
+<pre><code>游戏-鲸鱼魔盗团/
+├─ index.html                 # 开发入口；只负责挂载画布、UI 容器和 src/main.mjs
+├─ 启动游戏.ps1               # Windows 本地启动器
+├─ src/                       # 可编辑源码（唯一运行时源码来源）
+│  ├─ main.mjs                # 应用组装层：创建核心、世界、渲染、输入、音频和 UI
+│  ├─ core/                   # 与画面无关的主线状态和存档
+│  ├─ game/                   # 玩法运行时：世界、地图、输入、剧情、教程和规则适配
+│  ├─ render/                 # 资源加载、DPR 分辨率、动作采样和场景绘制
+│  │  └─ scene-renderer.mjs   # 主绘制器（旧 src/game/renderer.mjs 为兼容门面）
+│  └─ ui/                     # HTML UI、样式和 SVG 图标表现层
+├─ assets/                    # 美术和运行时资源
+│  ├─ runtime-catalog.json    # 运行时图像坐标与采样区的事实来源
+│  ├─ asset-manifest.json     # 资产制作、来源和验收登记
+│  ├─ atlases/ backgrounds/…  # 运行时 PNG
+│  ├─ prompts/ provenance/    # 生成提示词和来源记录
+│  ├─ concepts/ references/   # 方向稿、用户参考和已归档旧稿
+│  └─ preview/                # 离线资产预览页
+├─ scripts/                   # 构建、打包和无浏览器自动校验脚本
+├─ docs/                      # 设计、实现、验收和资产说明
+├─ output/                    # 本地验证日志、截图和审阅输出（可覆盖）
+├─ dist/                      # build-game.mjs 生成的静态部署目录（不要手改）
+└─ deliverables/              # finalize-delivery / package 脚本生成的交付压缩包</code></pre>
+<p><code>dist/</code>、<code>output/</code> 和 <code>deliverables/</code> 是派生目录。修改功能时只编辑 <code>src/</code>、<code>assets/</code>、<code>index.html</code> 或脚本；构建后再检查派生结果。不要在 <code>dist/src</code> 中修复问题，也不要把截图或压缩包反向提交为运行时依赖。</p>
+<h2>2. 运行时依赖方向</h2>
+<p>依赖关系从上到下保持单向，避免模块互相操作 DOM 或互相持有完整游戏对象：</p>
+<pre><code>index.html
+  └─ src/main.mjs                    # 组合根（composition root）
+      ├─ core/                       # 规则、状态、存档
+      ├─ game/                       # 世界模拟和输入适配
+      │   └─ core/、assets 目录数据
+      ├─ render/                     # 纯绘制与资源适配
+      │   └─ game 世界快照、assets catalog
+      └─ ui/                         # DOM 视图与用户反馈
+          └─ core/game 的只读 view</code></pre>
+<h3><code>src/core/</code>：可验证的状态层</h3>
+<ul><li><code>chapters.mjs</code>：五章配置、规则常量、评级和剧情标记；配置应保持只读。</li><li><code>state.mjs</code>：<code>GameCore</code> 主线状态机，负责资源、任务、结算暂存、提交、失败回滚和事件去重。</li><li><code>storage.mjs</code>：版本化检查点和本地存储容错。</li><li><code>experience-storage.mjs</code>：跨章节体验、档案、导入导出和备份。</li></ul>
+<p>这一层不能依赖 Canvas、DOM、<code>window</code> 或音频。动作层先验证碰撞和距离，再用带 <code>attemptId</code> 的事件调用核心 API。核心 API 返回结果对象，UI 不应直接修改内部状态。</p>
+<h3><code>src/game/</code>：玩法适配层</h3>
+<ul><li><code>world.mjs</code>：平台、机关、角色、警戒和世界事件；把玩家输入转换为核心事件。</li><li><code>maps.mjs</code>、<code>rooms.mjs</code>：地图和房间数据；不要在渲染器里硬编码章节逻辑。</li><li><code>input.mjs</code>：键盘和触控输入归一化。</li><li><code>player-guidance.mjs</code>：只读下一步建议，按真实库存、机制与合法出口决定目标；不提交世界事件。</li><li><code>story.mjs</code>、<code>tutorial.mjs</code>、<code>lesson-bridge.mjs</code>：剧情步骤、首分钟教学和教学与世界事件的桥接。</li><li><code>prompts.mjs</code>、<code>safe-vuln.mjs</code>、<code>contracts.mjs</code>：提示词、离线漏洞分析沙盒和挑战契约。</li><li><code>preferences.mjs</code>、<code>session.mjs</code>、<code>audio.mjs</code>：设置、最佳成绩和程序音效。</li><li><code>renderer.mjs</code>：保留为历史兼容门面；实际绘制实现位于 <code>../render/scene-renderer.mjs</code>。</li></ul>
+<h3><code>src/render/</code>：绘制和资源适配层</h3>
+<ul><li><code>assets.mjs</code>：按 <code>runtime-catalog.json</code> 加载和裁切资源。</li><li><code>resolution.mjs</code>：逻辑坐标 1280×720 与设备像素比的映射。</li><li><code>character-motion.mjs</code>：动作采样、残影和局部特效；不负责推进任务或扣资源。</li></ul>
+<p>绘制函数应接收世界快照和只读参数，不能在绘制过程中调用 <code>GameCore</code> 的变更 API。所有新增图片先登记到 <code>runtime-catalog.json</code>，再由 <code>AssetLibrary</code> 使用。</p>
+<h3><code>src/ui/</code>：界面表现层</h3>
+<ul><li><code>ui.mjs</code>：<code>GameUI</code> 兼容入口和控制器装配。</li><li><code>player-polish.css</code>：任务层次、角色区分、目标对侧停靠的指令面板与触屏排版；由统一样式入口加载。</li><li><code>ui-v3.mjs</code>：当前主界面、HUD、指令、剧情、档案和设置视图。</li><li><code>game.css</code>、<code>ui-v3.css</code>、<code>ui-polish.css</code>、<code>ui-icon-polish.css</code>：基础布局、版本样式、全局抛光和 SVG 状态样式。</li></ul>
+<p>UI 读取 <code>view()</code> 或事件回执，按钮事件通过 <code>main.mjs</code> 暴露的回调回到玩法层。UI 不应直接改变 <code>world</code> 内的角色、碰撞或资源字段。</p>
+<h2>3. 文件命名约定</h2>
+<ul><li>源码模块使用小写短横线命名，例如 <code>experience-storage.mjs</code>、<code>character-motion.mjs</code>；不要新增同义缩写或 <code>utils2</code> 一类临时名。</li><li>导出的主类使用 PascalCase（<code>GameCore</code>、<code>GameWorld</code>、<code>GameRenderer</code>）；纯函数使用 camelCase；常量使用大写下划线。</li><li>运行时资源文件使用小写 ASCII、短横线和明确类别，例如 <code>deepseek-actions.png</code>、<code>scan-grid-atlas.png</code>。</li><li>文档可以使用中文标题，但代码引用必须链接到稳定的相对路径；同一主题保留一个权威文档，其余文档只引用它。</li><li>校验脚本统一放 <code>scripts/verify-*.mjs</code>，构建或打包脚本使用动作开头的名称（<code>build-game.mjs</code>、<code>package-game.py</code>）。</li></ul>
+<h2>4. 资源与构建约定</h2>
+<p>资产的事实来源分三层：</p>
+<ol><li><code>assets/asset-manifest.json</code> 记录制作状态、来源、提示词和验收信息。</li><li><code>assets/runtime-catalog.json</code> 记录游戏实际加载的图片和采样坐标。</li><li><code>src/render/assets.mjs</code> 提供运行时加载 API；业务代码只使用资源 ID，不拼接散落的图片路径。</li></ol>
+<p>开发入口使用 <code>.mjs</code>，生产构建由 <code>scripts/build-game.mjs</code> 清理并复制 <code>src/</code>，再将导入扩展名转换为 <code>.js</code>。构建后的 <code>dist/index.html</code> 和 <code>dist/src</code> 应能在静态 HTTP 服务下直接运行。新增源码模块后必须确认构建脚本会复制它，并运行 <code>node scripts/verify-build.mjs</code> 检查所有本地引用；不要依赖上一次构建残留的文件。</p>
+<h2>5. 修改流程</h2>
+<ol><li>先判断改动属于核心规则、世界玩法、绘制适配还是 UI 表现，再修改对应目录。</li><li>如果增加状态字段，先修改 <code>core/state.mjs</code>、归一化逻辑和存档版本策略，再接入 UI 或世界层。</li><li>如果增加地图事件，修改地图／房间数据与 <code>world.mjs</code>，不要在 <code>renderer.mjs</code> 里用章节 ID 判断任务完成。</li><li>如果增加资产，更新 manifest、runtime catalog 和预览，再接入资源 ID。</li><li>修改后至少运行相关 <code>verify-*.mjs</code>，最后运行 <code>node scripts/build-game.mjs</code> 检查部署目录。</li></ol>
+<h2>6. 当前兼容债务与后续演进</h2>
+<ul><li><code>src/game/renderer.mjs</code> 现在是兼容门面，实际绘制实现位于 <code>src/render/scene-renderer.mjs</code>；后续可把纯展示快照进一步抽到 <code>src/game/presentation-state.mjs</code>，迁移时保持兼容导出。</li><li><code>src/ui/ui-v3.mjs</code> 仍承担较多模板和交互分支。后续可按 <code>screens/</code>、<code>components/</code>、<code>formatters/</code> 拆分，但先通过导出函数和快照测试固定行为。</li><li><code>game.css</code>、<code>ui-v3.css</code> 和两套抛光样式存在历史层叠。新增规则应优先写入设计 token 或组件类，并逐步删除重复选择器；不要为单个页面继续复制一整套颜色和阴影。</li><li><code>assets/ui/game-ui.css</code> 是旧资源说明中的设计系统，当前入口未直接加载。</li><li><code>src/ui/styles.css</code> 是运行时 CSS 聚合入口；将组件样式集中在此文件后，<code>index.html</code> 应只加载这一份样式入口，避免维护多份加载顺序。</li></ul>
+<h2>7. 最小验收清单</h2>
+<ul><li><code>node src/core/verify-core.mjs</code></li><li><code>node scripts/verify-main-flow.mjs</code></li><li><code>node scripts/verify-rendering.mjs</code></li><li><code>node scripts/verify-art.mjs</code></li><li><code>node scripts/build-game.mjs</code></li><li><code>node scripts/verify-build.mjs</code></li><li>使用 HTTP 服务访问根目录和 <code>dist/</code>，确认模块、图片和 SVG 图标没有 404。</li></ul>
+<p>这份约定描述的是当前可运行架构；未来目录重构应先更新本文和构建／验证脚本，再移动文件。</p></div></div></body></html>

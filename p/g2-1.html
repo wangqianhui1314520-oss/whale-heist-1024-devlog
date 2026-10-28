@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>修复与验收 · 后续章节排查（Codex 修复版） · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>修复与验收 · 后续章节排查（Codex 修复版）</h1>
+<p class="meta">来源：<code>_归档-20261026/游戏-output__later-chapter-audit/修复与验收.md</code>　·　3.4 KB</p>
+<hr><h1>后续章节正常游玩排查 · 2026-10-26</h1>
+<p>第二至第五章已完成代码排查、定向复现、真实浏览器检查和五章通关回归。修复均已进入当前 <code>dist</code>，发布目标是用户指定的 WorkBuddy 应用。</p>
+<table><thead><tr><th>已复现的问题</th><th>修复后的行为</th></tr></thead><tbody><tr><td>查看任务清单后，按钮持有焦点，空格被当作点击按钮，角色无法跳跃</td><td>游玩状态中空格仍控制跳跃；暂停菜单与输入框保留各自正常键盘行为</td></tr><tr><td>第二章部分节点的冲锋起点落在隔板里，寻路错误地退到下层；Grok 执行无效果却提示成功并消耗 Token</td><td>冲锋从可站立的位置开始；实际抵达目标所在平台才执行，任务按真实破障结果结算</td></tr><tr><td>第三、第五章等隔板目标从入口一侧无法接近，原提示称队友“正在绕行”，实际上未行动</td><td>若另一侧存在有效梯路，Grok 按预览路线真正绕到可达的一侧执行；没有有效路线时拒绝扣费</td></tr><tr><td>第五章队友集结后往返房间，历史集结状态让队友停止寻路，停在入口或梯子上</td><td>保留历史任务进度，队友继续沿梯路赶到信标；装载和撤离确认同时检查队友实际到场</td></tr><tr><td>旧检查点可能保存已进入错误楼层的执行任务</td><td>恢复后取消无效执行并退回本次消耗；无实际效果的回调不会完成目标</td></tr></tbody></table>
+<p>验收证据：</p>
+<ul><li><code>summary.json</code>：29 项自动回归全部通过，覆盖核心、存档、输入、任务完整性、剧情、压力测试与世界模拟。</li><li><code>verify-later-chapter-playability.txt</code>：6 条定向回归通过，包括节点优先的默认指令、精确指令的实际绕路、第三章回程桥、旧错误楼层任务退费、零效果回调和第五章装载前后往返。</li><li><code>fuzz-world.txt</code>：156 个房间／契约／随机种子用例，140400 帧，0 失败。</li><li>五章普通资源与零初始限定词自由路线均完成通关；第三章使用破障回程路线，无需完成扫描教学。</li><li><code>browser-report.json</code>：桌面、手机共 12 条实测通过，覆盖后四章的任务按钮焦点下跳跃，以及第二、三章从入口直接给 Grok 发令；0 浏览器异常、0 资源失败。</li><li>真实浏览器截图保存在本目录。</li></ul>
+<p>WorkBuddy 线上状态：<strong>已更新并通过线上验收</strong>。用户在原 WorkBuddy 应用点击更新后，禁用浏览器缓存并为资源增加校验参数，8 个关键脚本／样式文件的 SHA-256 均与已验收构建一致，修复标记全部存在。最初检查遇到发布同步延迟，后续已确认新文件上线。</p>
+<p><code>live-no-cache-report.json</code> 记录无缓存文件校验；<code>remote-browser-report.json</code> 记录原 WorkBuddy 网站上的桌面和手机共 12 条操作实测，全部通过，0 浏览器异常、0 资源失败。实测覆盖第二至第五章点击任务面板后空格仍能跳跃，以及第二、第三章从入口直接发出 Grok 指令后的实际破障与任务结算。测试在独立浏览器会话中进行，读取游戏状态的观察函数只加入该测试会话，不修改网站文件或玩家存档。</p>
+<p>已核验网址：https://whale-pirate-crew.app.workbuddy.host/?sharecode=KY5SOZXVTD</p>
+<p>当前构建目录：<code>D:/Vibe coding/1024切磋大会/游戏-鲸鱼魔盗团/dist</code>。</p>
+<p>发布包、文件列表与 SHA-256 见本目录的 ZIP 和 <code>release-manifest.json</code>。验收材料已归档到 <code>D:/Vibe coding/1024切磋大会/_归档-20261026/游戏-output__later-chapter-audit</code>。</p></div></div></body></html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>游戏 Bug 排查报告 · 2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>游戏 Bug 排查报告 · 2026-10-25</h1>
+<p class="meta">来源：<code>_归档-20261026/游戏-output__bug-audit-2026-10-25/游戏Bug排查报告.md</code>　·　5.4 KB</p>
+<hr><h1>鲸鱼魔盗团 Bug 排查报告</h1>
+<p>日期：2026-10-25。检查对象：当前游戏源码及 <code>dist</code> 发布构建。</p>
+<h2>结论</h2>
+<p>确认 3 个问题：1 个 P1，2 个 P2。本轮没有修改游戏源码。</p>
+<p>复现使用独立内存存储和明确标记的合成进度，不读写玩家真实存档。控制器复现运行实际 <code>src/main.mjs</code> 以及实际 core/world/storage 模块，只替换浏览器外壳、绘制、音频和资源传输。合成进度用于验证状态转换，不代表玩家实际通关记录。</p>
+<h2>BUG-1 · P1 · 最终章提交后，继续航程和导出存档回退到第五章</h2>
+<h3>用户触发步骤</h3>
+<ol><li>在主线完成第五章并从章节结果页继续，进入尾声和总结果页。</li><li>返回标题或刷新页面，点击“继续航程”；或者导出航程文件。</li><li>继续时读取到未通关的第五章，导出的航程也没有最终章结算。</li></ol>
+<h3>已确认的结果</h3>
+<ul><li>实时主线状态为已通关。</li><li>核心存档中有 5 章结果。</li><li>章内体验存档仍只有 4 章结果。</li><li>标题摘要 <code>completed</code> 为 <code>false</code>。</li><li>导出航程 <code>completed</code> 为 <code>false</code>。</li><li>重新创建控制器后继续，进入第 5 章，<code>completed</code> 为 <code>false</code>。</li></ul>
+<h3>代码原因</h3>
+<ul><li><code>src/main.mjs:301</code>：继续时先提交核心结算，然后将 <code>world</code> 置为 <code>null</code>，再调用 <code>persist()</code>。</li><li><code>src/main.mjs:112</code>：<code>world</code> 为空时直接返回，因此没有更新体验存档。</li><li><code>src/main.mjs:214</code>：通关分支直接播放尾声，不再创建世界；尾声也无法补写体验存档。</li><li><code>src/main.mjs:252</code>、<code>src/main.mjs:77</code> 和 <code>src/core/experience-storage.mjs:52</code>：继续、标题摘要和导出优先采用旧体验存档中的主线进度。</li></ul>
+<p>修复方向：让终局提交同步更新体验存档，使继续、摘要和导出采用同一个最新的主线状态。增加覆盖“最终章提交 → 刷新 → 继续 / 导出”的回归检查。</p>
+<h2>BUG-3 · P2 · 重看教程保留已打开节点，导致节点教学无法再次完成</h2>
+<h3>用户触发步骤</h3>
+<ol><li>在第一章打开全部 4 个必需资料节点，尚未离开本章。</li><li>打开“行动指南”，点击“重看教程”，返回行动。</li><li>重新完成移动、爬梯和跨缺口跳跃。</li><li>教程要求第一次冲刺击打节点，但所有节点都保持打开状态，无法再产生所需的击打事件。</li></ol>
+<h3>已确认的结果</h3>
+<ul><li>重看后仍是原来的关卡尝试，4 个节点的 HP 均保持 0。</li><li>复现中使用实际世界物理和 LessonBridge 重新完成了 <code>move</code>、<code>climb</code>、<code>jump</code>。</li><li>教程停在 <code>node-first</code>。</li><li>再次调用实际节点击打处理时，新增教学证据数为 0。</li></ul>
+<h3>代码原因</h3>
+<ul><li><code>src/main.mjs:334</code>：仅调用 <code>tutorial.restart()</code> 并更新设置。</li><li><code>src/game/tutorial.mjs:171</code>：清空教学证据，但不重置世界对象。</li><li><code>src/game/world.mjs:142</code>：HP 为 0 的节点直接跳过，无法再次触发击打教学事件。</li></ul>
+<p>影响：教程无法完整重看，提示会持续停留。玩家仍可继续关卡或跳过教程；这不是主线必然无法通关的问题。</p>
+<p>修复方向：用独立教学场景重看，或根据当前世界状态恢复可完成的教学步骤，并明确重看操作对本章进度的影响。</p>
+<h2>BUG-2 · P2 · 存储写入失败时，导入仍提示成功</h2>
+<h3>用户触发条件及步骤</h3>
+<ol><li>浏览器本地存储无法写入，例如配额耗尽或写入被禁用。</li><li>在设置中导入一个通过校验的航程文件。</li><li>界面提示“导入完成，点击继续航程”。</li><li>点击继续后，读取的仍是原存档。</li></ol>
+<h3>已确认的结果</h3>
+<p>故障注入只让存储写操作抛错，读取保持正常。测试原存档在第一章，导入文件在第五章：</p>
+<ul><li>导入提示为成功。</li><li>内存临时状态进入第五章。</li><li>隔离存储仍保留第一章。</li><li>随后点击继续，进入第一章。</li></ul>
+<h3>代码原因</h3>
+<p><code>src/main.mjs:321</code> 忽略 <code>saveCheckpoint</code>、<code>saveExperience</code>、<code>clearExperience</code> 和 <code>saveArchive</code> 的失败返回值，随后无条件重建状态、返回标题并显示成功提示。</p>
+<p>修复方向：导入时检查每一步持久化结果，成功后再切换内存状态；写入失败时保留原进度并给出准确反馈。还应处理部分键写入成功、部分失败的情况。</p>
+<h2>验证范围</h2>
+<p>此前在本轮完成的 8 组自动检查均通过：</p>
+<ul><li><code>src/core/verify-core.mjs</code></li><li><code>scripts/verify-input.mjs</code></li><li><code>scripts/verify-runtime-save.mjs</code></li><li><code>scripts/verify-main-flow.mjs</code></li><li><code>scripts/verify-world.mjs</code>（含输入驱动五章通关模拟）</li><li><code>scripts/verify-expanded-world.mjs</code></li><li><code>scripts/verify-mission-completeness.mjs</code></li><li><code>scripts/verify-story-flow.mjs</code></li></ul>
+<p>本次还运行了发布构建的浏览器检查：</p>
+<ul><li>五章试玩的指令面板、Enter 取消、双击确认只扣一次资源、地图、记录、指南和剧情回放。</li><li>60 轮暂停 / 继续操作。</li><li>结果：1 组通过，0 组失败；没有捕获到浏览器脚本异常、资源 HTTP 错误或控制台错误。</li><li>浏览器：Edge 156.0.4314.42；桌面视口 1280 × 720。</li></ul>
+<h2>证据文件</h2>
+<ul><li><code>reproduce.mjs</code>：上述 3 个问题的可重复断言，执行命令 <code>node output/bug-audit-2026-10-25/reproduce.mjs</code>。</li><li><code>reproduction-report.json</code>：实际观测结果。</li><li><code>synthetic-chapter5-fixture.json</code>：明确标记用途的隔离测试夹具，不是玩家实玩记录。</li><li><code>browser/browser-report.json</code>：发布构建浏览器检查结果。</li><li><code>browser/*.png</code>：浏览器检查截图。</li></ul>
+<p>这些通过项不代表已穷尽所有设备、操作序列或故障条件。</p></div></div></body></html>

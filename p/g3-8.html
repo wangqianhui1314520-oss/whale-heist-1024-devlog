@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>全方位压力测试报告-2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>全方位压力测试报告-2026-10-25</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/全方位压力测试报告-2026-10-25.md</code>　·　7.3 KB</p>
+<hr><h1>《鲸鱼魔盗团》全方位压力测试与修复记录</h1>
+<p>日期：2026-10-25（北京时间）。测试对象为当前本地源码及重新构建的 <code>dist/</code>。实际执行结果以 <a href="../output/qa-2026-10-25/summary.json" target="_blank" rel="noopener">summary.json</a> 和同目录各项日志为准。</p>
+<p>本轮以找出可复现问题并修复为目标，包括规则验证、乱序操作、随机世界输入、变异存档、主流程切换、浏览器键鼠交互、小尺寸横屏和本地 HTTP 检查。测试使用内存存储与独立的 8770/8771 测试地址，未清空或导入覆盖 8766 上的玩家航程。</p>
+<p>最终结果：<strong>21 项已复现问题完成修复，23 组检查全部通过，失败 0。</strong> 源码与部署包各 145 次 HTTP 检查均通过（合计 290 次）。部署包第五章在浏览器独立加载成功，所检控制台 error/warn 为空；<code>dist/</code> 共 66 个文件，资源引用缺失 0。</p>
+<h2>覆盖与证据</h2>
+<table><thead><tr><th>范围</th><th>单次最终回归的覆盖</th><th>验证方式</th></tr></thead><tbody><tr><td>核心状态</td><td>5 章、40 种子、59,967 次乱序操作</td><td><code>scripts/fuzz-core.mjs</code></td></tr><tr><td>异常存档</td><td>1,500 份字段变异快照，校验失败保持原状态</td><td>同上</td></tr><tr><td>提示词</td><td>10,000 组队友、目标、章节、预算与句式组合</td><td>同上</td></tr><tr><td>世界与物理</td><td>13 场景 × 4 契约 × 3 种子，140,400 帧</td><td><code>scripts/fuzz-world.mjs</code></td></tr><tr><td>世界恢复与行动</td><td>1,248 次即时保存恢复、286 条开始执行的指令、6 次正常死亡重建</td><td>同上</td></tr><tr><td>主流程</td><td>2,050 次菜单、暂停、重试、指令、剧情回放及无效导入转移</td><td><code>scripts/verify-stress-main.mjs</code></td></tr><tr><td>输入中断</td><td>1,000 轮失焦/切页中断，并检查多触点、重复按键、改键与互动开关</td><td><code>scripts/verify-input.mjs</code></td></tr><tr><td>五章通关</td><td>普通地图与扩展地图均通过方向输入、冲刺与持续互动完成；扩展版共 344.03 模拟秒</td><td><code>verify-world.mjs</code>、<code>verify-expanded-campaign.mjs</code></td></tr><tr><td>浏览器</td><td>菜单、章节锁、第五章展示、非法提示词、双击确认、取消、暂停、剧情选择、损坏 JSON、竖横屏切换</td><td>隔离测试页实机操作</td></tr><tr><td>显示</td><td>桌面及 844×390 横屏、390×844 竖屏提示</td><td>浏览器视口与 DOM 实际尺寸检查</td></tr><tr><td>HTTP</td><td>每个地址 145 次请求，含 128 次分批并发、资源/MIME、HEAD、404、异常编码、隐藏文件、路径越界和非读取方法</td><td><code>scripts/check-http.mjs</code></td></tr></tbody></table>
+<p>世界随机测试在部分轮次把角色放到合法平台上，以覆盖不同楼层；这些随机游走不代表真人从入口学会路线。五章通关模拟使用明确的路径与辅助行动，不能据其用时宣称首次游玩时间已达到二十分钟。</p>
+<h2>已修复的问题</h2>
+<table><thead><tr><th>ID</th><th>优先级</th><th>复现触发与原问题</th><th>修复后的行为</th></tr></thead><tbody><tr><td>QA-01</td><td>P2</td><td>恢复缺少字段的漏洞分析会话后，<code>view()</code> 发生 TypeError</td><td>验证与恢复统一使用规范化后的会话</td></tr><tr><td>QA-02</td><td>P2</td><td>新实例恢复 <code>attempt-2</code> 仍生成相同 ID，旧世界事件可继续扣血</td><td>恢复后使用不同的尝试 ID，旧事件失效</td></tr><tr><td>QA-03</td><td>P2</td><td>第五章装载后再次收到队友到达事件，状态倒退、快照无法再恢复</td><td>重复到达幂等处理，撤离期间不重复装载</td></tr><tr><td>QA-04</td><td>P3</td><td>超过 500 个动态目标的快照通过部分校验，后续注册失败</td><td>在替换现有状态前原子拒绝</td></tr><tr><td>QA-05</td><td>P3</td><td>错误类型的目标、aliases、tags 等字段导致提示词编译抛错</td><td>返回明确的无效输入结果</td></tr><tr><td>QA-06</td><td>P3</td><td>嵌套接力被静默丢弃，执行结果与计划不一致</td><td>拒绝嵌套接力</td></tr><tr><td>QA-07</td><td>P2</td><td>Token 不足时世界预览仍显示可执行</td><td>按实际成本禁用并提示所需 Token</td></tr><tr><td>QA-08</td><td>P2</td><td>Token 只够接力第一步时仍启动并扣费，第二步中断</td><td>启动前验证整组 Token 与限定词，不足时整组不启动</td></tr><tr><td>QA-09</td><td>P2</td><td>暂停页关闭或 Esc 后仍停在暂停页</td><td>正确恢复游戏</td></tr><tr><td>QA-10</td><td>P2</td><td>焦点在“取消指令”上按 Enter，错误执行指令</td><td>保留焦点按钮的原生动作，取消不扣 Token</td></tr><tr><td>QA-11</td><td>P2</td><td>剧情关键词按钮上按空格，被“下一句”快捷键抢占</td><td>正确选择关键词</td></tr><tr><td>QA-12</td><td>P3</td><td>长按界面快捷键可重复推进或确认</td><td>忽略重复快捷键事件</td></tr><tr><td>QA-13</td><td>P3</td><td>任务清单收起后仍展示全部可选支线，遮挡场景</td><td>默认只显示当前任务，展开再显示支线</td></tr><tr><td>QA-14</td><td>P3</td><td>HUD 无文字图标按错误单格比例缩放，图形被压扁</td><td>按 362×724 单格等比采样</td></tr><tr><td>QA-15</td><td>P3</td><td>设置与档案切换标签后，重绘导致焦点丢失</td><td>焦点回到刚选择的标签</td></tr><tr><td>QA-16</td><td>P3</td><td>已加载过游戏后从主菜单进入章节，再返回却进入暂停页</td><td>章节页返回主菜单</td></tr><tr><td>QA-17</td><td>P2</td><td>房间快照不兼容后，旧背包/已完成行动被混入新房间，恢复提示也被队列清空</td><td>同步重建尝试、世界、教程与训练信用，恢复提示正常显示</td></tr><tr><td>QA-18</td><td>P3</td><td>模板没有本房间适用目标时，档案页却先解除核心暂停</td><td>目标与队友验证成功后才恢复指令状态</td></tr><tr><td>QA-19</td><td>P3</td><td>尚未开始航程，只浏览菜单后刷新也生成“进行中”存档</td><td>未开局且无原存档时不制造航程</td></tr><tr><td>QA-20</td><td>P2</td><td>小横屏剧情关键词约 5px/20px 高；顶部按钮超出画面上沿</td><td>关键词字号 13px、至少 44px 高；顶部按钮保留 8px 安全距离</td></tr><tr><td>QA-21</td><td>P3</td><td>小横屏任务按钮折行、Token 数字过小</td><td>任务按钮不折行，资源数字至少 12px</td></tr></tbody></table>
+<p>另外修正了构建验证器：合法的 <code>./</code> 目录链接应解析为目录下的 <code>index.html</code>；同时不再把只有目录、没有文件的路径当成有效资源。旧教学断言改为校验任务语义和实际目标标签，避免文案缩短造成误报。</p>
+<h2>实机复核</h2>
+<ul><li>在第五章选择 GLM，再以键盘 Enter 激活“取消指令”，Token 保持 12；双击实际确认只扣一次。</li><li>暂停后按 Esc 可继续；章节选择的返回落在主菜单。</li><li>序章“观察”关键词可用空格选择，三个必要选择仍需玩家完成。</li><li>收起任务后，可选支线从画面和无障碍树隐藏；展开后可查看。</li><li>844×390 视口下，“观察”按钮实测 146.14×52.84、字号 13px；风格按钮 44.59×44、字号 12px、顶部 8px；任务按钮 166.5×44，不折行。</li><li>旋转至竖屏显示旋转提示；回到横屏时保留暂停，避免后台继续行动。</li></ul>
+<p>[图片：小横屏剧情按钮修复后]</p>
+<p>[图片：最终部署包第五章 HUD]</p>
+<h2>重跑</h2>
+<p>在项目目录运行：</p>
+<pre><code>.\scripts\verify-all.ps1
+node scripts/check-http.mjs http://127.0.0.1:8770/</code></pre>
+<p><code>verify-all.ps1</code> 逐项执行核心、世界、体验、输入、剧情、存档、资源和压力脚本，最后重新构建并校验 <code>dist/</code>；每项输出与汇总保存到 <code>output/qa-2026-10-25/</code>。HTTP 脚本要求对应的本地服务已启动。</p>
+<h2>验证范围的限制</h2>
+<p>本轮自动验证通过表示这些已执行路径未再复现问题，不代表穷尽所有操作。尚未覆盖实体手机的多指触控、Safari/Firefox、长时间真实设备运行与首次体验二十分钟的人体试玩校准。小尺寸测试使用桌面浏览器视口，不能代替真实触屏硬件验证。不兼容快照回退会把本章重建计入一次“重新出发”，不扣评分。</p></div></div></body></html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-10-23　工作日志 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>2026-10-23　工作日志</h1>
+<p class="meta">来源：<code>.workbuddy/memory/2026-10-23.md</code>　·　5.3 KB</p>
+<hr><h1>2026-10-23</h1>
+<h2>1024切磋大会（WaytoAGI 全国AI切磋大会 · 1024超能Coding周末）立项调研</h2>
+<ul><li>用户宣布参赛。活动时间 2026-10-24~25 每天 10:30-19:02（512分钟×2天=1024分钟），官网 events.waytoagi.com/collections/qiecuo1024，报名入口仍开放（明日开赛，需今日报名）。</li><li>六赛道：用餐/办公/短剧/侦探/OPC/游戏，可多选、同一作品只交一次；10-25 15:00 封板、16:00 提交截止（成片/可玩链接 + 海报 + 说明）；全国大奖 10240 元 + 奖杯，本地前三+人气奖进全国评审，11-1 颁奖直播。</li><li>江苏会场：苏州/常州（两天场）、南京/无锡（周日单日场）、徐州（周六单日场），另有线上赛区可全程远程。</li><li>赛道×资产匹配结论：主攻「短剧」——《让模型飞》EP1(2:54) + Pillow/edge-tts/IndexTTS 2.5 管线现成，无脸字幕卡天然满足"主角不换脸"，且正好攻坚"静态卡缺电影感"痛点；有余力兼报「游戏」（技术最强项，48h 网页小游戏）。</li><li>待用户确认：参赛形式（线上/苏州/常州）+ 赛道多选；确认后在本工作区搭脚手架并进入开发。</li></ul>
+<h2>当日进展（截至 14:05）</h2>
+<ul><li>用户确认：<strong>线上赛区</strong>；选题定为"大肥鱼（DeepSeek蓝鲸）带 Grok+Claude+GLM 攻韩国服务器"事件（CrowdStrike TAG-217 / ARTEX，2026-10 曝光），双赛道：短剧+游戏。</li><li><strong>短剧《鲸天魔盗团》三集成片完成</strong>：复用《让模型飞》管线（D:/Vibe coding/自媒体/账号搭建/让模型飞/src），本工作区 短剧-鲸天魔盗团/；新增6张Pillow背景（terminal/bank_night/artex机柜鲸/telegram/crowdstrike/bank_day）+3新角色（GROK老八/BOSS雇主/CROWDSTRIKE程探长）；EP1 57.1s / EP2 59.5s / EP3 59.8s，守住30-60s红线；edge-tts 系统版7.2.8全量403，<strong>venv版7.3.1解决</strong>（venv: C:/Users/Administrator/.workbuddy/binaries/python/envs/default，含PIL+numpy+edge-tts；ffmpeg 9.0.1）。</li><li><strong>游戏《大肥鱼劫银记》原型完成</strong>（游戏-大肥鱼劫银记/index.html，单文件Canvas2D竖屏塔防）；Node无头测试桩 test_game.js 抓到P0：S.stolen从不递增→永远无法获胜；已加航道拥堵上限(24)。<strong>遗留2个缺陷未修</strong>：① sell处 S.stolen++ 漏加（Edit失败因old_string不匹配，实际代码是 <code>if (u.carry &amp;&amp; dist(u, SHIP) &lt; SHIP.r)</code>）② S.vaultQ 未在S对象/loadLevel初始化→单位到达数据库时TypeError崩溃。</li><li><strong>参赛策划案 Word 已交付</strong>（用户当圈指令"先出策划案"）：走 workbuddy-docx full_pipeline（doc-writer→general-writer→doc-formatter→business-report模板→html-review 45分打回修正后96分过→doc-converter），成品 output/541008e1-4963-4a1f-9648-f08314130564/stage3/1024切磋大会参赛策划案.docx（封面+目录+页码；verify 200块0缺失、25条PAGEREF）。</li><li>待办：① 用户官网报名（未完成，明日10:30开场）② 修游戏2缺陷+重跑无头测试 ③ 短剧一页大纲+海报 ④ 短剧动态化（镜头推拉）。</li></ul>
+<h2>下午追加（13:50）</h2>
+<ul><li>用户要"几个游戏策划案"→ 交付<strong>三份独立 Word 策划案</strong>（均走 docx full_pipeline，html-review 96分，verify 0缺失）：</li><li>方案一《大肥鱼劫银记》出兵掠夺战（现有原型深化，剩余约6h）→ output/dbf6a258-49c9-4bf2-9620-a0a8e8596f12/stage3/方案一-大肥鱼劫银记-游戏策划案.docx</li><li>方案二《关窗行动！银行保卫战》反转防守快打（约5h）→ output/24632d32-3c2e-42e9-8579-3d2213447bdc/stage3/方案二-关窗行动银行保卫战-游戏策划案.docx</li><li>方案三《汤师爷的黑市群聊》群聊叙事选择九结局（约4h，复用短剧资产最多）→ output/b1e8fdf0-87b5-4c2d-a0e3-6c1e7163cc28/stage3/方案三-汤师爷的黑市群聊-游戏策划案.docx</li><li>踩坑记录：convert_doc.py 预检 PF-03——CSS 里定义了 <code>.abstract-card td p</code> 等后代规则但正文未挂载该 class 时报"类选择器与结构脱钩"；<strong>规则：HTML 中只用挂载了的 class 的样式，未使用的样式块要删</strong>。三份删掉 abstract-card 规则块后一次通过。</li></ul>
+<h2>晚间大改（23:05）——游戏推倒重做</h2>
+<ul><li>用户指令："删掉之前完成的东西"，新方向=<strong>玩家直接操控大肥鱼、大肥鱼指令其他AI攻银行服务器</strong>，要"玩法新颖有意思"。</li><li>已删：3份旧游戏策划案管线（dbf6a258/24632d32/b1e8fdf0）+ 旧原型目录 游戏-大肥鱼劫银记/。保留：短剧-鲸天魔盗团/、主策划案(541008e1，其游戏章节已过时待刷新)、README、提交物料。</li><li>新游戏定位：<strong>《大肥鱼：指令不清》</strong>——三支柱：①直接操控蓝鲸(惯性游动/冲刺/背数据) ②指令轮盘+AI自主执行(老八冲/汤师爷社工/老四复查) ③<strong>提示词工程玩法化</strong>（指令有歧义→AI理解错→长按追加限定词消耗提示词条清零偏差；信任度低偏差率升高）。关卡L1查询页/L2展业App/L3外包系统+逃脱关(关舱门)。</li><li>新策划案已交付：output/6e2c79a8-5b73-4fab-b313-e4af9e464c32/stage3/大肥鱼-指令不清-游戏策划案.docx（96分/103块0缺失）。新游戏开发目录已建：游戏-大肥鱼指令不清/src/。</li><li>下一步：用户确认新概念后开工（游动手感→指令系统→关卡→群聊面板，约7h）；主策划案游戏章节需同步刷新。</li></ul></div></div></body></html>

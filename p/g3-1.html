@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UI与UX重构方案-2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>UI与UX重构方案-2026-10-25</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/UI与UX重构方案-2026-10-25.md</code>　·　10.9 KB</p>
+<hr><h1>《鲸鱼魔盗团》UI 与 UX 重构方案</h1>
+<p>日期：2026-10-25。方案已落到正式运行时 UI；布局原型仍用于视觉对照，正式行为以 <code>src/ui/ui.mjs</code>、<code>src/ui/ui-v3.mjs</code> 和对应样式为准。</p>
+<h2>实施状态</h2>
+<ul><li>局内 HUD 已合并为一条当前目标；完整任务和可选支线默认收起，教程结束后常驻键位栏隐藏。</li><li>附近互动提示与世界消息已去重，场景标签在有互动焦点时不再重复显示同一按键提示。</li><li>指令页已改为“选目标 → 预览影响 → 选方案 → 确认执行”；高级约束、时机、自定义短句和模板收进“高级编排”。</li><li>默认方案显示真实 <code>AI Token × 1</code> 消耗，精确方案显示 <code>Token × 1 · 限定词 × 1</code>，不再把默认行动标成免费。</li><li>主菜单已保留标题、唯一主行动按钮和航图/设置/档案次入口，移除英文眉题、重复状态、长职责列表和版本水印。</li><li>已通过 <code>verify-main-flow</code>、<code>verify-story-ui</code>、<code>verify-input</code>、<code>verify-experience</code>、<code>verify-stress-main</code>、<code>build-game</code> 与 <code>verify-build</code>。</li></ul>
+<h2>判断</h2>
+<p>上一轮修复了程序错误、缩短了标签，但没有解决信息架构。同一个目标仍能同时出现在左侧“当前目标”、右侧“任务”和“任务清单”摘要；互动提示在物体旁与屏幕中央重复；常驻键位、队友名字/职业/状态、章节和资源共同争夺注意力。</p>
+<p>新的方向是：<strong>一个当前动作、一个互动焦点、一套现场反馈。</strong> 玩家首先看懂目标物与队友的行动，详细信息由玩家主动展开。</p>
+<h2>局内画面</h2>
+<table><thead><tr><th>现在</th><th>方案</th></tr></thead><tbody><tr><td>左侧目标卡 + 右侧任务卡 + 任务按钮摘要</td><td>合并为顶部一条动作目标，完整清单放航图</td></tr><tr><td>固定游戏 Logo、章节名和普通计时</td><td>Logo 退出局内；章名仅入房短暂出现；普通计时放暂停页</td></tr><tr><td>生命数字、分母、生命条同时显示</td><td>常驻生命条；受伤/低生命时短暂显示数值</td></tr><tr><td>警戒百分数长期占位</td><td>平静时淡化；被发现时显示雷达形、方向和分段警戒条</td></tr><tr><td>两种接近的青色水晶</td><td>Token 用蓝色能量图形；限定词用金色封条，形状与颜色均不同</td></tr><tr><td>头像 + 名字 + 职业 + “就绪/执行/冷却”</td><td>头像 + 技能角标；冷却用环与秒数；执行用动作标识</td></tr><tr><td>尚未加入的队友常驻灰头像</td><td>正式首次航程只显示已加入队友；加入时扩展队友栏</td></tr><tr><td>所有机关、物品、出口上方都有标签</td><td>当前目标、靠近对象、选中对象才显短标签</td></tr><tr><td>场景旁与中央同时提示互动</td><td>仅在当前对象上方显示一处按键与动作</td></tr><tr><td>常驻整条键位说明</td><td>首次用到时教一个键；学会后淡出，帮助页可随时查阅</td></tr><tr><td>第五章一进入就显示准备撤离大条</td><td>未启动时用单一动作目标引导；真正启动才出现中央倒计时</td></tr></tbody></table>
+<p>布局：左上生命，顶部中央唯一目标，右上能量/限定词/暂停，左下队友，右下三格背包。场景中只给当前对象一个可见焦点，保护角色、平台边缘和机关的可读性。</p>
+<p>目标文案由“下一步实际行动”决定。例如第一章依次为“走到蓝色标记”“跳过缺口”“撞开节点”“打开纸窗”“取走资料”“返回鲸艇”。“交付资料 0/4”属于章节总进度，不应压过开场的移动教学。</p>
+<p>满包时切换为“返回鲸艇”；进入其他房间寻找目标时，标记对应出口。路线示范由玩家请求或卡住后出现，保持探索空间。</p>
+<h2>指令操作</h2>
+<p>普通指令的路径改为：</p>
+<p><strong>点目标 → 展示推荐队友与影响范围 → 确认执行。</strong></p>
+<ul><li>点纸窗就推荐 Grok；队友头像仍允许玩家主动切换。</li><li>用“整片开路 / 只开此处”两张短卡表达差别，场景内直接预览作用范围。</li><li>精确卡增加一次选择；确认前不会执行或扣费。</li><li>普通行动实际消耗 AI Token；增加精确约束额外消耗限定词。费用在固定位置只显示一次，禁止再称默认行动“免费”。</li><li>卡片确认前可显示“只破东侧纸窗”这一句复述；行动结束后用破坏、纸页、扫描、勾形与声效反馈，详细回执归档。</li><li>只有将惊动警戒器、Token 不足或目标不可达时，才出现对应的一条短风险说明，例如“缺 1 能量”“会触发警报”。</li><li>“时机、约束组合、短句输入、模板和接力”统一进入“提示词”扩展页，随章节解锁。基础动作不用读完整表单。</li></ul>
+<p>提示词仍是核心玩法：玩家能看到一句话如何改变作用范围，并通过世界中的实际结果理解约束。减少的是重复选择、解释段落和表单层级。</p>
+<p>新手教程需随新交互同步调整：保留实际走路、攀梯、两次独立冲刺、选目标、确认队友行动、交付与登艇的行为证据；合并界面步骤，不再要求分别操作队友下拉、目标下拉、默认方案和确认四层控件。</p>
+<h2>互动与反馈</h2>
+<p>物体在可互动范围内出现轮廓和一个焦点标记，提示随实际状态变化：</p>
+<table><thead><tr><th>状态</th><th>视觉与短文案</th></tr></thead><tbody><tr><td>可拾取资料</td><td>资料图形轻微上浮，靠近显示“E 拾取”</td></tr><tr><td>交付中</td><td>资料飞入艇舱，焦点环显示真实进度</td></tr><tr><td>交付完成但按键仍按住</td><td>按键图形演示释放，不立刻自动登艇</td></tr><tr><td>可登艇</td><td>同一个焦点切换为“E 登艇”</td></tr><tr><td>队友执行中</td><td>队友与目标之间的方向/范围反馈，头像显示执行状态</td></tr><tr><td>AI 能量耗尽</td><td>能量槽空态，相关行动按钮提示“缺能量”，可用补给发出明确图形引导</td></tr><tr><td>守卫发现玩家</td><td>朝向玩家的警示形与方向标，危险反馈优先于普通提示</td></tr></tbody></table>
+<p>默认不同时叠加目标卡、队友长对话、系统通知和互动说明。提示排队、去重，同一时刻优先显示玩家最需要处理的一条。危险和真实倒计时优先。</p>
+<h2>主菜单与其他页面</h2>
+<table><thead><tr><th>页面</th><th>重构方式</th></tr></thead><tbody><tr><td>主菜单</td><td>保留标题、唯一大按钮“继续行动/开始行动”，存档只显示一行“第二章·简历风波”；次入口为航图、设置、档案；重开收进更多操作</td></tr><tr><td>主菜单装饰</td><td>保留鲸艇和角色美术；移除英文眉题、水印、重复的保存状态、版本标语和队伍分工名单</td></tr><tr><td>暂停</td><td>首屏突出继续；设置、航图、记录为次入口；重试和重开折叠，明确重试位置</td></tr><tr><td>设置</td><td>默认展示音量、画质和辅助；改键、触控、剧情风格、存档管理分别按需展开；立即生效，无重复“应用”步骤</td></tr><tr><td>章节航图</td><td>5 个场景缩略图节点，当前位置与锁形清楚；选中一章才出现名称、成绩和进入按钮；展示模式放次级入口</td></tr><tr><td>剧情</td><td>默认一种演出；电影/实景/分镜选择移到设置；只保留字幕、继续与低强调跳过，历史在需要时打开</td></tr><tr><td>档案</td><td>用场景缩略图、角色肖像和证据图形做入口，点开后读内容，不把完整记录堆在首屏</td></tr><tr><td>演算舱</td><td>“证据→分析→建议”三步可视化；证据用卡片图形，先显示结论一句，详细日志点击展开；分析 Token 与行动 Token 清楚区分</td></tr><tr><td>结算</td><td>先展示队伍返航、评级和三项结果；公开记录/评分细项折叠，唯一主按钮为继续航程</td></tr></tbody></table>
+<h2>美术与视觉规范</h2>
+<p>深海蓝背景、象牙白可行走平台、少量黄铜边框与青色互动光继续保留。减少整块深蓝玻璃面板、重复双边框、发光文字和装饰英文，使角色、目标与危险更突出。</p>
+<ul><li>图片负责场景、头像、技能、资源图形、按钮材质与框体。</li><li>数字、必要短标签、提示词输入、焦点与无障碍文本保持可更新的界面元素。</li><li>24—32px 图标优先使用简洁轮廓，细密宝石纹理适合放在大图；不能把两个近似水晶当作两套容易辨认的资源。</li><li>首次出现使用“图标 + 两字标签 + 一次实际演示”，熟悉后收起标签。颜色始终配合形状或符号。</li><li>统一所有按钮的正常、悬停/聚焦、按下、不可用、执行中状态。不可用原因在选择时可获得。</li><li>小屏主要操作文字目标 14px，次要文字至少 12px；有效触控目标至少 44px。通过重排和删减适配，避免整体缩小字体。</li></ul>
+<p>优先新增或重绘：蓝色能量图标、金色限定词封条、三种简洁技能角标、目标/可交互/完成三态标记、资料装载反馈、低装饰按钮框与进度环。现有角色、场景与头像继续使用。</p>
+<h2>实施顺序与验收</h2>
+<ol><li>合并任务/提示的信息来源，删除重复面板、局内 Logo、常驻键位和重复状态；同步改下一步动作目标与文案。</li><li>制作“点目标→看范围→执行”的基础交互，重做指令卡、资源费用与新手事件；高级提示词按需展开。</li><li>统一主菜单、暂停、设置、航图、剧情、档案、演算舱和结算的视觉层级，再替换必要图片资产。</li><li>在桌面、小横屏及真实触屏设备验证；回归原有五章、Token、存档与撤离测试。</li></ol>
+<p>验收目标属于设计约束，待实现后测量：</p>
+<ul><li>普通游玩同屏只有一个主动作目标、一个附近互动焦点。</li><li>常规局内常驻中文控制在约 24 字以内（不含主动打开的菜单、剧情字幕与临时危险说明）。</li><li>默认指令两次明确点击可执行；精确方案增加一次选择，确认前不扣资源。</li><li>常驻 HUD 尽量控制在画面 15% 内，并检查其不覆盖人物、站立边与关键目标。</li><li>新玩家在开场 10 秒内能指出“我在哪、该往哪走、现在按什么”，在 60 秒内完成第一次真实合作。</li><li>不认识的图标能通过首次标签、聚焦/长按或帮助页理解，信息不依赖悬停。</li><li>第五章只在真实启动时出现倒计时；背包、装载与队友状态均读取真实进度。</li></ul>
+<h2>布局原型</h2>
+<p><code>output/uiux-proposal/index.html</code> 演示主菜单、局内精简 HUD 和目标指令卡。原型复用当前美术及静态场景，所有切换仅用于方案预览；它没有写入正式游戏或存档。实际重构还需处理动态目标优先级、房间切换、新手事件、输入方式和完整无障碍交互。</p>
+<h2>开发落点</h2>
+<ul><li>统一生成一个 HUD 展示模型，包含当前动作、当前焦点、资源和危险优先级，避免教程卡、任务卡与世界消息分别决定同一位置的内容。</li><li>将局内拆为资源栏、下一步目标、互动焦点、队友栏、背包与指令卡六个组件；基础指令与高级编排共享真实的预览、成本与确认逻辑。</li><li>合并重复样式与旧布局规则，形成一套字号、间距、边框、状态和动效规范；不继续靠新增一层 CSS 覆盖旧界面。</li><li>保留现有五章与状态规则，只同步修改新手界面事件和展示逻辑；资源扣费、世界效果与记录仍来自游戏实际执行。</li><li>回归确认前不扣费、重复确认不重复扣费、键盘按钮原生行为、触控有效区域、提示去重、旋屏暂停和存档兼容。</li></ul></div></div></body></html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>剧情性能优化说明 · 2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>剧情性能优化说明 · 2026-10-25</h1>
+<p class="meta">来源：<code>_归档-20261026/游戏-output__story-performance-20261025/优化说明.md</code>　·　2.5 KB</p>
+<hr><h1>剧情满屏与绘制优化 · 2026-10-25</h1>
+<p>本地源码与正式构建已完成更新。原公开试玩链接未发布新版本：当前会话没有可用的线上发布连接。</p>
+<h2>变更</h2>
+<ul><li>电影、实景、分镜三种剧情风格铺满游戏视口；图片保持比例并按需要裁切，对话和操作按钮叠放在画面上方。</li><li>修正电影缩放动画起始时露边、独立剧场的行内 contain 设置及章节列表的旧 PNG 引用。</li><li>预加载当前剧情与下一场景图片，保留有上限的图片缓存。</li><li>剧情背景、历史内容和布局仅在状态变化时更新，减少重复 DOM 操作。</li><li>标准及低画质模式将游戏画布重绘上限设为 60 次/秒，物理与输入沿用原有的 60 Hz 固定更新。</li><li>剧情、暂停、菜单和页面隐藏时停止游戏画布重绘；返回游戏后恢复绘制。</li><li>本地服务器补充 WebP、MP3 的正确内容类型，HTTP 检查同步更新。</li></ul>
+<h2>验证结果</h2>
+<ul><li>正式包：148 个文件，缺失引用 0。</li><li>主流程回归：8 项通过，含 180 Hz 回调下的绘制频率、遮罩暂停绘制及恢复行为。</li><li>剧情 UI 和独立剧场回归通过。</li><li>最终完整浏览器验收：11 项通过、0 失败、0 浏览器诊断；覆盖五章操作、三种剧情风格、640/740/844 宽手机横屏、存档恢复及 13 个房间的渲染夹具。</li><li>定向实测：桌面 1280×720、触控模拟 844×390 / DPR 3，各三种剧情风格均覆盖整个游戏视口，图片成功解码，标题及继续按钮可点击。</li><li>定向实测记录的游戏画布绘制频率约为桌面 55.3 次/秒、手机模拟 58.5 次/秒；暂停、菜单、三种剧情画面期间均为 0 次。恢复后重新绘制。</li></ul>
+<p>这些是本机浏览器和手机模拟结果，不代表实际手机的性能，也不是严格的同条件优化前后性能对比。完整验收首轮性能采样仍观察到 10 个超过 50 ms 的回调间隔，因此不能承诺消除所有卡顿。</p>
+<p>最终构建 SHA-256：<code>0838e82fc9f3e1686ebe35808d2f46ba88b8fa88b382f10a2c4a1ef3b1ed9b91</code>（按验收脚本对构建文件的路径和内容汇总计算）。</p>
+<h2>文件</h2>
+<ul><li>正式发布目录：<code>../../dist/</code></li><li>最终浏览器报告：<code>browser-final/browser-report.json</code></li><li>定向重绘与满屏报告：<code>targeted/report.json</code></li><li>桌面剧情截图：<code>targeted/desktop-story-cinematic.png</code></li><li>手机分镜截图：<code>targeted/touch-dpr3-story-comic.png</code></li></ul>
+<p><code>browser/</code> 保留前一次未通过的诊断记录；最终验收以 <code>browser-final/</code> 为准。</p></div></div></body></html>

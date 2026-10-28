@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>部署说明 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>部署说明</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/部署说明.md</code>　·　1.7 KB</p>
+<hr><h1>GitHub 私有源码与 Sites 公开试玩部署</h1>
+<p>源代码仓库与在线地址以根目录 README 的发布链接为准。</p>
+<h2>源码与构建</h2>
+<p>推送到 GitHub 私有仓库的 <code>main</code> 分支后，<code>.github/workflows/verify-game.yml</code> 会执行可移植的规则、输入、关卡、剧情、存档验证，重新生成 <code>dist/</code>，检查正式包资源引用，并将正式包保存为保留七天的私有 Actions 构建产物。也可从 GitHub Actions 手动运行该工作流。</p>
+<h2>在线发布</h2>
+<p>使用 <code>.openai/hosting.json</code> 中既有的 Sites 项目，静态目录为 <code>dist/</code>。通过 Sites 源码工作流同步已验证源码并打包，保存对应版本后部署。游戏试玩对外公开，GitHub 仓库保持私有；正式站点只发布 <code>dist/</code>，不发布开发脚本、策划文档或本地测试产物。GitHub 推送只触发校验和构建，后续修改需另行发布 Sites 版本才会更新线上试玩。</p>
+<h2>本地构建</h2>
+<p>需要 Node.js 22 或更新版本：</p>
+<pre><code>node scripts/build-game.mjs
+node scripts/verify-build.mjs
+node scripts/serve.mjs --root dist</code></pre>
+<p>打开服务打印的 Local 地址。所有运行资源使用相对地址，支持静态托管。游戏无需服务器密钥或环境变量。</p>
+<p><code>scripts/verify-art.mjs</code> 还会读取当前创作电脑上的生成原图与提示词来源，用于本地美术溯源；其完整溯源检查不属于 GitHub 托管 runner 的发布门槛。正式包构建会检查所有待发布资源均存在，部署包校验会检查模块、样式、图片等引用。</p>
+<h2>存档</h2>
+<p>进度保存在浏览器本地。由本地网址迁移到在线网址时不会自动继承存档，可使用游戏设置中的存档导出／导入功能。</p></div></div></body></html>

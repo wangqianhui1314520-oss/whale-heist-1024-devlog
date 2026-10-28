@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>当前视觉与开发基线 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>当前视觉与开发基线</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/当前视觉与开发基线.md</code>　·　2.6 KB</p>
+<hr><h1>鲸鱼魔盗团 当前视觉与开发基线</h1>
+<p>本说明记录用户最新确认的改动，视角与操作相关条款优先于 V2.0 策划案中的俯视方案。五章故事、约二十分钟首次通关目标、三名队友、限定词、广播调查与章节存档规则继续沿用。</p>
+<h2>当前画面与操作</h2>
+<ul><li>横版侧视固定镜头，同一画面展示多层平台、跳跃路径和机关关系，参考《森林冰火人》的视角与关卡阅读方式。</li><li>采用 16:9 画面、1280×720 逻辑视口；电脑适配窗口，手机横屏展示，保持相同的关卡可见范围。</li><li>主角左右移动、跳跃、鲸形水流冲刺；场景加入可破隔板、压力板、升降台、桥和闸门。跳跃受重力与平台碰撞约束。</li><li>玩家直接控制 DeepSeek，队友通过指令配合；保留 Grok 破障、Claude 诱饵和 GLM 复查的功能分工。</li><li>角色采用用户给定的 Q 版拟人形象。主角保留蓝发、蓝眼、白蕾丝头饰、蓝白女仆裙和鲸尾；Grok、Claude、GLM 统一头身与上色。战斗素材以侧视动作替代原俯视四向图。</li></ul>
+<h2>视觉稿与资产状态</h2>
+<p>当前目标视觉稿路径为 <code>assets/concepts/gameplay-sideview-visual-target.png</code>，提示词保存在同目录 <code>.prompt.txt</code> 文件。该图属于设计效果图，不能称为实机截图。此前俯视稿归档为 <code>assets/concepts/archived/gameplay-topdown-visual-target-superseded.png</code>，不再作为开发视角依据。</p>
+<p>完整资产的文件名、规格、透明要求、来源与状态见 <code>assets/asset-manifest.json</code> 和 <code>docs/美术资产制作清单.md</code>。用户参考与生成素材分开登记；视觉稿生成不代表全部精灵、图块或特效已完成。</p>
+<h2>已开始的开发</h2>
+<p><code>src/core/</code> 为不依赖画面的原生 JavaScript 主线状态核心，包括五章配置、任务条件、资源、暂存结算、一次性提交、广播状态、历史暴露、存档和重试回滚，另有断言验证。</p>
+<p>该核心尚未包含角色动作、平台碰撞、实机地图或可玩界面。下一步动作层与关卡制作按本说明的横版侧视方向集成；实际流程时长需在完整可玩版本中测量。</p>
+<h2>2026-10-24 游戏接入更新</h2>
+<p>五章侧视可玩流程、键鼠与触屏输入、章间存档、重试、结算和程序音效已实现。比赛主角卡已用真实运行画面制作于 <code>assets/submission/deepseek-hero-card.png</code>，1600×900 PNG。前文“待开发”“待截图”等为此前阶段记录；当前实施与验收见<a href="开发与验收记录.md" target="_blank" rel="noopener">开发与验收记录</a>。首次体验二十分钟待真人校准；在线发布等待源码上传和部署授权。</p></div></div></body></html>

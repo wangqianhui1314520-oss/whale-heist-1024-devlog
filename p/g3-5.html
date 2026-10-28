@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>人物动作稳定性修复-2026-10-26 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>人物动作稳定性修复-2026-10-26</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/人物动作稳定性修复-2026-10-26.md</code>　·　2.8 KB</p>
+<hr><h1>人物动作稳定性修复 · 2026-10-26</h1>
+<p>本轮修复 Grok 持续向同一方向行走时，看起来反复左右转身的问题。</p>
+<h2>原因与改动</h2>
+<p>旧行走循环为 <code>idle → walk → walk → idle → walk → walk</code>。Grok 的待机与迈步图中，斧头、头发和身体轮廓差异很大，每 0.3 秒插入待机图会造成武器换边、人物转身的观感。正常跟随重现未发现朝向变量持续左右抖动，因此本次在动作采样层修复。</p>
+<ul><li>四名角色行走全程使用当前方向的 <code>walk</code> 原图，停止后才恢复待机。去除行走中的整体拉伸，将起伏限制为 1 个逻辑像素，保留固定轻微前倾。</li><li>主角冲刺和 Grok 破障全程使用当前方向的 <code>skill</code> 原图，避免活动途中插入行走图。Grok 持续破障时不再每 0.25 秒重播身体起手动作。</li><li>Grok 的水流和冲击特效继续按任务时间播放，与落定的身体姿态独立计时。</li><li>物理移动、导航路线、任务耗时与关卡规则没有改动。</li></ul>
+<p>修改入口：<code>src/render/character-motion.mjs</code>。<code>dist/</code> 已从源码重新构建。本轮没有覆盖旁边的历史发布快照，也没有发布在线站点。</p>
+<h2>验证</h2>
+<p>以下检查通过：</p>
+<ul><li><code>node scripts/verify-character-motion.mjs</code>：40 个原图采样区、Grok 左右各 180 次连续实际 drawImage 取样、停止恢复待机、破障姿态与独立特效、减少动态效果设置。</li><li><code>node scripts/verify-rendering.mjs</code>：完整绘制链、主角运动和跳跃、指令预览兼容。</li><li><code>node src/core/verify-core.mjs</code>、<code>node scripts/verify-art.mjs</code>、<code>node scripts/verify-world.mjs</code>、<code>node scripts/verify-main-flow.mjs</code>；世界验证包含五章输入驱动通关。</li><li><code>node scripts/build-game.mjs</code>、<code>node scripts/verify-build.mjs</code>：正式部署目录生成及资源引用验证。</li><li><code>node scripts/qa-character-animation.cjs</code>：正式 dist，桌面 1280×720、手机横屏 844×390 / DPR 2 浏览器模拟，正常 UI 输入验证左右移动、跳跃、下落、冲刺和 Grok 指令。</li></ul>
+<p>浏览器另有明确标记的独立渲染夹具：Grok 左右各 120 次连续行走取样、各 70 次持续破障取样。这些夹具验证正式采样器和图集适配器，不作为真实游玩记录。</p>
+<p>验证报告：<a href="../output/animation-qa/browser-report.json" target="_blank" rel="noopener">browser-report.json</a>。方向对照：<a href="../output/animation-qa/grok-walk-directions.png" target="_blank" rel="noopener">grok-walk-directions.png</a>。实机画面：<a href="../output/animation-qa/desktop-walk.png" target="_blank" rel="noopener">电脑</a>、<a href="../output/animation-qa/mobile-walk.png" target="_blank" rel="noopener">手机模拟</a>。</p>
+<h2>美术边界</h2>
+<p>仍沿用现有五种关键姿态和程序动效，没有把同一张图的六拍变换称为六张独立步态图。本轮修复轮廓跳变、错误混帧和反复起手；完整左右脚交替步态与专用攀爬图仍需新增美术。</p></div></div></body></html>

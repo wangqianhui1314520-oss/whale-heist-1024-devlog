@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>修复报告 · bug-fixes 2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>修复报告 · bug-fixes 2026-10-25</h1>
+<p class="meta">来源：<code>_归档-20261026/游戏-output__bug-fixes-2026-10-25/修复报告.md</code>　·　3.4 KB</p>
+<hr><h1>鲸鱼魔盗团 Bug 修复报告</h1>
+<p>日期：2026-10-25。此前排查确认的 3 个问题均已修复，<code>dist</code> 发布构建已更新。</p>
+<h2>修复内容</h2>
+<table><thead><tr><th>问题</th><th>修复结果</th></tr></thead><tbody><tr><td>BUG-1 · 通关后继续或导出回退至第五章</td><td>终局状态可在关卡世界已释放时保存；标题、章节解锁、继续与导出统一读取航程。对于结果前缀完全一致的旧受影响存档，采用已提交的后续章节结果并清除过时的关卡快照。</td></tr><tr><td>BUG-2 · 导入写入失败仍提示成功</td><td>导入前记录原存档，全部写入完成后才提交；失败时回滚并显示准确提示，保留当前游戏及界面。持续故障阻止物理回滚时，读取仍返回日志中的原存档，待恢复写入后完成还原。</td></tr><tr><td>BUG-3 · 重看教程后卡在已消耗的节点</td><td>“重看教程”打开独立的教程回顾页，可查看前三章共 11 步操作和路线提示；保留当前教学证据、已打开节点、关卡进度与已消耗的训练资源。</td></tr></tbody></table>
+<p>主要修改：<code>src/main.mjs</code>、<code>src/core/storage.mjs</code>、<code>src/core/experience-storage.mjs</code>、<code>src/ui/ui-v3.mjs</code>。</p>
+<p>新增回归：<code>scripts/verify-bug-fixes.mjs</code>、<code>scripts/lib/main-harness.mjs</code>、<code>scripts/lib/synthetic-campaign.mjs</code>；浏览器用例加入 <code>scripts/qa-browser.cjs</code>。常规 <code>verify-all.ps1</code> 会自动收集新增的 <code>verify-*.mjs</code> 检查。</p>
+<h2>验证结果</h2>
+<ul><li>新增控制器回归：7 组通过，0 组失败。覆盖终局提交与尾声恢复、旧存档协调、导入各写入步骤故障、持续故障恢复、成功导入和教程状态保留。</li><li>已有检查全部通过：核心逻辑、运行时存档、主流程、体验存档、剧情流程、剧情界面、渲染、资源、输入、世界模拟、扩展世界与任务完整性。</li><li>压力回归通过：2,050 次状态转换，其中包含 2,000 步固定种子随机交互。</li><li>发布构建及构建校验通过：148 个文件，0 个缺失引用。</li><li>发布版浏览器定向回归：1 组通过，0 组失败；Edge 156.0.4314.42，1280 × 720。实际操作验证旧通关存档标题与导出、写入失败提示与存档保留、教程回顾展开及返回。</li><li>浏览器未捕获游戏页面脚本异常或资源 HTTP 错误；记录中的预加载警告来自 Edge 自带下载页 <code>edge://downloads-hub/</code>。</li><li>修改文件的 <code>git diff --check</code> 通过。</li></ul>
+<h2>范围与限制</h2>
+<p>测试使用隔离内存存储、独立浏览器上下文和明确标记的合成游戏进度，没有读写玩家真实存档。控制器回归执行实际主控制器及核心、世界、存储模块，浏览器检查执行更新后的 <code>dist</code>。</p>
+<p>导入事务需要临时存储空间保存原存档；空间不足时会安全返回导入失败。教程回顾是查阅操作与提示，不会重新开始交互教学。</p>
+<p>验证覆盖本次三个问题及相关流程，未穷尽所有设备、操作序列和存储故障。</p>
+<h2>浏览器证据</h2>
+<ul><li><a href="&lt;D:/Vibe coding/1024切磋大会/游戏-鲸鱼魔盗团/output/bug-fixes-2026-10-25/browser/browser-report.json&gt;" target="_blank" rel="noopener">浏览器检查记录</a></li><li><a href="&lt;D:/Vibe coding/1024切磋大会/游戏-鲸鱼魔盗团/output/bug-fixes-2026-10-25/browser/completed-campaign.png&gt;" target="_blank" rel="noopener">通关状态</a></li><li><a href="&lt;D:/Vibe coding/1024切磋大会/游戏-鲸鱼魔盗团/output/bug-fixes-2026-10-25/browser/save-import-failure.png&gt;" target="_blank" rel="noopener">导入失败提示</a></li><li><a href="&lt;D:/Vibe coding/1024切磋大会/游戏-鲸鱼魔盗团/output/bug-fixes-2026-10-25/browser/tutorial-review.png&gt;" target="_blank" rel="noopener">教程回顾</a></li></ul></div></div></body></html>

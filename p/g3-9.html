@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>全量栅格美术升级验收-2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>全量栅格美术升级验收-2026-10-25</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/全量栅格美术升级验收-2026-10-25.md</code>　·　11.9 KB</p>
+<hr><h1>全量栅格美术升级验收</h1>
+<p>核验日期：2026-10-25。核验对象为当前工作区文件；此前方案、旧截图与旧验收结论不作为本次完成依据。</p>
+<p>本次已确认：游戏入口与剧情剧场不再加载 SVG 图形，场景主要视觉由 PNG 图集绘制；新增操作图标与四态按钮已接入真实组件。仍保留 HTML 动态文字、CSS 布局、焦点、遮罩与状态控制。这里的“资产化”指固定视觉图形由美术图片承担，不表示移除网页必需的 HTML/CSS 或 Canvas 图片合成。</p>
+<h2>资产数量与接入范围</h2>
+<table><thead><tr><th>口径</th><th>当前数量</th><th>证据与边界</th></tr></thead><tbody><tr><td><code>runtime-catalog.json</code> 登记 PNG</td><td>51</td><td>逐文件尺寸、字节、SHA256、透明元数据、生成来源核验通过</td></tr><tr><td>其中基础生产原图</td><td>23</td><td>角色动作4、头像4、敌人2、场景/道具图集4、FX图集4、背景3、UI原图2</td></tr><tr><td>其中剧情图片</td><td>26</td><td>五张早期关键帧，加七个剧情节点 × 三种演出风格的21张图</td></tr><tr><td>其中本轮新增 UI 图集</td><td>2</td><td><code>operation-icons-v1.png</code> 与 <code>button-states-v1.png</code></td></tr><tr><td>构建单独复制的补充 PNG</td><td>10</td><td>HUD徽章带、六张框体、标题纹章、鲸艇小队、码头前景；不重复计入51</td></tr><tr><td>Canvas 采样区</td><td>96</td><td>40角色姿态、4头像、2敌人、6道具、18场景部件、16FX帧、3背景、7UI图形</td></tr><tr><td>本轮操作图标</td><td>16</td><td>HTML/CSS按实测坐标取样，不新增Canvas采样区</td></tr><tr><td>本轮按钮状态</td><td>4</td><td>默认、聚焦、按压、禁用，均为图集内独立绘制区域</td></tr></tbody></table>
+<p>10张补充图片为：<code>hud-icon-badges.png</code>、<code>panel-large.png</code>、<code>panel-card.png</code>、<code>hud-pill.png</code>、<code>hud-square.png</code>、<code>button-rail.png</code>、<code>ring.png</code>、<code>title-ornament-v1.png</code>、<code>whale-crew-hero-v2.png</code>、<code>dock-rail-overlay-v3.png</code>。前八张位于 <code>assets/ui/</code>，后两张位于 <code>assets/foreground/</code>。</p>
+<p>“登记/加载”与“每张在某张截图同时可见”是不同证据。51张图片均进入构建目录；角色、场景、FX通过 <code>AssetLibrary</code> 取样，剧情通过 <code>storyArtFor()</code> 和章节/档案封面读取，新UI由真实HTML组件读取。<code>chrome-kit.png</code> 的内容还通过独立框体图片复用；Canvas中的 <code>ui-resource-shell</code> 为无DOM标签时的回退路径，不能用预加载记录冒充正常场景中的可见绘制。视觉方向稿、旧版前景、来源原图、主角卡和历史截图不堆叠到游玩画面中。</p>
+<h2>新增 UI 图集核验</h2>
+<p><code>src/ui/raster-icons.mjs</code> 定义1285×1224操作图集的16个实测区域：左、右、上、下、跳跃、冲刺、互动、暂停、航图、设置、档案、开始、重试、生命、计时、关闭。<code>ui.mjs</code> 与 <code>ui-v3.mjs</code> 使用同一图标工厂，触控与HUD使用真实PNG图标。主菜单、暂停和结果操作仍配短标签，避免只能猜图标。</p>
+<p><code>src/ui/component-art.css</code> 从1774×887按钮图集中取四个837×242区域。<code>:hover</code>、<code>:focus-visible</code>、<code>:active</code>、<code>:disabled</code>对应真实绘制状态；主行动使用金色状态。<code>styles.css</code> 最后导入该文件，因此实际覆盖此前按钮壳样式。</p>
+<p>两项原图与原始生成输出逐字节一致，来源、提示词、尺寸和SHA256已登记。两份 <code>register-operation-icons.mjs</code> / <code>register-button-states.mjs</code> 的中文名称与说明码点正确，离线 <code>assets/preview/catalog.js</code> 与运行目录JSON一致。</p>
+<h2>程序化图形检查</h2>
+<p>检查范围为 <code>index.html</code>、<code>story-theater.html</code>、<code>src/**/*.mjs</code>、<code>src/**/*.css</code>，仅扫描文本文件。没有扫描PNG二进制；PNG的C2PA元数据中即使含SVG缩略信息，也不属于运行时SVG组件。</p>
+<table><thead><tr><th>检查项</th><th>当前结果</th><th>具体边界</th></tr></thead><tbody><tr><td><code>&lt;svg&gt;</code>、<code>.svg</code>资源引用、<code>createElementNS</code></td><td>游戏与剧情剧场未检出</td><td>HTML图标工厂返回PNG背景的<code>span</code></td></tr><tr><td>CSS线性/径向渐变</td><td>游戏与剧情剧场未检出</td><td>面板、按钮、环、HUD等固定图形使用PNG</td></tr><tr><td>CSS旋转菱形、旧orbit、几何扫描装饰</td><td>已移除或关闭</td><td>剧情反馈改用现有四帧FX图集</td></tr><tr><td>Canvas美术绘制</td><td>正常路径为图片绘制</td><td><code>AssetLibrary.draw()</code>使用<code>drawImage()</code>取原图区域</td></tr><tr><td>Canvas路径与矩形</td><td>仍保留必要功能</td><td>精确范围<code>clip()</code>、舞台裁切；未用路径涂绘替代美术</td></tr><tr><td>Canvas <code>strokeRect()</code></td><td>仅debug路径</td><td>碰撞调试框由<code>debug</code>开关控制</td></tr><tr><td>Canvas <code>fillText()</code></td><td>无DOM时动态标签回退</td><td>正常页面具备<code>scene-labels</code>，场景文字走HTML；回退框体仍取PNG</td></tr></tbody></table>
+<p>源CSS仍有文字颜色、普通分隔线、阴影、照片裁圆、控件边界与响应式尺寸，状态里仍有<code>✓</code>、<code>◇</code>、折叠<code>＋/−</code>等文字记号。这些没有被宣称为新增美术资产，也不能把“主要美术资产化”写成“源码完全不含任何绘图相关API或CSS样式”。</p>
+<p><code>assets/preview/</code> 是不参与游戏入口的离线资产审阅工具。其CSS仍含卡片渐变和Alpha棋盘格，其Canvas含诊断背景/文字；透明棋盘用于检查素材Alpha，不是游戏场景美术。该工具不属于上述“游戏与剧情剧场未检出渐变”的范围。</p>
+<h2>动画口径</h2>
+<p>40个角色姿态 = 四名角色 × 左右朝向 × 待机、行走、起跳、下落、技能五种状态。每个状态当前是一张关键姿态。<code>character-motion.mjs</code> 使用离散位移、旋转、缩放和现有姿态组成动作节奏；“待机4帧”“行走6帧”等程序采样阶段不能写成新增独立绘制帧。</p>
+<p>实际逐帧美术为四组FX：水流冲刺、斧击、纸页诱饵、扫描。每组4张独立帧，2×2图集，运行目录为8FPS、500ms，合计16帧。UI或剧情可以重用这些帧并采用自己的触发时长，但不因此增加美术帧数。按钮四态是交互状态图，不计作FX动画。</p>
+<p>完整角色逐帧步态目前仍未制作。不能宣称全角色已有手绘连续行走动画。</p>
+<h2>文字密度与图片构图</h2>
+<p>已由当前代码确认的调整：指令默认只呈现目标、两种方案、费用、队友短复述与确认；高级编排和影响按需展开。帮助以操作表与配图说明分区；存档导入、地图移动说明、证据正文采用<code>details</code>；分析列表不再逐行重复未收集长说明；契约保留简述并折叠完整规则。</p>
+<p>主要画面采用一层外框承载内容，内部列表减少重复金属方框。面板以PNG九宫保持角部，按钮图集按坐标取样；主菜单标题区保留透明，使场景、鲸艇和小队成为主体。</p>
+<p>剧情背景遮挡分别修复了两个入口：<code>story-theater.css</code> 的<code>.screen-shade</code>/剧本封面遮罩，以及游戏内 <code>ui-v3.css</code> 的基础、电影、实景三处<code>.story-shade</code>。它们此前误将<code>panel-card.png</code>铺满舞台，现改为低透明阅读遮罩，保留生成背景。两个入口是独立DOM/CSS路径；最终已重新检查游戏内电影、实景、分镜三种截图，确认背景可见。</p>
+<p>档案封面现通过<code>storyArtFor()</code>按剧情映射专属电影插画。漫画按原图三分之一的557.333∶941比例显示单帧，当前镜头不再重复完整对白，正文保留在下方字幕框。全线结算的五章进度使用五张剧情关键帧；契约使用2×2 PNG九宫卡片与短述，完整规则可展开。</p>
+<h2>当前截图证据</h2>
+<p>目录：<code>output/screenshots/raster-release-2026-10-25/</code>。</p>
+<p>最终共20张截图，含15张真实运行画面与5张明确标记的示例夹具。已目检的真实运行截图：</p>
+<ul><li><code>desktop-title.png</code>：透明标题区、鲸艇小队、主行动按钮与短导航。</li><li><code>desktop-chapters.png</code>：五章封面与真实解锁状态、PNG禁用按钮。</li><li><code>desktop-gameplay.png</code>：场景、HUD、角色、任务与实时游戏状态。</li><li><code>desktop-command.png</code>：目标、双方案、短复述、固定确认区；背景仍可辨认。</li><li><code>desktop-pause.png</code>：开始/设置/航图/记录等PNG操作图标配短标签。</li><li><code>desktop-settings.png</code>：三条音量滑杆、实图轨道与滑块、四类设置入口。</li><li><code>desktop-map.png</code>：房间插图与任务分区，移动说明折叠。</li><li><code>desktop-archive.png</code>：剧情专属封面和回看入口，锁定状态保留。</li><li><code>desktop-help.png</code>：PNG操作图标、键位和三条主要规则配图。</li><li><code>desktop-story-stage.png</code>：真实场景底图、独立角色姿态与字幕面板。</li><li><code>desktop-story-cinematic.png</code>：完整生成插画与简洁字幕面板。</li><li><code>desktop-story-comic.png</code>：单帧保持原始比例，当前帧与下方对白分工明确。</li><li><code>mobile-command.png</code>：短横屏指令内容可滚动，确认按钮留在独立底部区域。</li><li><code>mobile-touch.png</code>：四方向、跳跃、冲刺、互动均有PNG图形；队友与HUD并存。</li><li><code>final-game-title.png</code>：最终交付预览，保留主菜单、鲸艇和小队视觉主视图。</li></ul>
+<p>两张移动截图最终通过CDP以实际844×390 CSS视口、<code>deviceScaleFactor=1.75</code>重新捕获；输出像素为1477×683。它们是移动视口中的实时页面，不能把较高输出像素误读为桌面截图。该检查仍属于浏览器模拟，不等同实体手机GPU性能测试。</p>
+<p>已目检的示例夹具截图：<code>chapter-result-fixture.png</code>、<code>campaign-result-fixture.png</code>、<code>failure-fixture.png</code>、<code>analysis-fixture.png</code>、<code>contracts-fixture.png</code>。它们使用真实UI渲染器与示例数据，并显示“验收示例/不代表实际通关”标识。它们证明这些面板的构图和资产接入，不证明本次浏览器已经真实完成五章、取得示例分数或触发对应失败/分析进度。</p>
+<p>最终浏览器QA记录：<code>finalTab</code>与<code>reviewTab</code>两个活动页面的error日志均为空。截图覆盖所列主要画面，未穷举全部设置组合、每段剧情台词和所有游戏状态。</p>
+<h2>自动检查</h2>
+<p>本次独立重新运行并通过：</p>
+<ul><li><code>node scripts/verify-art.mjs</code>：51 PNG、96采样区、来源和边界、四组四帧FX、逐URL加载断言。</li><li><code>node scripts/verify-rendering.mjs</code>：所有章节房间的正常渲染不涂绘替代形状，60个指令范围预览，327次角色与11862次精灵绘制检查。</li><li><code>node scripts/verify-story-art.mjs</code>：12段剧情与动态分支、七个节点、21张风格图、漫画顺序裁切、四角色和四组FX。</li><li><code>node scripts/verify-story-ui.mjs</code>：三种剧情模式、强制选择、历史、返回路径、任务收纳与短横屏可访问结构。</li></ul>
+<p>最终完整套件记录为<a href="../output/qa-2026-10-25/summary.json" target="_blank" rel="noopener">summary.json</a>，执行时间2026-10-25 12:57（UTC 04:57），<strong>24项全部通过、0失败</strong>，包括核心与世界fuzz、架构、美术、角色动作、扩展航程/世界、体验、输入、教学桥、主流程、地图、任务完整性、记录、分层渲染、存档、剧情美术/流程/UI、压力检查、构建与部署包校验。<code>verify-story-flow</code>的测试外壳已包含<code>sceneImageKeys</code>，最终完整套件中的17条剧情流程检查通过。</p>
+<p>构建结果为51张登记原图；部署包核验101文件、缺失0。完整结果分别见<a href="../output/qa-2026-10-25/build-game.txt" target="_blank" rel="noopener">构建日志</a>与<a href="../output/qa-2026-10-25/verify-build.txt" target="_blank" rel="noopener">包校验日志</a>。美术日志已改为动态“all catalog image URLs”文案；实际断言按当前目录动态检查51个图片URL。</p>
+<p>对实际游戏地址执行<code>node scripts/check-http.mjs http://127.0.0.1:8766/</code>通过145个请求。渲染调用检查、浏览器截图、HTTP资源检查分别提供不同证据；模拟加载断言不代替真实浏览器解码。</p>
+<h2>已纠正文档与实际边界</h2>
+<p>本轮纠正 <code>assets/README.md</code> 中旧“28张”口径，明确51张目录原图、10张补充图、40姿态与16个真实FX帧。<code>asset-manifest.json</code> 的八条历史UI组合记录已更新为PNG组合接入事实，保留动态HTML文字与CSS布局，不再把旧SVG样式或“待接入”说明当作现状。</p>
+<p>可继续提升的真实边界为：角色完整逐帧步态、所有状态组合的穷举覆盖、真实移动设备GPU表现与真人首分钟体验。现有证据不足以声称这些已经全部完成。原始资产留白、墙/水接缝和透视一致性仍应以实际镜头复查，不能单凭文件齐全或测试通过宣称全部画面达到最终美术质量。</p></div></div></body></html>

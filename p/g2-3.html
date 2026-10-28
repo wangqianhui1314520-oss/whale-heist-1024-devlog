@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>前端通关 QA 报告 · 2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>前端通关 QA 报告 · 2026-10-25</h1>
+<p class="meta">来源：<code>_归档-20261026/游戏-output__playthrough/前端通关QA报告-2026-10-25.md</code>　·　8.4 KB</p>
+<hr><h1>《鲸鱼魔盗团》前端整局通关 QA 报告</h1>
+<ul><li>时间：2026-10-25 17:00–21:10</li><li>方式：真实浏览器（Edge headless，1280×720）+ Playwright 驱动<strong>真实键鼠输入</strong>，从标题界面新开局打到章节结算；第 5 章另用「章节展示」模式与「存档导入」两条独立路径复核</li><li>探针：只读遥测（路由拦截注入 <code>window.__whale.snap()</code>），<strong>未修改任何游戏文件</strong></li><li>产物：<code>playthrough.log</code> / <code>log-demo5.log</code>（逐动作日志）、<code>shots/*.png</code>（画面取证）、<code>report.json</code>、驱动 <code>play.cjs</code></li></ul>
+<h2>一、实测进度</h2>
+<table><thead><tr><th>章节</th><th>结果</th><th>结算</th><th>关键验证</th></tr></thead><tbody><tr><td>序章</td><td>通过</td><td>—</td><td>三次关键词（观察/发令/撤离）+「开始行动」</td></tr><tr><td>第1章 纸窗入港</td><td><strong>通关</strong></td><td><strong>78 / A</strong></td><td>10 步教程全通；必需 4/4；协作 10；低警戒 8</td></tr><tr><td>第2章 简历风波</td><td><strong>通关</strong></td><td><strong>65–67 / B</strong></td><td>两条诱饵教程（默认多人 / 训练限定词单人）；6/6；警报 4–7</td></tr><tr><td>第3章 复查勿扰</td><td><strong>通关</strong></td><td><strong>71 / B</strong></td><td>扫描教程；资料 6/6；0 重试</td></tr><tr><td>第4章 战报公开</td><td><strong>通关</strong></td><td><strong>80 / A</strong>（用时 01:04、暴露 0、重试 0）</td><td>关广播、踩板开闸、Claude 引开档案巡逻、设信标、2/2 任务物</td></tr><tr><td>第5章 闭舱返航</td><td><strong>通关（章节展示）</strong></td><td><strong>75 / A</strong></td><td>3/3 数据、三人集结、装载、60s 撤离实跑 <strong>18.0s</strong>、交付登艇</td></tr><tr><td>战役总结界面</td><td>未取到</td><td>—</td><td>整链跑总在第5章被守卫击杀→检查点回档打断；单章已全部验证</td></tr></tbody></table>
+<p>五章成绩合计 <strong>371 分</strong>（78+67+71+80+75），若走完整战役按 <code>campaignGrade</code> 阈值为 <strong>B</strong>（A 需 375）。</p>
+<p>教程完整事件链（第1章实跑）：<code>move → climb → jump → node-first(hp2→1) → node-open(hp1→0) → grok-obstacle(纸窗碎) → delivery → board</code></p>
+<h2>二、问题清单</h2>
+<h3>P1-1 偶发「画面完全正常但角色不响应移动」（未定因，复现 5+ 次）</h3>
+<ul><li>现象：角色站在平台上、<code>screen=none</code>、<code>grounded=true</code>、<code>barriers=[]</code>（纸窗已破）、<code>activeElement=CANVAS</code>、无遮罩、无 nearby —— 按 A/D 完全不动，持续 4.5s 以上；换个时间点重开同一段又正常。</li><li>实测取证（驱动的卡死诊断）：</li></ul>
+<p>  <code>walkTo 卡死(拾取 harbor-data-2) activeElement=CANVAS 目标x=500 当前x=406.7 y=490.0 screen=none grounded=true barriers=[] gates=[] nearby=无</code></p>
+<ul><li>已排除：焦点落在按钮上（activeElement 是 canvas）、纸窗未破（barriers 为空）、平台边缘（y=490 在平台上）。</li><li>影响：玩家会认为游戏卡死；对评审演示是致命观感。</li><li>建议：人工在真实浏览器复现一次并抓 <code>core.view().phase</code>（若为 <code>paused</code> 即"无遮罩的暂停态"，属状态机漏洞）；QA 驱动已加自愈钩子：检测到 <code>phase!=='playing'</code> 就按 Esc→继续。</li></ul>
+<h3>P2-2 第5章信标台：三块数据全部落在守卫巡逻区间内</h3>
+<ul><li>数据点 1040 / 1120 / 1180，守卫巡逻 1030–1200 —— <strong>取件必然进入接触区</strong>。</li><li>实测：一次完整撤离生命 100→35；另一次在信标台被直接打死（触发失败界面）。第5章接触伤害 15/次（0.55s 预警后结算）。</li><li>建议：把一块数据移到信标西侧安全带，或缩短巡逻区间到 1100–1200，让"等巡逻走开"成为可行解法。</li></ul>
+<h3>P2-3 死亡→检查点回档会静默清空「已收集未交付」的资料</h3>
+<ul><li>检查点只在「换房」和「交付完成」时创建（<code>makeCheckpoint</code>），房间内捡到的资料不在快照里。</li><li>实测：第5章取齐 3 份后被打死 → 检查点重试回房间入口 → 背包清空、三块数据重新刷出，界面没有任何"已收集资料会丢失"的提示。</li><li>建议：检查点纳入背包，或在重试确认里写明"未交付的资料会丢失"。</li></ul>
+<h3>P2-4 冲刺惯性约 117px 且难以刹车，窄平台必掉层</h3>
+<ul><li>位移构成：33px 助跑 + 185px 冲刺 + <strong>117px 惯性滑行</strong>；西画廊（400px）、高台（400px）上从节点西侧起冲会直接冲出边缘。</li><li>实测：<code>review-data-4</code> 连续两次「冲刺后 (654,600)」——本应停在 490 层。</li><li>建议：冲刺结束给 0.1s 强摩擦，或允许反向输入立即刹车；节点尽量放在平台中段。</li></ul>
+<h3>P2-5 教程「跳跃」判定窗过窄</h3>
+<ul><li>只有从西码头 <code>x ≤ 323</code> 起跳才登记通过（<code>lesson-bridge.mjs</code> <code>startX &lt;= from.x + from.w + 3</code>）；同样越过 45px 缺口、同样落在对面平台，从更东侧起跳不算过。</li><li>实测：驱动从 x=302 起跳连续 3 次未通过，改到 x≈292 一次通过。</li><li>建议：只判「起跳时脚下平台 = 西码头」，不限制精确 x。</li></ul>
+<h3>P2-6 地面周期陷阱无预警且惩罚偏重</h3>
+<ul><li>陷阱直接 20 伤害 + 触发警报，没有预警；<code>damageProtectionMs=700</code>，站在陷阱上 3.5 秒必死（100 血）。</li><li>第2/3章机房必须横穿陷阱区往返，第4/5章地面也各有一处。</li><li>建议：激活前 0.3–0.5s 地面裂纹/闪烁（与警戒器 1.3s 预警同一套语言）。</li></ul>
+<h3>P2-7 副房间动线：入口最西、出口更西、资料最东</h3>
+<ul><li>进副房间固定刷在 <code>x=85</code>，返回出口 <code>x=65</code>，必拿资料在 <code>x≈1000–1180</code>；第2–5章机房都要横穿整条地面（含陷阱/守卫）。</li><li>实测：第2章单章 100s+ 中约 25s 是纯跑路，且跑路本身是主要伤害来源。</li><li>建议：副房间入口/出口挪到资料侧，或机房中部加一条捷径梯路。</li></ul>
+<h3>P3-8 结算面板「暴露」缺解释</h3>
+<ul><li>第2章暴露直接顶到 20（上限），界面没说它由公开指令/公开交付/警报加权而来，玩家无法复盘。</li></ul>
+<h3>P3-9 队友破障指令可用性依赖"队友站哪一侧"，提示不明确</h3>
+<ul><li>第3章回程隔板、第5章接应隔板：队友若还在障碍西侧，预览直接报「静态梯路尚未连通，请换一个落脚点」，玩家无从得知"要等队友先绕过去"。</li><li>实测：同一指令在不同轮次时好时坏，差异只是队友位置。</li><li>建议：预览给出「队友正在绕行（预计 Ns）」，或让队友自动选择可达侧。</li></ul>
+<h2>三、确认正常的部分（实跑）</h2>
+<ul><li>标题 → 新游戏 → 序章三次关键词 → 开始行动；章节副本「继续航程」</li><li>第1章 10 步教程的事件校验（必须真实完成动作，纯点击无法跳过）</li><li>数据节点两次独立冲刺（第二次需不同 attackId）、Grok 破障回执、<code>grok-join</code> 剧情插入</li><li>回艇交付（广播开启 0.4s / 关闭 1.6s）、登艇结算、评分四项拆分与评级</li><li>第2章诱饵教程：默认（多人）与训练限定词（单人、0 限定词、2 Token）</li><li>房间切换、支线档案夹层（额外档案 + 补给 +1 限定词/2 Token）</li><li>死亡 → 失败界面 →「从检查点再试」完整恢复</li><li>警报「预警 1.3s → 扫描波」、陷阱相位、守卫巡逻与视野</li><li>第3章 0 重试通关（71/B）；第5章 60s 撤离实跑 18.0s（剩余 39.7s）</li><li>存档导出/导入：自造 4 章存档通过 <code>parseSave</code> 严格校验（分数/拆分/曝光/警报一致），导入后自动回标题并要求「点击继续航程」</li></ul>
+<h2>四、测试环境提示（重要）</h2>
+<p>测试期间仓库源码在并发修改（<code>src/main.mjs</code> 18:23、<code>ui-v3.mjs</code> 18:20、<code>world.mjs</code> 18:45、<code>rooms.mjs</code> 18:47，共 262 行未提交）：</p>
+<ul><li>不同轮次跑的是不同版本，部分现象只出现在旧版本（例如"被诱饵引开的守卫贴身仍扣血"已在 18:45 版本修复为 <code>g.luredUntil&lt;=this.time</code> 才结算接触伤害）。</li><li>本报告结论已按<strong>最后一段源码</strong>逐条 <code>grep</code> 复核：P1-1 / P2-2 / P2-4 / P2-5 / P2-6 / P2-7 / P3-8 / P3-9 仍成立。</li><li>建议封板前固定 commit 再跑一次本驱动，避免「边改边测」导致结论漂移。</li></ul>
+<h2>五、QA 工具说明</h2>
+<p>驱动 <code>output/playthrough/play.cjs</code>（自带 8774 端口静态服务）：</p>
+<table><thead><tr><th>用法</th><th>说明</th></tr></thead><tbody><tr><td><code>node output/playthrough/play.cjs</code></td><td>完整战役：标题→序章→第1–5章→战役总结→通关抽查</td></tr><tr><td><code>QA_MODE=demo5 node …</code></td><td>章节展示模式专跑第5章（不写存档）</td></tr><tr><td><code>QA_MODE=import5 node …</code></td><td>导入 4 章存档后专跑第5章+战役总结</td></tr></tbody></table>
+<p>内置能力：只读遥测、逐动作日志、失败界面自动检查点重试、按钮焦点释放、BFS 平台/梯子导航回层、陷阱相位穿越、互动状态校验重试（<code>holdUntil</code>）。</p>
+<p>已知局限：驱动是"脚本化玩家"，不会走位躲守卫，第5章信标台的密集巡逻是主要失分点（多次死亡触发回档），这也是没能走到"战役总结"界面的直接原因。</p></div></div></body></html>

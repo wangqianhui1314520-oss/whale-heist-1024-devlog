@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>最终暴力测试与视觉验收-2026-10-25 · 鲸鱼魔盗团制作对话记录</title><style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#0e1728;--line:#1e2d45;--tx:#e6f1ff;--tx2:#9fb3cd;--cy:#3ddbd9;--acc:#69a9ff;--ok:#3ddb84;--warn:#ffcc66;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+h1{font-size:27px;margin:0 0 8px;letter-spacing:.5px}
+.sub{color:var(--tx2);font-size:14px;margin:0}
+.badge{display:inline-block;background:rgba(61,219,217,.12);color:var(--cy);border:1px solid rgba(61,219,217,.35);
+ padding:3px 10px;border-radius:999px;font-size:12px;margin:8px 6px 0 0}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:3px solid var(--cy)}
+h3{font-size:16px;margin:22px 0 8px;color:var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{color:var(--tx2);font-size:12px;margin-bottom:6px}
+.card .v{font-size:18px;font-weight:600}
+.card .v.ok{color:var(--ok)}
+ul.list{list-style:none;padding:0;margin:10px 0}
+ul.list li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:7px 0;padding:11px 14px}
+ul.list li a{font-weight:600}
+.meta{color:var(--tx2);font-size:12px;margin-top:4px}
+.tl{border-left:2px solid var(--line);margin:16px 0 16px 8px;padding-left:18px}
+.tl .d{color:var(--cy);font:600 13px/1.8 Consolas,monospace}
+.tl .t{color:var(--tx);margin:0 0 10px}
+.doc h1,.doc h2,.doc h3{color:var(--tx)}
+.doc h2{border-left-color:var(--acc)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;background:var(--panel2)}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--cy);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+pre{background:#08101c;border:1px solid var(--line);border-radius:8px;padding:13px;overflow-x:auto;font:13px/1.6 Consolas,monospace}
+code{background:rgba(105,169,255,.14);padding:1px 5px;border-radius:4px;font:13px Consolas,monospace;color:#bcd8ff}
+pre code{background:none;padding:0;color:#cfe3ff}
+blockquote{border-left:3px solid var(--warn);background:rgba(255,204,102,.08);margin:14px 0;padding:10px 14px;color:#ffe3ad}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.back{display:inline-block;margin-bottom:18px;color:var(--cy);font-size:14px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx2);font-size:13px}
+.gdesc{color:var(--tx2);font-size:13px;margin:0 0 6px}
+</style></head>
+<body><div class="wrap"><a class="back" href="../index.html">← 返回记录总览</a><div class="doc"><h1>最终暴力测试与视觉验收-2026-10-25</h1>
+<p class="meta">来源：<code>游戏-鲸鱼魔盗团/docs/最终暴力测试与视觉验收-2026-10-25.md</code>　·　6.6 KB</p>
+<hr><h1>《鲸鱼魔盗团》最终暴力测试与视觉验收</h1>
+<p>日期：2026-10-25，北京时间。验收对象：当前源码和由它重新生成的 <code>dist/</code>，含本日后续合入的剧情完整展示、对白避让和剧场分支改动。</p>
+<h2>结论与适用范围</h2>
+<p>本地参赛交付门槛：<strong>最终自动验证 25/25、正式部署包浏览器验收 11/11，通过。</strong> 本轮覆盖五章机制、13 个房间的视觉构成、异常输入与恢复、键鼠及手机横屏模拟、剧情分支、构建一致性和交付包完整性。剧情并行修改结束后，已重新构建并复验稳定版本；当前结果以所链接 JSON 为准。</p>
+<p>这是一份有证据范围的发布候选验收。实际手机 GPU、多指硬件手感、Safari/Firefox、长期真人游玩和首次体验约二十分钟仍需实体设备与玩家验证；本报告不以自动通关时间或桌面触屏模拟替代这些结果，也不以绿灯宣称所有设备零缺陷或商业竞争力已被客观证明。</p>
+<h2>功能、稳定性与压力证据</h2>
+<table><thead><tr><th>范围</th><th>结果</th><th>当前证据</th></tr></thead><tbody><tr><td>全套规则与集成</td><td>25 组通过，0 失败，含本次新合入的剧场分支检查</td><td><a href="../output/qa-2026-10-25/summary.json" target="_blank" rel="noopener">summary.json</a></td></tr><tr><td>核心乱序输入</td><td>40 种子、5 章，59,967 次状态操作，1,500 份变异快照，10,000 组提示词输入</td><td><a href="../output/qa-2026-10-25/fuzz-core.txt" target="_blank" rel="noopener">fuzz-core.txt</a></td></tr><tr><td>扩展世界加压</td><td>312 案例、436,800 帧、4,056 次保存恢复、723 次开始执行的指令、14 次死亡重建，0 失败</td><td><a href="../output/qa-2026-10-25/fuzz-world-extended.txt" target="_blank" rel="noopener">fuzz-world-extended.txt</a></td></tr><tr><td>主流程加压</td><td>指定种子 659918、20,000 轮随机操作，实际 20,489 次转场；5 组检查全通过</td><td><a href="../output/qa-2026-10-25/verify-stress-main-20000.txt" target="_blank" rel="noopener">verify-stress-main-20000.txt</a></td></tr><tr><td>五章输入通关</td><td>普通资源路线和零初始限定词路线均完成五章；模拟用时 344.03 / 352.01 秒</td><td><a href="../output/qa-2026-10-25/campaign-all-budgets.txt" target="_blank" rel="noopener">campaign-all-budgets.txt</a></td></tr><tr><td>浏览器端到端</td><td>五章入口、章节锁、四契约、Enter 取消、双击确认只扣一次、非法短句、损坏存档、暂停、重载和教学进度恢复均通过</td><td><a href="../output/final-acceptance/browser-report.json" target="_blank" rel="noopener">browser-report.json</a></td></tr><tr><td>HTTP 与资源</td><td>正式包 145 次请求，通过资源/MIME/HEAD/404/异常路径和方法检查，含 128 次分批并发</td><td>同上 <code>checks[].http</code></td></tr><tr><td>构建一致性</td><td>正式包 40 份代码/样式/HTML 和 62 份资源与源码逐文件比较；验收开始与结束均检查，并记录整体 SHA-256</td><td>同上 <code>build</code></td></tr></tbody></table>
+<p>世界 fuzz 的部分轮次使用合法平台起点覆盖不同楼层，不能称为真人随机输入从入口通关。五章通关脚本使用方向输入、冲刺、持续互动和公开指令 API；其路线规划已知关卡，不代表首次玩家的学习时间。</p>
+<h2>真实浏览器与视觉验收</h2>
+<p>当前生产包使用本机 Edge 的独立临时上下文测试，仅访问自建 <code>127.0.0.1</code> 服务。测试不读取或覆盖玩家在正式 8766 地址的存档。脚本自行启动和关闭测试服务及浏览器。</p>
+<ul><li>标题、章节航图、契约、设置、五章首房间、行动指南、航图、指令、记录及三种剧情样式均保存当前画面。</li><li>序章的观察、发令、撤离三项必要选择不能被跳过；实际键盘移动推进教学，暂停后刷新继续，教学进度保留。</li><li>844×390、740×360、640×360 横屏均检查七个触控按钮：命中区至少 44×44，按钮在视口内；确认按钮可见，非法文本不能执行。</li><li>小横屏剧情关键词至少 44px 高、13px 字号；顶部控件在安全区域；竖屏提示后回横屏保持暂停，再由玩家恢复。</li><li>剧场三种样式和全部可选择分支逐项检查，浏览不修改存档。12 段剧情、20 个版本的完整推进另由 <code>verify-story-theater.mjs</code> 验证。</li><li>13 个房间另外以正式生产模块、资源和 HUD 生成带明确标记的视觉夹具。这些图用于检查图层、地形、角色与机关构成，不作为穿越房间或通关证据。</li></ul>
+<p>共 45 张当次画面，见 <a href="../output/final-acceptance/visual-review.html" target="_blank" rel="noopener">视觉审阅页</a>；点击缩略图可看原尺寸。复核未见缺图、人物横向拉伸、主要操作被遮住或按钮超出所检视口的阻断问题。完整证据列表以 JSON 中的 <code>screenshots</code> 为准，历史失败截图不代表当前验收结果。</p>
+<p>[图片：13 房间总览（视觉夹具）]</p>
+<h2>性能证据的边界</h2>
+<p>浏览器记录三组各 599 个有效 requestAnimationFrame 间隔：1280×720 标准画质、120 次暂停切换之后，以及 844×390 触屏模拟。JSON 保存中位数、P95、超过 50ms 的帧数、JS 堆和各层 Canvas 尺寸。桌面主要绘制层为 2560×1440，触屏模拟为 1920×1080。</p>
+<p>这些是当前机器的无头浏览器观测，受同时运行的任务和浏览器调度影响，不能换算成真实手机 FPS 或长期无内存泄漏结论。检查期间未发生页面异常、控制台错误/警告或生产资源请求失败。</p>
+<h2>本轮新增修正与交付一致性</h2>
+<ol><li>没有适用目标时，队友提示改为“当前房间没有这位队友可处理的目标”，避免误导玩家认为整章协作已经完成。</li><li>随机主流程脚本支持并校验真实生效的 <code>MSTRESS_STEPS</code> / <code>MSTRESS_SEED</code>；以前固定 2000 步的限制已去除，报告记录实际步数和种子。</li><li>新增可重复运行的 <code>scripts/qa-browser.cjs</code>，提供真实浏览器交互、视口尺寸、截图、资源诊断、性能采样和源包一致性门槛。</li><li>验收期间探测到剧情源码继续更新而 dist 未同步，曾明确判定构建一致性失败；保留新修改并重新构建、复验后才形成当前结论。</li><li>提交说明删除未实现的“连击/队友信任”描述，明确默认指令仍消耗 AI Token；两种游戏 ZIP 重新生成并进行 CRC、哈希与内容比对，结果见 <a href="../deliverables/最终交付验收.json" target="_blank" rel="noopener">最终交付验收.json</a>。</li></ol>
+<h2>重跑</h2>
+<p>在游戏目录运行：</p>
+<pre><code>.\scripts\verify-all.ps1
+$env:FUZZ_SEEDS='6'; $env:FUZZ_FRAMES='1400'; node scripts/fuzz-world.mjs
+$env:MSTRESS_SEED='659918'; $env:MSTRESS_STEPS='20000'; node scripts/verify-stress-main.mjs
+node scripts/verify-expanded-campaign.mjs --all
+node scripts/qa-browser.cjs</code></pre>
+<p>浏览器脚本需要 Playwright 和 Edge；可设置 <code>PLAYWRIGHT_MODULE</code> 为本机模块位置、<code>QA_BROWSER</code> 为已有浏览器可执行文件。游戏运行本身没有这些开发依赖。浏览器日志及画面位于 <code>output/final-acceptance/</code>，交付 ZIP 的大小、文件数和 SHA-256 位于 <a href="../deliverables/交付包校验.json" target="_blank" rel="noopener">交付包校验.json</a>。</p></div></div></body></html>
